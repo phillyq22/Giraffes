@@ -9,12 +9,15 @@ import javafx.scene.layout.BorderPane;
 
 /*
  * Main class that sets up the GUI 
+ * 
+ * @author Philip Quinn and Matt Moore
+ * @version 3.8.2018
  */
 public class Main extends Application {
 
 	private static Stage primaryStage;
 	private static BorderPane mainLayout;
-	
+	private static Stage processStage;
 	private static BorderPane processLayout;
 	/*
 	 * Starts the JavaFX program
@@ -23,6 +26,9 @@ public class Main extends Application {
 	public void start(Stage primaryStage) throws IOException
 	{
 		this.primaryStage = primaryStage;
+		this.processStage = new Stage();
+		buildPrimaryStage();
+		buildProcessStage();
 		showMainView();
 		
 	}
@@ -30,7 +36,13 @@ public class Main extends Application {
 	/*
 	 * Loads in the InitialView to display it on the primary stage
 	 */
-	public static void showMainView() throws IOException
+	public static void showMainView()
+	{
+		processStage.hide();
+		primaryStage.show();
+	}
+	
+	public static void buildPrimaryStage() throws IOException
 	{
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("view/InitialView.fxml"));
@@ -38,7 +50,6 @@ public class Main extends Application {
 		Scene scene = new Scene(mainLayout);
 		primaryStage.setTitle("Symbol Table Reader");
 		primaryStage.setScene(scene);
-		primaryStage.show();
 	}
 	
 	/*
@@ -46,13 +57,18 @@ public class Main extends Application {
 	 */
 	public static void showProcessView() throws IOException
 	{
+		primaryStage.hide();
+		processStage.show();
+	}
+	
+	public static void buildProcessStage() throws IOException
+	{
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("processedView/ProcessView.fxml"));
 		processLayout = loader.load();
 		Scene scene = new Scene(processLayout);
-		primaryStage.setTitle("Processed");
-		primaryStage.setScene(scene);
-		primaryStage.show();
+		processStage.setTitle("Processed");
+		processStage.setScene(scene);
 	}
 	
 	/*
