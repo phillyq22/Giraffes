@@ -3,12 +3,10 @@
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -16,29 +14,31 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.InitialViewController">
    <left>
-      <SplitPane dividerPositions="0.24749163879598662" orientation="VERTICAL" prefHeight="600.0" prefWidth="304.0" BorderPane.alignment="CENTER">
+      <SplitPane dividerPositions="0.24749163879598662" orientation="VERTICAL" prefHeight="600.0" prefWidth="599.0" BorderPane.alignment="CENTER">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <TextField id="filename" fx:id="filename" layoutX="76.0" layoutY="50.0" prefHeight="23.0" prefWidth="150.0" promptText="Enter File Name">
+                  <TextField id="filename" fx:id="filename" layoutX="224.0" layoutY="50.0" prefHeight="23.0" prefWidth="150.0" promptText="Enter File Name">
                      <font>
                         <Font name="Arial" size="12.0" />
                      </font>
                      <effect>
                         <Blend />
                      </effect></TextField>
-                  <Button layoutX="125.0" layoutY="99.0" mnemonicParsing="false" onAction="#searchFile" text="Import" />
+                  <Button layoutX="139.0" layoutY="78.0" mnemonicParsing="false" onAction="#searchFile" text="Import By Filename" />
+                  <Button layoutX="344.0" layoutY="78.0" mnemonicParsing="false" onAction="#selectMultiFiles" prefHeight="25.0" prefWidth="100.0" text="Select Files" />
+                  <Label fx:id="fileError" layoutX="139.0" layoutY="103.0" prefHeight="17.0" prefWidth="320.0" textFill="RED" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="196.0">
                <children>
-                  <TableView fx:id="loadedFilesView" layoutX="-2.0" prefHeight="399.0" prefWidth="306.0">
+                  <TableView fx:id="loadedFilesView" layoutX="-2.0" prefHeight="399.0" prefWidth="600.0">
                     <columns>
-                      <TableColumn fx:id="loadedFiles" prefWidth="305.0" text="Loaded Files" />
+                      <TableColumn fx:id="loadedFiles" prefWidth="599.0" text="Loaded Files" />
                     </columns>
                   </TableView>
                   <Button fx:id="removeFileButton" layoutX="30.0" layoutY="408.0" mnemonicParsing="false" onAction="#removeFile" text="Remove File" />
-                  <Button fx:id="processButton" layoutX="222.0" layoutY="408.0" mnemonicParsing="false" onAction="#process" text="Process" />
+                  <Button fx:id="processButton" layoutX="514.0" layoutY="408.0" mnemonicParsing="false" onAction="#process" text="Process" />
                </children>
             </AnchorPane>
         </items>
@@ -48,14 +48,6 @@
       <AnchorPane prefHeight="600.0" prefWidth="297.0" BorderPane.alignment="CENTER">
          <children>
             <Group fx:id="group" />
-            <RadioButton fx:id="dwarf3" layoutX="22.0" layoutY="55.0" mnemonicParsing="false" onAction="#dwarfSelect" text="3">
-               <toggleGroup>
-                  <ToggleGroup fx:id="dwarf" />
-               </toggleGroup></RadioButton>
-            <RadioButton fx:id="dwarf2" layoutX="22.0" layoutY="28.0" mnemonicParsing="false" onAction="#dwarfSelect" text="2" toggleGroup="$dwarf" />
-            <RadioButton fx:id="dwarf4" layoutX="22.0" layoutY="82.0" mnemonicParsing="false" onAction="#dwarfSelect" text="4" toggleGroup="$dwarf" />
-            <RadioButton fx:id="dwarf5" layoutX="22.0" layoutY="109.0" mnemonicParsing="false" onAction="#dwarfSelect" text="5" toggleGroup="$dwarf" />
-            <Label layoutX="22.0" layoutY="6.0" text="DWARF Version" />
          </children>
       </AnchorPane>
    </right>

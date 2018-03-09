@@ -42,6 +42,9 @@ public class Main extends Application {
 		primaryStage.show();
 	}
 	
+	/*
+	 * Builds the primary stage for InitialView
+	 */
 	public static void buildPrimaryStage() throws IOException
 	{
 		FXMLLoader loader = new FXMLLoader();
@@ -61,6 +64,9 @@ public class Main extends Application {
 		processStage.show();
 	}
 	
+	/*
+	 * Builds the process stage for ProcessView
+	 */
 	public static void buildProcessStage() throws IOException
 	{
 		FXMLLoader loader = new FXMLLoader();

@@ -6,14 +6,17 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.FileChooser;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import java.io.File;
 import java.io.IOException; 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.regex.Pattern;
 
 import application.Main;
 
@@ -35,8 +38,9 @@ public class InitialViewController {
 	@FXML private RadioButton dwarf3;
 	@FXML private RadioButton dwarf4;
 	@FXML private RadioButton dwarf5;
+	@FXML private Label fileError;
 
-	/**
+	/*
 	 * Searches in the current working directory(cwd) for the file name entered by the user.
 	 * If the File is found in cwd, checks if file has already been imported. If not, add
 	 *  
@@ -49,20 +53,12 @@ public class InitialViewController {
 		String fileName = filename.getText();//getting the file name entered into the filename textfield
 		String filePath = (s + "\\" + fileName);//creating the full file path
 		File file = new File(filePath);
-		if(file.exists() && !fileName.equals(""))
+		if(file.exists() && !fileName.equals("") && file.isFile())
 		{
 			ObservableList<LoadedFile> list = loadedFilesView.getItems();
-			int size = list.size();
-			boolean found = false;
-			for(int i = 0; i < size && !found; i++)
+			if(!fileExist(file) && (Pattern.matches(".*[.txt]", fileName) || Pattern.matches(".*[.java]", fileName)))
 			{
-				if(list.get(i).getPath().equals(filePath))
-				{
-					found = true;//file was already imported
-				}
-			}
-			if(!found)
-			{
+				fileError.setText("");
 				CheckBox checkBox = new CheckBox(filename.getText());
 				LoadedFile lf =  new LoadedFile(filePath, checkBox);
 				//Makes sure that the checkboxes are displayed by checking for the field called checkBox in LoadedFile object
@@ -70,10 +66,14 @@ public class InitialViewController {
 				list.add(lf);
 				loadedFilesView.setItems(list);
 			}
+			else
+			{
+				fileError.setText("File already loaded in, or is of the wrong extension.");
+			}
 		}		
 		else
 		{
-			System.err.println(false);
+			fileError.setText("Error loading file.");
 		}
 	}
 	
@@ -124,9 +124,59 @@ public class InitialViewController {
 		}
 	}
 	
+	/*
+	 * Processes selected files
+	 * 
+	 * @param	e	The pressing of the process button
+	 */
 	public void process(ActionEvent e) throws IOException
 	{
 		Main.showProcessView();
 	}
 	
+	/*
+	 * Allows file selection from your operating system's file browser.
+	 * 
+	 * @param 	e	The clicking of the selectFiles button
+	 */
+	public void selectMultiFiles(ActionEvent e)
+	{
+		FileChooser fc = new FileChooser();
+		File file = fc.showOpenDialog(null);
+		if(!fileExist(file) && (Pattern.matches(".*[.txt]", file.getAbsolutePath()) || Pattern.matches(".*[.java]", file.getAbsolutePath())))
+		{
+			fileError.setText("");
+			ObservableList<LoadedFile> list = loadedFilesView.getItems();
+			CheckBox checkBox = new CheckBox(file.getName());
+			LoadedFile lf =  new LoadedFile(file.getAbsolutePath(), checkBox);
+			//Makes sure that the checkboxes are displayed by checking for the field called checkBox in LoadedFile object
+			loadedFiles.setCellValueFactory(new PropertyValueFactory<LoadedFile, CheckBox>("checkBox"));
+			list.add(lf);
+			loadedFilesView.setItems(list);
+		}
+		else
+		{
+			fileError.setText("File either already loaded in, or is of the wrong extension.");
+		}
+	}
+	
+	/*
+	 * Checks whether or not the selected file already has been selected.
+	 * 
+	 * @param 	file 	The file to be checked 
+	 */
+	public boolean fileExist(File file)
+	{
+		ObservableList<LoadedFile> list = loadedFilesView.getItems();
+		int size = list.size();
+		boolean found = false;
+		for(int i = 0; i < size && !found; i++)
+		{
+			if(list.get(i).getPath().equals(file.getAbsolutePath()))
+			{
+				found = true;//file was already imported
+			}
+		}
+		return found;
+	}
 }
