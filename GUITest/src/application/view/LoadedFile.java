@@ -1,41 +1,43 @@
 package application.view;
 
+import java.io.File;
+
 import javafx.scene.control.CheckBox;
 
 /*
- * Class that stores instances of loaded files. Knows the loaded files full file path and the checkbox associated with it.
+ * Class that stores instances of loaded files. Knows the loaded files full file file and the checkbox associated with it.
  * 
  * @author Philip S. Quinn
  * @version 3/1/2018
  */
 public class LoadedFile {
-	private String path;//full file path
+	private File file;//full file file
 	private CheckBox checkBox;
 	
-	public LoadedFile(String path, CheckBox checkBox)
+	public LoadedFile(File file, CheckBox checkBox)
 	{
-		this.path = path;
+		this.file = file;
 		this.checkBox = checkBox;
 	}
 	
-	public LoadedFile(String path)
+	public LoadedFile(File file)
 	{
-		this.path = path;
+		this.file = file;
 		this.checkBox = null;
 	}
 	
 	public LoadedFile()
 	{
-		this.path = null;
+		this.file = null;
 		this.checkBox = null;
 	}
 
-	public String getPath() {
-		return path;
+	public File getFile() {
+		return file;
 	}
 
-	public void setPath(String path) {
-		this.path = path;
+	public void setFile(File file) {
+		this.file = file;
 	}
 
 	public CheckBox getCheckBox() {

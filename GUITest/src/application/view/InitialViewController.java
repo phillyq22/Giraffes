@@ -59,8 +59,8 @@ public class InitialViewController {
 			if(!fileExist(file) && (Pattern.matches(".*[.txt]", fileName) || Pattern.matches(".*[.java]", fileName)))
 			{
 				fileError.setText("");
-				CheckBox checkBox = new CheckBox(filename.getText());
-				LoadedFile lf =  new LoadedFile(filePath, checkBox);
+				CheckBox checkBox = new CheckBox(fileName);
+				LoadedFile lf =  new LoadedFile(file, checkBox);
 				//Makes sure that the checkboxes are displayed by checking for the field called checkBox in LoadedFile object
 				loadedFiles.setCellValueFactory(new PropertyValueFactory<LoadedFile, CheckBox>("checkBox"));
 				list.add(lf);
@@ -143,12 +143,13 @@ public class InitialViewController {
 	{
 		FileChooser fc = new FileChooser();
 		File file = fc.showOpenDialog(null);
-		if(!fileExist(file) && (Pattern.matches(".*[.txt]", file.getAbsolutePath()) || Pattern.matches(".*[.java]", file.getAbsolutePath())))
+		String filepath = file.getAbsolutePath();
+		if(!fileExist(file) && (Pattern.matches(".*[.txt]", file.getAbsolutePath()) || Pattern.matches(".*[.java]", filepath)))
 		{
 			fileError.setText("");
 			ObservableList<LoadedFile> list = loadedFilesView.getItems();
 			CheckBox checkBox = new CheckBox(file.getName());
-			LoadedFile lf =  new LoadedFile(file.getAbsolutePath(), checkBox);
+			LoadedFile lf =  new LoadedFile(file, checkBox);
 			//Makes sure that the checkboxes are displayed by checking for the field called checkBox in LoadedFile object
 			loadedFiles.setCellValueFactory(new PropertyValueFactory<LoadedFile, CheckBox>("checkBox"));
 			list.add(lf);
@@ -172,7 +173,7 @@ public class InitialViewController {
 		boolean found = false;
 		for(int i = 0; i < size && !found; i++)
 		{
-			if(list.get(i).getPath().equals(file.getAbsolutePath()))
+			if(list.get(i).getFile().getAbsoluteFile().equals(file.getAbsolutePath()))
 			{
 				found = true;//file was already imported
 			}
