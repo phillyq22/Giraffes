@@ -143,21 +143,24 @@ public class InitialViewController {
 	{
 		FileChooser fc = new FileChooser();
 		File file = fc.showOpenDialog(null);
-		String filepath = file.getAbsolutePath();
-		if(!fileExist(file) && (Pattern.matches(".*[.txt]", file.getAbsolutePath()) || Pattern.matches(".*[.java]", filepath)))
+		if(file != null)
 		{
-			fileError.setText("");
-			ObservableList<LoadedFile> list = loadedFilesView.getItems();
-			CheckBox checkBox = new CheckBox(file.getName());
-			LoadedFile lf =  new LoadedFile(file, checkBox);
-			//Makes sure that the checkboxes are displayed by checking for the field called checkBox in LoadedFile object
-			loadedFiles.setCellValueFactory(new PropertyValueFactory<LoadedFile, CheckBox>("checkBox"));
-			list.add(lf);
-			loadedFilesView.setItems(list);
-		}
-		else
-		{
-			fileError.setText("File either already loaded in, or is of the wrong extension.");
+			String filepath = file.getAbsolutePath();
+			if(!fileExist(file) && (Pattern.matches(".*[.txt]", file.getAbsolutePath()) || Pattern.matches(".*[.java]", filepath)))
+			{
+				fileError.setText("");
+				ObservableList<LoadedFile> list = loadedFilesView.getItems();
+				CheckBox checkBox = new CheckBox(file.getName());
+				LoadedFile lf =  new LoadedFile(file, checkBox);
+				//Makes sure that the checkboxes are displayed by checking for the field called checkBox in LoadedFile object
+				loadedFiles.setCellValueFactory(new PropertyValueFactory<LoadedFile, CheckBox>("checkBox"));
+				list.add(lf);
+				loadedFilesView.setItems(list);
+			}
+			else
+			{
+				fileError.setText("File either already loaded in, or is of the wrong extension.");
+			}
 		}
 	}
 	
