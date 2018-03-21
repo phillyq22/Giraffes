@@ -42,7 +42,7 @@ public class Parsing {
 						// Creates a new structure and adds it to the list
 						// self: have it search for existing children first and add those?
 						
-						String[] methodTemp = t2[2].split("\\(");
+						String[] methodTemp = t2[2].split("\\("); // checks to find methods and avoid adding them for now
 						if(methodTemp.length < 2 || !methodTemp[1].equals("class"))
 						{
 							if(t2[1].equals("class"))
