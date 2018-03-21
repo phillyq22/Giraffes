@@ -67,4 +67,8 @@ public class Structure
 		children.add(structure);
 	}
 
+	public String getName(){
+		return name;
+	}
+
 }
