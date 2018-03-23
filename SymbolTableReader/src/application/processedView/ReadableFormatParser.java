@@ -50,9 +50,9 @@ public class ReadableFormatParser {
 				for(int i =0; i<indentCount; i++){
 					indentString = indentString + INDENT_STRING;
 				}
-				writer.write(indentString + item.toString() + "\r\n");
+				writer.write(indentString + item.getValue().toString() + "\r\n");
 				for (TreeItem<String> child: item.getChildren()){
-					writer.write(indentString + INDENT_STRING + child.toString() + "\r\n");
+					writer.write(indentString + INDENT_STRING + child.getValue().toString() + "\r\n");
 				}
 				writer.write("\r\n");
 			}
