@@ -21,6 +21,7 @@ import java.util.regex.Pattern;
 
 import application.Main;
 import application.processedView.Parsing;
+import application.processedView.ProcessViewController;
 import application.processedView.Structure;
 
 /*
@@ -33,7 +34,7 @@ import application.processedView.Structure;
 public class InitialViewController {
 	/*Fields*/
 	@FXML private TextField filename;
-	@FXML private static TableView<LoadedFile> loadedFilesView;
+	@FXML private TableView<LoadedFile> loadedFilesView;
 	@FXML private TableColumn<LoadedFile, CheckBox> loadedFiles; 
 	@FXML private Button removeFileButton;
 	@FXML private Button processButton;
@@ -42,7 +43,8 @@ public class InitialViewController {
 	@FXML private RadioButton dwarf4;
 	@FXML private RadioButton dwarf5;
 	@FXML private Label fileError;
-	private static ArrayList<Structure> structs;
+	@FXML private Label processError;
+	private ArrayList<Structure> structs;
 	/*
 	 * Searches in the current working directory(cwd) for the file name entered by the user.
 	 * If the File is found in cwd, checks if file has already been imported. If not, add
@@ -54,7 +56,7 @@ public class InitialViewController {
 		Path currentRelativePath = Paths.get("");//getting the cwd path as an object
 		String s = currentRelativePath.toAbsolutePath().toString();//cwd as a string
 		String fileName = filename.getText();//getting the file name entered into the filename textfield
-		String filePath = (s + "\\" + fileName);//creating the full file path
+		String filePath = (s + File.separator + fileName);//creating the full file path
 		File file = new File(filePath);
 		if(file.exists() && !fileName.equals("") && file.isFile())
 		{
@@ -103,48 +105,33 @@ public class InitialViewController {
 	}
 	
 	/*
-	 * Action listener for the dwarf radio buttons
-	 * 
-	 * @param e Selecting a dwarf version
-	 */
-	public void dwarfSelect(ActionEvent e)
-	{
-		if(dwarf2.isSelected())
-		{
-			System.out.println(dwarf2.getText());
-		}
-		else if(dwarf3.isSelected())
-		{
-			System.out.println(dwarf3.getText());
-		}
-		else if(dwarf4.isSelected())
-		{
-			System.out.println(dwarf4.getText());
-		}
-		else if(dwarf5.isSelected())
-		{
-			System.out.println(dwarf5.getText());
-		}
-	}
-	
-	/*
 	 * Processes selected files
 	 * 
 	 * @param	e	The pressing of the process button
 	 */
 	public void process(ActionEvent e) throws IOException
 	{
-		if(loadedFilesView != null)
+		boolean error = true;
+		ObservableList<LoadedFile> list = loadedFilesView.getItems();
+		if(!list.isEmpty())
 		{
-			ObservableList<LoadedFile> list = loadedFilesView.getItems();
-			if(!list.isEmpty())
+			LoadedFile lf = list.get(0);
+			if(lf.getCheckBox().isSelected())
 			{
-				structs = Parsing.parse(list.get(0).getFile());
+				error = false;
+				processError.setText("");
+				structs = Parsing.parse(lf.getFile());
+				ProcessViewController.setStructs(structs);
+				Main.buildProcessStage();
+				Main.showProcessView();
 			}
-			Main.showProcessView();
+		}
+		if(error)
+		{
+			processError.setText("Select a File to process!");
 		}
 	}
-	
+		
 	/*
 	 * Allows file selection from your operating system's file browser.
 	 * 
@@ -182,25 +169,28 @@ public class InitialViewController {
 	 */
 	public boolean fileExist(File file)
 	{
-		ObservableList<LoadedFile> list = loadedFilesView.getItems();
-		int size = list.size();
 		boolean found = false;
-		for(int i = 0; i < size && !found; i++)
+		ObservableList<LoadedFile> list = null;
+		if(loadedFilesView != null)
 		{
-			if(list.get(i).getFile().getAbsoluteFile().equals(file.getAbsolutePath()))
+			list = loadedFilesView.getItems();
+		}
+		if(list != null)
+		{
+			int size = list.size();
+			for(int i = 0; i < size && !found; i++)
 			{
-				found = true;//file was already imported
+				if(list.get(i).getFile().getAbsoluteFile().equals(file.getAbsolutePath()))
+				{
+					found = true;//file was already imported
+				}
 			}
 		}
 		return found;
 	}
 	
-	public static ArrayList<Structure> getStructs()
-	{
-		return structs;
-	}
 	
-	public static File getFile()
+	public File getFile()
 	{
 		return loadedFilesView.getItems().get(0).getFile();
 	}

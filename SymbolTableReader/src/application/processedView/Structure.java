@@ -60,11 +60,7 @@ public class Structure {
 	
 	public String toString()
 	{
-		String s = "STRUCTURE: " +name + "\n";
-		for(Field f : fields)
-			s += f.toString() + "\n";
-		for(Structure c : children)
-			s += c.toString() + "\n";
+		String s = "STRUCTURE: " +name ;
 		return s;
 	}
 

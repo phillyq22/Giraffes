@@ -28,9 +28,7 @@ public class Main extends Application {
 		this.primaryStage = primaryStage;
 		this.processStage = new Stage();
 		buildPrimaryStage();
-		buildProcessStage();
-		showMainView();
-		
+		showMainView();		
 	}
 	
 	/*
