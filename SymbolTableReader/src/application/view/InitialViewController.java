@@ -189,7 +189,9 @@ public class InitialViewController {
 		return found;
 	}
 	
-	
+	/*
+	 * Gets the selected file to process.
+	 */
 	public File getFile()
 	{
 		return loadedFilesView.getItems().get(0).getFile();

@@ -1,0 +1,89 @@
+_IO_FILE
+  FIELD: _flags;, int, 0, 4
+  FIELD: _IO_read_ptr;, char, 8, 8
+  FIELD: _IO_read_end;, char, 16, 8
+  FIELD: _IO_read_base;, char, 24, 8
+  FIELD: _IO_write_base;, char, 32, 8
+  FIELD: _IO_write_ptr;, char, 40, 8
+  FIELD: _IO_write_end;, char, 48, 8
+  FIELD: _IO_buf_base;, char, 56, 8
+  FIELD: _IO_buf_end;, char, 64, 8
+  FIELD: _IO_save_base;, char, 72, 8
+  FIELD: _IO_backup_base;, char, 80, 8
+  FIELD: _IO_save_end;, char, 88, 8
+  FIELD: _fileno;, int, 112, 4
+  FIELD: _flags2;, int, 116, 4
+  FIELD: _old_offset;, __off_t, 120, 8
+  FIELD: _cur_column;, short, 128, 2
+  FIELD: _vtable_offset;, char, 130, 1
+  FIELD: _shortbuf[1];, char, 131, 1
+  FIELD: _lock;, _IO_lock_t, 136, 8
+  FIELD: _offset;, __off64_t, 144, 8
+  FIELD: __pad1;, void, 152, 8
+  FIELD: __pad2;, void, 160, 8
+  FIELD: __pad3;, void, 168, 8
+  FIELD: __pad4;, void, 176, 8
+  FIELD: __pad5;, size_t, 184, 8
+  FIELD: _mode;, int, 192, 4
+  FIELD: _unused2[20];, char, 196, 20
+  _IO_marker
+    FIELD: _pos;, int, 16, 4
+    _IO_marker
+    _IO_FILE
+  _IO_FILE
+typedef
+  FIELD: gp_offset;, unsigned, 0, 4
+  FIELD: fp_offset;, unsigned, 4, 4
+  FIELD: overflow_arg_area;, void, 8, 8
+  FIELD: reg_save_area;, void, 16, 8
+tm
+  FIELD: tm_sec;, int, 0, 4
+  FIELD: tm_min;, int, 4, 4
+  FIELD: tm_hour;, int, 8, 4
+  FIELD: tm_mday;, int, 12, 4
+  FIELD: tm_mon;, int, 16, 4
+  FIELD: tm_year;, int, 20, 4
+  FIELD: tm_wday;, int, 24, 4
+  FIELD: tm_yday;, int, 28, 4
+  FIELD: tm_isdst;, int, 32, 4
+  FIELD: tm_gmtoff;, long, 40, 8
+  FIELD: *, const, /*, 48
+lconv
+  FIELD: decimal_point;, char, 0, 8
+  FIELD: thousands_sep;, char, 8, 8
+  FIELD: grouping;, char, 16, 8
+  FIELD: int_curr_symbol;, char, 24, 8
+  FIELD: currency_symbol;, char, 32, 8
+  FIELD: mon_decimal_point;, char, 40, 8
+  FIELD: mon_thousands_sep;, char, 48, 8
+  FIELD: mon_grouping;, char, 56, 8
+  FIELD: positive_sign;, char, 64, 8
+  FIELD: negative_sign;, char, 72, 8
+  FIELD: int_frac_digits;, char, 80, 1
+  FIELD: frac_digits;, char, 81, 1
+  FIELD: p_cs_precedes;, char, 82, 1
+  FIELD: p_sep_by_space;, char, 83, 1
+  FIELD: n_cs_precedes;, char, 84, 1
+  FIELD: n_sep_by_space;, char, 85, 1
+  FIELD: p_sign_posn;, char, 86, 1
+  FIELD: n_sign_posn;, char, 87, 1
+  FIELD: int_p_cs_precedes;, char, 88, 1
+  FIELD: int_p_sep_by_space;, char, 89, 1
+  FIELD: int_n_cs_precedes;, char, 90, 1
+  FIELD: int_n_sep_by_space;, char, 91, 1
+  FIELD: int_p_sign_posn;, char, 92, 1
+  FIELD: int_n_sign_posn;, char, 93, 1
+_IO_marker
+  FIELD: _pos;, int, 16, 4
+  _IO_marker
+  _IO_FILE
+__pthread_internal_list
+  __pthread_internal_list
+  __pthread_internal_list
+CallbackInfo
+  FIELD: object;, void, 0, 8
+  FIELD: thread;, ThreadHandle, 8, 4
+  FIELD: callback;, void, 16, 8
+  FIELD: userData;, void, 24, 8
+  FIELD: apiInfo;, void, 32, 8
+  FIELD: isRunning;, bool, 40, 1

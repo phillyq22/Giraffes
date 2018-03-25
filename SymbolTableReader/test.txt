@@ -1,0 +1,14 @@
+STRUCTURE: typedef
+  FIELD: gp_offset;, unsigned, 0, 4
+  FIELD: fp_offset;, unsigned, 4, 4
+  FIELD: overflow_arg_area;, void, 8, 8
+  FIELD: reg_save_area;, void, 16, 8
+
+  FIELD: gp_offset;, unsigned, 0, 4
+
+  FIELD: fp_offset;, unsigned, 4, 4
+
+  FIELD: overflow_arg_area;, void, 8, 8
+
+  FIELD: reg_save_area;, void, 16, 8
+

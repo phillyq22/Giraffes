@@ -54,7 +54,13 @@ public class ProcessViewController implements Initializable
 		treeView.setRoot(root);
 		treeView.refresh();
 	}
-		
+	
+	/*
+	 * Parses several structures.
+	 * 
+	 * @param structs	the list of structures to parse.
+	 * @param parent	the parent treeitem.
+	 */
 	public static void parseMany(ArrayList<Structure> structs, TreeItem<String> parent)
 	{
 		for (Structure s : structs)
@@ -65,6 +71,12 @@ public class ProcessViewController implements Initializable
 		}
 	}
 	
+	/*
+	 * Parses a single treeItem for a single structure.
+	 * 
+	 * @param parent	the parent treeitem.
+	 * @param s 		the structure that's being parsed.
+	 */
 	public static void parseSingle(TreeItem<String> parent, Structure s)
 	{
 		for (Field f : s.getFields())
@@ -90,6 +102,9 @@ public class ProcessViewController implements Initializable
 			treeView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 	}
 	
+	/*
+	 * Exports the structures selected by the user to a file in their current working directory.
+	 */
 	public void exportSelected() throws IOException
 	{
 		Path currentRelativePath = Paths.get("");//getting the cwd path as an object
@@ -105,6 +120,9 @@ public class ProcessViewController implements Initializable
 		}
 	}
 	
+	/*
+	 * Exports all the loaded structures to a file in their current working directory.
+	 */
 	public void exportAll() throws IOException
 	{
 		Path currentRelativePath = Paths.get("");//getting the cwd path as an object
@@ -119,7 +137,10 @@ public class ProcessViewController implements Initializable
 			saveFileError.setText("File with this name already exists!");
 		}
 	}
-		
+	
+	/*
+	 * Returns the GUI back to the mainView.
+	 */
 	public void back(ActionEvent e) throws IOException
 	{
 		Main.showMainView();

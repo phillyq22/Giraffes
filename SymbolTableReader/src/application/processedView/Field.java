@@ -1,7 +1,10 @@
 package application.processedView;
-
-// Zac Capell, 2/27
-
+/*
+ * Class to represent the fields of a structure. 
+ * 
+ * @author Zac Capell
+ * @version 2018.03.23
+ */
 public class Field {
 	
 	String type, name, starting, size;
@@ -10,6 +13,14 @@ public class Field {
 	{
 	}
 	
+	/*
+	 * Constructor of Field.
+	 * 
+	 * @param	type		The datatype of the field.
+	 * @param	name		The name of the field.
+	 * @param	starting	The starting bit of the field.
+	 * @param	size		The bit size of the field. 
+	 */
 	public Field(String type, String name, String starting, String size)
 	{
 		this.type = type;

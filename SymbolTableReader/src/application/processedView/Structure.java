@@ -2,14 +2,23 @@ package application.processedView;
 
 import java.util.*;
 
-// Zac Capell, 2/26/18
-
+/*
+ * Class to represent a data structure. 
+ * 
+ * @author Zac Capell
+ * @version 2018.03.23
+ */
 public class Structure {
 	
-	String name;
-	ArrayList<Structure> children = new ArrayList<Structure>();
-	ArrayList<Field> fields = new ArrayList<Field>();
+	private String name;
+	private ArrayList<Structure> children = new ArrayList<Structure>();
+	private ArrayList<Field> fields = new ArrayList<Field>();
 	
+	/*
+	 * @param name the name of the structure.
+	 * @param children the Structures within this structure.
+	 * @param fields the list of this Structure's fields.
+	 */
 	public Structure(String name, ArrayList<Structure> children, ArrayList<Field> fields)
 	{
 		this.name = name;
