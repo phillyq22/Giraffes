@@ -7,10 +7,10 @@ import java.util.*;
 public class Structure {
 	
 	String name;
-	ArrayList<Structure> children = new ArrayList<Structure>();
+	ArrayList<Child> children = new ArrayList<Child>();
 	ArrayList<Field> fields = new ArrayList<Field>();
 	
-	public Structure(String name, ArrayList<Structure> children, ArrayList<Field> fields)
+	public Structure(String name, ArrayList<Child> children, ArrayList<Field> fields)
 	{
 		this.name = name;
 		this.children = children;
@@ -27,16 +27,10 @@ public class Structure {
 		return name;
 	}
 	
-	public ArrayList<Structure> getChildren()
+	public ArrayList<Child> getChildren()
 	{
 		return children;
 	}
-	
-	/** public ArrayList<Attribute> getAttributes()
-	* {
-	* 	return attributes;
-	* }
-	*/
 	
 	public ArrayList<Field> getFields()
 	{
@@ -48,7 +42,7 @@ public class Structure {
 		this.name = name;
 	}
 	
-	public void setChildren(ArrayList<Structure> children)
+	public void setChildren(ArrayList<Child> children)
 	{
 		this.children = children;
 	}
@@ -60,12 +54,18 @@ public class Structure {
 	
 	public String toString()
 	{
-		String s = "STRUCTURE: " +name + "\n";
-		for(Field f : fields)
-			s += f.toString() + "\n";
-		for(Structure c : children)
-			s += c.toString() + "\n";
-		return s;
+		return "STRUCTURE: " + name;
+	}
+	
+	public boolean equals(Object obj)
+	{
+		if(obj instanceof Structure)
+		{
+			Structure s = (Structure) obj;
+			if(this.name.equals(s.getName()))
+				return true;
+		}
+		return false;
 	}
 
 }

@@ -4,18 +4,19 @@ package swengStructure;
 
 public class Field {
 	
-	String type, name, starting, size;
+	String type, name;
+	int word, startByte;
 	
 	public Field()
 	{
 	}
 	
-	public Field(String type, String name, String starting, String size)
+	public Field(String type, String name, int word, int startByte)
 	{
 		this.type = type;
 		this.name = name;
-		this.starting = starting;
-		this.size = size;
+		this.word = word;
+		this.startByte = startByte;
 	}
 	
 	public String getType()
@@ -28,14 +29,14 @@ public class Field {
 		return name;
 	}
 	
-	public String getStarting()
+	public int getWord()
 	{
-		return starting;
+		return word;
 	}
 	
-	public String getSize()
+	public int getStartByte()
 	{
-		return size;
+		return startByte;
 	}
 	
 	public void setType(String type)
@@ -48,19 +49,19 @@ public class Field {
 		this.name = name;
 	}
 	
-	public void setStarting(String starting)
+	public void setWord(int word)
 	{
-		this.starting = starting;
+		this.word = word;
 	}
 	
-	public void setSize(String size)
+	public void setStartByte(int startByte)
 	{
-		this.size = size;
+		this.startByte = startByte;
 	}
 	
 	public String toString()
 	{
-		return "FIELD: " + name + ", " + type + ", " + starting + ", " + size;
+		return "FIELD: " + type + ", " + name + " STARTING WORD: " + word + " STARTING BYTE: " + startByte;
 	}
 
 }
