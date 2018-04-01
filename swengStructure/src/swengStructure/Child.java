@@ -4,19 +4,14 @@ package swengStructure;
 
 public class Child extends Structure{
 	
-	String name;
+	String fieldName;
 	int word, startByte;
 	
 	public Child()
 	{
 		
 	}
-	
-	public void setName(String name)
-	{
-		this.name = name;
-	}
-	
+		
 	public void setWord(int word)
 	{
 		this.word = word;
@@ -27,10 +22,29 @@ public class Child extends Structure{
 		this.startByte = startByte;
 	}
 	
+	public void setFieldName(String fieldName)
+	{
+		this.fieldName = fieldName;
+	}
+	
+	public String getFieldName()
+	{
+		return fieldName;
+	}
+	
+	public int getWord()
+	{
+		return word;
+	}
+	
+	public int getStartByte()
+	{
+		return startByte;
+	}
 	
 	public String toString()
 	{
-		return super.toString() + " STARTING WORD: " + word + ", STARTING BYTE: " + startByte;
+		return super.toString() + ", " + fieldName + " STARTING WORD: " + word + ", STARTING BYTE: " + startByte;
 	}
 
 }

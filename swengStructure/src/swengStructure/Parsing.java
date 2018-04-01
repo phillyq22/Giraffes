@@ -52,7 +52,7 @@ public class Parsing {
 							{
 								Child child = new Child();
 								child.setName(t2[2]);
-								child.setName(t2[4]);
+								child.setFieldName(t2[4]);
 								child.setWord(Integer.parseInt(t2[6]) / 8);
 								child.setStartByte(Integer.parseInt(t2[7]) % 8);
 							}	
