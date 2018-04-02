@@ -9,21 +9,13 @@ package swengStructure;
  * Contains the variable type, name, starting word, and byte within that word of a single variable in a structure
  */
 
-public class Field {
+public class Field extends Structure{
 	
-	private String type, name;
+	private String type;
 	private int word, startByte;
 	
 	public Field()
 	{
-	}
-	
-	public Field(String type, String name, int word, int startByte)
-	{
-		this.type = type;
-		this.name = name;
-		this.word = word;
-		this.startByte = startByte;
 	}
 	
 	public String getType()
@@ -31,10 +23,6 @@ public class Field {
 		return type;
 	}
 	
-	public String getName()
-	{
-		return name;
-	}
 	
 	public int getWord()
 	{
@@ -51,11 +39,6 @@ public class Field {
 		this.type = type;
 	}
 	
-	public void setName(String name)
-	{
-		this.name = name;
-	}
-	
 	public void setWord(int word)
 	{
 		this.word = word;
@@ -68,7 +51,7 @@ public class Field {
 	
 	public String toString()
 	{
-		return "FIELD: " + type + ", " + name + " STARTING WORD: " + word + " STARTING BYTE: " + startByte;
+		return "FIELD: " + type + ", " + super.getName() + " STARTING WORD: " + word + " STARTING BYTE: " + startByte;
 	}
 
 }
