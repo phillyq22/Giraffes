@@ -1,11 +1,18 @@
 package swengStructure;
 
-// Zac Capell, 2/27
+ 
+
+/**
+ * @author Zac Capell 
+ * @version 2/27/18
+ *
+ * Contains the variable type, name, starting word, and byte within that word of a single variable in a structure
+ */
 
 public class Field {
 	
-	String type, name;
-	int word, startByte;
+	private String type, name;
+	private int word, startByte;
 	
 	public Field()
 	{

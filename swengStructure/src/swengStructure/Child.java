@@ -1,11 +1,16 @@
 package swengStructure;
 
-//Zac Capell 3/29
+/**
+ * @author Zac Capell 
+ * @version 3/29/18
+ *
+ * A version of a structure that is the same as a structure, but also contains its name as a variable and its starting word and byte within that word
+ */
 
 public class Child extends Structure{
 	
-	String fieldName;
-	int word, startByte;
+	private String fieldName;
+	private int word, startByte;
 	
 	public Child()
 	{
