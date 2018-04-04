@@ -21,10 +21,10 @@
    <right>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutX="117.0" layoutY="361.0" mnemonicParsing="false" onAction="#detectExportFormat" text="Export All" />
+            <Button layoutX="117.0" layoutY="361.0" mnemonicParsing="false" onAction="#detectExportAllFormat" text="Export All" />
             <TextField fx:id="exportFileName" layoutX="26.0" layoutY="311.0" promptText="Name the file to export" />
             <Label fx:id="saveFileError" contentDisplay="CENTER" layoutX="10.0" layoutY="336.0" prefHeight="17.0" prefWidth="190.0" textAlignment="CENTER" textFill="RED" />
-            <Button layoutX="14.0" layoutY="361.0" mnemonicParsing="false" onAction="#detectExportFormat" text="Export Selected" />
+            <Button layoutX="14.0" layoutY="361.0" mnemonicParsing="false" onAction="#detectExportSelectedFormat" text="Export Selected" />
             <RadioButton fx:id="exportXML" layoutX="20.0" layoutY="234.0" mnemonicParsing="false" text="XML File">
                <toggleGroup>
                   <ToggleGroup fx:id="exportFormat" />

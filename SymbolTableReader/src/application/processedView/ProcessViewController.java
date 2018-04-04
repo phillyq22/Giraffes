@@ -109,10 +109,55 @@ public class ProcessViewController implements Initializable
 		treeView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 	}
 	
+	public void detectExportSelectedFormat() throws IOException
+	{
+		if(exportText.isSelected())
+		{
+			exportSelectedToText();
+		}
+		else if(exportXML.isSelected())
+		{
+			exportSelectedToXML();
+		}
+		else if(exportMatlab.isSelected())
+		{
+			exportSelectedToMatlab();
+		}
+	}
+	
+	private void exportSelectedToMatlab() throws IOException {
+		Path currentRelativePath = Paths.get("");//getting the cwd path as an object
+		String s = currentRelativePath.toAbsolutePath().toString();//cwd as a string
+		String fileName = exportFileName.getText();//getting the file name entered into the filename textfield
+		String filePath = (s + "\\" + fileName + ".txt");//creating the full file path
+		if(MATLABFormatParser.parseSelected(treeView.getSelectionModel().getSelectedItems(),filePath)){
+			saveFileError.setText("");
+		}
+		else
+		{
+			saveFileError.setText("File with this name already exists!");
+		}		
+	}
+
+	private void exportSelectedToXML() throws IOException 
+	{
+		Path currentRelativePath = Paths.get("");//getting the cwd path as an object
+		String s = currentRelativePath.toAbsolutePath().toString();//cwd as a string
+		String fileName = exportFileName.getText();//getting the file name entered into the filename textfield
+		String filePath = (s + "\\" + fileName + ".txt");//creating the full file path
+		if(XMLFormatParser.parseSelected(treeView.getSelectionModel().getSelectedItems(),filePath)){
+			saveFileError.setText("");
+		}
+		else
+		{
+			saveFileError.setText("File with this name already exists!");
+		}		
+	}
+
 	/*
 	 * Exports the structures selected by the user to a file in their current working directory.
 	 */
-	public void exportSelected() throws IOException
+	public void exportSelectedToText() throws IOException
 	{
 		Path currentRelativePath = Paths.get("");//getting the cwd path as an object
 		String s = currentRelativePath.toAbsolutePath().toString();//cwd as a string
@@ -127,7 +172,7 @@ public class ProcessViewController implements Initializable
 		}
 	}
 	
-	public void detectExportFormat() throws IOException
+	public void detectExportAllFormat() throws IOException
 	{
 		if(exportText.isSelected())
 		{

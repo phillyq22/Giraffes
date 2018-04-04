@@ -131,7 +131,7 @@ public class InitialViewController {
 				} 
 				catch (TransformException e1) 
 				{
-					processError.setText("Final was not in proper format for parsing, please try again.");
+					processError.setText("File was not in proper format for parsing, please try again.");
 
 				}
 			}

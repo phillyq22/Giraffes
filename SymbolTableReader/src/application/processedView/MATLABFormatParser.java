@@ -81,9 +81,9 @@ public class MATLABFormatParser {
 				
 				
 				for (Field f:struct.getFields()) {
-					writer.write(indentString + SPACE_PIPE);
+					writer.write(indentString + SPACE_PIPE+ "\r\n");
 					writer.write(indentString + INDENT_STRING + f.getName() + "\r\n");
-					writer.write(indentString + INDENT_STRING + SPACE_PIPE);
+					writer.write(indentString + INDENT_STRING + SPACE_PIPE+ "\r\n");
 					writer.write(indentString + INDENT_STRING + DASHED_INDENT + "Type : '" + f.getType() + "'\r\n");
 					writer.write(indentString + INDENT_STRING + DASHED_INDENT + "Starting_Word : '" + f.getWord() + "'\r\n");
 					writer.write(indentString + INDENT_STRING + DASHED_INDENT + "Starting_Byte : '" + f.getStartByte() + "'\r\n");
@@ -91,7 +91,7 @@ public class MATLABFormatParser {
 				if(struct.getChildren().size()>0) {
 					//parseList(struct.getChildren(), indentString + INDENT_STRING);
 					for(Structure child:struct.getChildren()) {
-						writer.write(indentString + SPACE_PIPE);
+						writer.write(indentString + SPACE_PIPE+ "\r\n");
 						writer.write(indentString + DASHED_INDENT+ child.getName() + "\r\n");
 						writer.write(indentString + INDENT_STRING + SPACE_PIPE + "\r\n");
 						if(child instanceof Child) {
@@ -130,9 +130,9 @@ public class MATLABFormatParser {
 		
 		
 		for (Field f:struct.getFields()) {
-			writer.write(indent + SPACE_PIPE);
+			writer.write(indent + SPACE_PIPE + "\r\n");
 			writer.write(indent + INDENT_STRING + f.getName() + "\r\n");
-			writer.write(indent + INDENT_STRING + SPACE_PIPE);
+			writer.write(indent + INDENT_STRING + SPACE_PIPE + "\r\n");
 			writer.write(indent + INDENT_STRING + DASHED_INDENT + "Type : '" + f.getType() + "'\r\n");
 			writer.write(indent + INDENT_STRING + DASHED_INDENT + "Starting_Word : '" + f.getWord() + "'\r\n");
 			writer.write(indent + INDENT_STRING + DASHED_INDENT + "Starting_Byte : '" + f.getStartByte() + "'\r\n");
@@ -153,6 +153,7 @@ public class MATLABFormatParser {
 	private static void parseList(ArrayList<Structure> structs, String indent) throws IOException {
 		for (Structure s:structs) {
 			parseSingle(s,indent);
+			writer.write(indent+"\r\n");
 		}
 	}
 }

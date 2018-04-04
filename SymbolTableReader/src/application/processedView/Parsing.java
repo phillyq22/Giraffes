@@ -116,7 +116,7 @@ public class Parsing {
 		return structures;
 		}
 		
-		catch(IndexOutOfBoundsException oob)
+		catch(Exception e)
 		{
 			throw new TransformException("Parsing hit a line that did not fit in expected format");
 		}
