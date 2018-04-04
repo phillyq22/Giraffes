@@ -54,12 +54,12 @@ public class Parsing {
 						{
 							if(t2[1].equals("class")) // if the field is a class, that means it's a child, and adds it do the children for later
 							{
-								Child child = new Child();
-								child.setName(t2[2]);
-								child.setFieldName(t2[4]);
-								child.setWord(Integer.parseInt(t2[6]) / 8);
-								child.setStartByte(Integer.parseInt(t2[7]) % 8);
-								children.add(child);
+								Field field = new Field();
+								field.setType(t2[1] + " " + t2[2] + " " + t2[3]);
+								field.setName(t2[4]);
+								field.setWord(Integer.parseInt(t2[6]) / 8);
+								field.setStartByte(Integer.parseInt(t2[7]) % 8);
+								fields.add(field);
 							}	
 							else if(!t2[1].equals("/*")) // denotes a pahole information line
 							{
@@ -109,7 +109,7 @@ public class Parsing {
 			
 		}
 		
-		assignChildren(structures); // finds the top level children and assigns the proper fields and children to them
+		//assignChildren(structures); // finds the top level children and assigns the proper fields and children to them
 		scanner.close();
 		return structures;
 		}
