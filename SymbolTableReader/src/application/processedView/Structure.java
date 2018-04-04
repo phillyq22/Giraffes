@@ -1,24 +1,20 @@
 package application.processedView;
 
-import java.util.*;
+import java.util.ArrayList;
 
-/*
- * Class to represent a data structure. 
- * 
+/**
  * @author Zac Capell
- * @version 2018.03.23
+ * @version 2/26/18
+ * 
+ * Contains the name of a structure, then array lists for each of its variables and children
  */
+
 public class Structure {
 	
 	private String name;
 	private ArrayList<Structure> children = new ArrayList<Structure>();
 	private ArrayList<Field> fields = new ArrayList<Field>();
 	
-	/*
-	 * @param name the name of the structure.
-	 * @param children the Structures within this structure.
-	 * @param fields the list of this Structure's fields.
-	 */
 	public Structure(String name, ArrayList<Structure> children, ArrayList<Field> fields)
 	{
 		this.name = name;
@@ -40,12 +36,6 @@ public class Structure {
 	{
 		return children;
 	}
-	
-	/** public ArrayList<Attribute> getAttributes()
-	* {
-	* 	return attributes;
-	* }
-	*/
 	
 	public ArrayList<Field> getFields()
 	{
@@ -69,8 +59,18 @@ public class Structure {
 	
 	public String toString()
 	{
-		String s = "STRUCTURE: " +name ;
-		return s;
+		return "STRUCTURE: " + name;
+	}
+	
+	public boolean equals(Object obj)
+	{
+		if(obj instanceof Structure)
+		{
+			Structure s = (Structure) obj;
+			if(this.name.equals(s.getName()))
+				return true;
+		}
+		return false;
 	}
 
 }

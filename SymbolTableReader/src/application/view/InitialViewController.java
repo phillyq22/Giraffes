@@ -19,6 +19,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
+import javax.xml.crypto.dsig.TransformException;
+
 import application.Main;
 import application.processedView.Parsing;
 import application.processedView.ProcessViewController;
@@ -120,10 +122,18 @@ public class InitialViewController {
 			{
 				error = false;
 				processError.setText("");
-				structs = Parsing.parse(lf.getFile());
-				ProcessViewController.setStructs(structs);
-				Main.buildProcessStage();
-				Main.showProcessView();
+				try 
+				{
+					structs = Parsing.parse(lf.getFile());
+					ProcessViewController.setStructs(structs);
+					Main.buildProcessStage();
+					Main.showProcessView();
+				} 
+				catch (TransformException e1) 
+				{
+					processError.setText("Final was not in proper format for parsing, please try again.");
+
+				}
 			}
 		}
 		if(error)
@@ -144,7 +154,7 @@ public class InitialViewController {
 		if(file != null)
 		{
 			String filepath = file.getAbsolutePath();
-			if(!fileExist(file) && (Pattern.matches(".*[.txt]", file.getAbsolutePath()) || Pattern.matches(".*[.java]", filepath)))
+			if(!fileExist(file) && (Pattern.matches(".*[.txt]", filepath) || Pattern.matches(".*[.a]", filepath) || Pattern.matches(".*[.o]", filepath)))
 			{
 				fileError.setText("");
 				ObservableList<LoadedFile> list = loadedFilesView.getItems();

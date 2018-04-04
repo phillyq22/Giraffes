@@ -1,32 +1,21 @@
 package application.processedView;
-/*
- * Class to represent the fields of a structure. 
- * 
- * @author Zac Capell
- * @version 2018.03.23
+
+ 
+
+/**
+ * @author Zac Capell 
+ * @version 2/27/18
+ *
+ * Contains the variable type, name, starting word, and byte within that word of a single variable in a structure
  */
-public class Field {
+
+public class Field extends Structure{
 	
-	String type, name, starting, size;
+	private String type;
+	private int word, startByte;
 	
 	public Field()
 	{
-	}
-	
-	/*
-	 * Constructor of Field.
-	 * 
-	 * @param	type		The datatype of the field.
-	 * @param	name		The name of the field.
-	 * @param	starting	The starting bit of the field.
-	 * @param	size		The bit size of the field. 
-	 */
-	public Field(String type, String name, String starting, String size)
-	{
-		this.type = type;
-		this.name = name;
-		this.starting = starting;
-		this.size = size;
 	}
 	
 	public String getType()
@@ -34,19 +23,15 @@ public class Field {
 		return type;
 	}
 	
-	public String getName()
+	
+	public int getWord()
 	{
-		return name;
+		return word;
 	}
 	
-	public String getStarting()
+	public int getStartByte()
 	{
-		return starting;
-	}
-	
-	public String getSize()
-	{
-		return size;
+		return startByte;
 	}
 	
 	public void setType(String type)
@@ -54,24 +39,19 @@ public class Field {
 		this.type = type;
 	}
 	
-	public void setName(String name)
+	public void setWord(int word)
 	{
-		this.name = name;
+		this.word = word;
 	}
 	
-	public void setStarting(String starting)
+	public void setStartByte(int startByte)
 	{
-		this.starting = starting;
-	}
-	
-	public void setSize(String size)
-	{
-		this.size = size;
+		this.startByte = startByte;
 	}
 	
 	public String toString()
 	{
-		return "FIELD: " + name + ", " + type + ", " + starting + ", " + size;
+		return "FIELD: " + type + ", " + super.getName() + " STARTING WORD: " + word + " STARTING BYTE: " + startByte;
 	}
 
 }

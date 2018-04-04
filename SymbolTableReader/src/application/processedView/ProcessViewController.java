@@ -18,8 +18,10 @@ import javafx.scene.control.TreeView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.TreeItem;
 
 /**
@@ -32,10 +34,15 @@ import javafx.scene.control.TreeItem;
 public class ProcessViewController implements Initializable
 {
 	/**This annotation allows eclipse to recognize the fx:id created in SceneBuilder and utilize it as a variable accordingly*/
-	@FXML TreeView<String> treeView = new TreeView<String>();
+	@FXML TreeView<Structure> treeView = new TreeView<Structure>();
 	@FXML Button back;
 	@FXML private TextField exportFileName = new TextField();
 	@FXML private Label saveFileError;
+	@FXML private RadioButton exportText;
+	@FXML private RadioButton exportXML;
+	@FXML private RadioButton exportMatlab;
+	@FXML private ToggleGroup exportFormat;
+
 	private static ArrayList<Structure> structs = new ArrayList<Structure>();
 
 	/**
@@ -48,7 +55,7 @@ public class ProcessViewController implements Initializable
 	@Override
 	public void initialize(URL location, ResourceBundle resources) 
 	{		
-		TreeItem<String> root = new TreeItem<String>("");
+		TreeItem<Structure> root = new TreeItem<Structure>(null);
 		root.setExpanded(true);
 		parseMany(structs, root);
 		treeView.setRoot(root);
@@ -61,11 +68,11 @@ public class ProcessViewController implements Initializable
 	 * @param structs	the list of structures to parse.
 	 * @param parent	the parent treeitem.
 	 */
-	public static void parseMany(ArrayList<Structure> structs, TreeItem<String> parent)
+	public static void parseMany(ArrayList<Structure> structs, TreeItem<Structure> parent)
 	{
 		for (Structure s : structs)
 		{
-			TreeItem<String> node = new TreeItem<String>(s.toString());
+			TreeItem<Structure> node = new TreeItem<Structure>(s);
 			parseSingle(node, s);
 			parent.getChildren().add(node);
 		}
@@ -77,11 +84,11 @@ public class ProcessViewController implements Initializable
 	 * @param parent	the parent treeitem.
 	 * @param s 		the structure that's being parsed.
 	 */
-	public static void parseSingle(TreeItem<String> parent, Structure s)
+	public static void parseSingle(TreeItem<Structure> parent, Structure s)
 	{
 		for (Field f : s.getFields())
 		{
-		parent.getChildren().add(new TreeItem<String>(f.toString()));
+		parent.getChildren().add(new TreeItem<Structure>(f));
 		}
 		if (!s.getChildren().isEmpty())
 		{
@@ -99,7 +106,7 @@ public class ProcessViewController implements Initializable
 		{
 			treeView.getSelectionModel().clearSelection(0);
 		}
-			treeView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		treeView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 	}
 	
 	/*
@@ -120,10 +127,26 @@ public class ProcessViewController implements Initializable
 		}
 	}
 	
+	public void detectExportFormat() throws IOException
+	{
+		if(exportText.isSelected())
+		{
+			exportAllToText();
+		}
+		else if(exportXML.isSelected())
+		{
+			exportAllToXML();
+		}
+		else if(exportMatlab.isSelected())
+		{
+			exportAllToMatlab();
+		}
+	}
+	
 	/*
 	 * Exports all the loaded structures to a file in their current working directory.
 	 */
-	public void exportAll() throws IOException
+	public void exportAllToText() throws IOException
 	{
 		Path currentRelativePath = Paths.get("");//getting the cwd path as an object
 		String s = currentRelativePath.toAbsolutePath().toString();//cwd as a string
@@ -138,6 +161,38 @@ public class ProcessViewController implements Initializable
 		}
 	}
 	
+	public void exportAllToMatlab() throws IOException 
+	{
+		Path currentRelativePath = Paths.get("");//getting the cwd path as an object
+		String s = currentRelativePath.toAbsolutePath().toString();//cwd as a string
+		String fileName = exportFileName.getText();//getting the file name entered into the filename textfield
+		String filePath = (s + "\\" + fileName + ".txt");//creating the full file path
+		if(MATLABFormatParser.parseStructure(structs,0,filePath))
+		{
+			saveFileError.setText("");
+		}
+		else
+		{
+			saveFileError.setText("File with this name already exists!");
+		}		
+	}
+
+	public void exportAllToXML() throws IOException 
+	{
+		Path currentRelativePath = Paths.get("");//getting the cwd path as an object
+		String s = currentRelativePath.toAbsolutePath().toString();//cwd as a string
+		String fileName = exportFileName.getText();//getting the file name entered into the filename textfield
+		String filePath = (s + "\\" + fileName + ".txt");//creating the full file path
+		if(XMLFormatParser.parseStructure(structs,0,filePath))
+		{
+			saveFileError.setText("");
+		}
+		else
+		{
+			saveFileError.setText("File with this name already exists!");
+		}			
+	}
+
 	/*
 	 * Returns the GUI back to the mainView.
 	 */

@@ -1,20 +1,15 @@
 package application.processedView;
-import java.util.ArrayList;
-import javafx.collections.ObservableList;
-import javafx.scene.control.TreeItem;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
-/*
- * Class used to parse processed structures into a readable format to a file.
- * 
- * @author Russell L. Binaco
- * @version 2018.03.23
- */
+import javafx.collections.ObservableList;
+import javafx.scene.control.TreeItem;
 
-public class ReadableFormatParser {
+public class XMLFormatParser {
 	private final static String INDENT_STRING = "  ";
 	private static BufferedWriter writer;
 	
@@ -50,14 +45,14 @@ public class ReadableFormatParser {
 	 * @param	filePath	The name of the filePath.
 	 * 
 	 */
-	public static boolean parseSelected(ObservableList<TreeItem<Structure>> observableList, String filePath) throws IOException{
+	public static boolean parseSelected(ObservableList<TreeItem<Structure>> selected, String filePath) throws IOException{
 		File file = new File(filePath);
 		boolean notFound = false;
 		if(!file.exists())
 		{
 			notFound = true;
 			BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-			for(TreeItem<Structure> item : observableList)
+			for(TreeItem<Structure> item : selected)
 			{
 				TreeItem<Structure> parent = item;
 				int indentCount = -1;
@@ -69,10 +64,31 @@ public class ReadableFormatParser {
 				for(int i =0; i<indentCount; i++){
 					indentString = indentString + INDENT_STRING;
 				}
-				writer.write(indentString + item.getValue().toString() + "\r\n");
-				for (TreeItem<Structure> child: item.getChildren()){
-					writer.write(indentString + INDENT_STRING + child.getValue().toString() + "\r\n");
+//				writer.write(indentString + item.getValue().toString() + "\r\n");
+//				for (TreeItem<String> child: item.getChildren()){
+//					writer.write(indentString + INDENT_STRING + child.getValue().toString() + "\r\n");
+//				}
+				Structure struct = item.getValue();
+				writer.write(indentString + "<" + struct.getName());
+				if (struct instanceof Child) {
+					writer.write(" name=" + ((Child)struct).getFieldName() +"\" Starting_Word=\"" + ((Child)struct).getWord()+ "\" Starting_Byte=\""+((Child)struct).getStartByte()+ "\"");
 				}
+				writer.write(">\r\n");
+				for (Field f:struct.getFields()) {
+					//writer.write(indent + INDENT_STRING + f.toString() + "\r\n");
+					writer.write(indentString + INDENT_STRING + "<"+ f.getName()+" Type=\""+ f.getType()+"\" Starting_Word=\"" + f.getWord()+ "\" Starting_Byte=\""+f.getStartByte()+ "\"/>\r\n");
+				}
+				if(struct.getChildren().size()>0) {
+					for(Structure child:struct.getChildren()) {
+						writer.write(indentString + INDENT_STRING + "<" + child.getName());
+						if (child instanceof Child) {
+							writer.write(" name=" + ((Child)child).getFieldName() +"\" Starting_Word=\"" + ((Child)child).getWord()+ "\" Starting_Byte=\""+((Child)child).getStartByte()+ "\"");
+						}
+						writer.write("/>\r\n");
+					}
+				}
+				
+				writer.write(indentString + "</"+ struct.getName()+">\r\n");
 				writer.write("\r\n");
 			}
 			writer.close();
@@ -87,13 +103,23 @@ public class ReadableFormatParser {
 	 * @param	indent	The starting indentation level.
 	 */
 	private static void parseSingle(Structure struct, String indent) throws IOException{
-		writer.write(indent + struct.getName() + "\r\n");
+		//writer.write(indent + struct.getName() + "\r\n");
+		writer.write(indent + "<" + struct.getName());
+		if (struct instanceof Child) {
+			writer.write(" name=" + ((Child)struct).getFieldName() +"\" Starting_Word=\"" + ((Child)struct).getWord()+ "\" Starting_Byte=\""+((Child)struct).getStartByte()+ "\"");
+		}
+		writer.write(">\r\n");
+		
+		
 		for (Field f:struct.getFields()) {
-			writer.write(indent + INDENT_STRING + f.toString() + "\r\n");
+			//writer.write(indent + INDENT_STRING + f.toString() + "\r\n");
+			writer.write(indent + INDENT_STRING + "<"+ f.getName()+" Type=\""+ f.getType()+"\" Starting_Word=\"" + f.getWord()+ "\" Starting_Byte=\""+f.getStartByte()+ "\"/>\r\n");
 		}
 		if(struct.getChildren().size()>0) {
 			parseList(struct.getChildren(), indent + INDENT_STRING);
 		}
+		
+		writer.write(indent + "</"+ struct.getName()+">\r\n");
 	}
 	
 	/*
