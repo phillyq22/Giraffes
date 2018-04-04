@@ -2,13 +2,18 @@ package swengStructure;
 
 import java.util.*;
 
-// Zac Capell, 2/26/18
+/**
+ * @author Zac Capell
+ * @version 2/26/18
+ * 
+ * Contains the name of a structure, then array lists for each of its variables and children
+ */
 
 public class Structure {
 	
-	String name;
-	ArrayList<Structure> children = new ArrayList<Structure>();
-	ArrayList<Field> fields = new ArrayList<Field>();
+	private String name;
+	private ArrayList<Structure> children = new ArrayList<Structure>();
+	private ArrayList<Field> fields = new ArrayList<Field>();
 	
 	public Structure(String name, ArrayList<Structure> children, ArrayList<Field> fields)
 	{
@@ -32,12 +37,6 @@ public class Structure {
 		return children;
 	}
 	
-	/** public ArrayList<Attribute> getAttributes()
-	* {
-	* 	return attributes;
-	* }
-	*/
-	
 	public ArrayList<Field> getFields()
 	{
 		return fields;
@@ -60,12 +59,18 @@ public class Structure {
 	
 	public String toString()
 	{
-		String s = "STRUCTURE: " +name + "\n";
-		for(Field f : fields)
-			s += f.toString() + "\n";
-		for(Structure c : children)
-			s += c.toString() + "\n";
-		return s;
+		return "STRUCTURE: " + name;
+	}
+	
+	public boolean equals(Object obj)
+	{
+		if(obj instanceof Structure)
+		{
+			Structure s = (Structure) obj;
+			if(this.name.equals(s.getName()))
+				return true;
+		}
+		return false;
 	}
 
 }
