@@ -150,8 +150,9 @@ public class InitialViewController {
         File file = new File(fullFilePath);
        
         String runTimeString = new String();
-        String exeLinked = new String("cd " + filePath + " ; /usr/bin/g++ -o tester tester.a");
-        String pahole = new String("cd " + filePath + " ; pahole -a tester.a > " + fullFilePath);
+	String tester = new String("tester tester.a -lpthread");
+        String exeLinked = new String("cd " + filePath + " ; /usr/bin/g++ -o " + tester);
+        String pahole = new String("cd " + filePath + " ; pahole -A tester.a > " + fullFilePath);
  
         if(!list.isEmpty())
         {
@@ -166,10 +167,10 @@ public class InitialViewController {
                
                 for (int i = 0; i < list.size(); i++)
                 {
-                    LoadedFile loadedFiles = list.get(i);
-                    if (Pattern.matches(".*[.o]", loadedFiles.getFile().getName()))
+                    lf = list.get(i);
+                    if (Pattern.matches(".*[.o]", lf.getFile().getName()))
                     {                      
-                runTimeString += loadedFiles.getFile().getName() + " ";
+                runTimeString += lf.getFile().getName() + " ";
                     }
                    
                 }
@@ -255,7 +256,7 @@ public class InitialViewController {
         if(file != null)
         {
             String filepath = file.getAbsolutePath();
-            if(!fileExist(file) && (Pattern.matches(".*[.o]", filepath) || Pattern.matches(".*[.a]", filepath)/*|| !Pattern.matches(".*[.]", filepath)*/))
+            if(!fileExist(file) && (Pattern.matches(".*[.o]", filepath) || Pattern.matches(".*[.a]", filepath) /*|| !Pattern.matches(".*[.]", filepath)*/))
             {
                 fileError.setText("");
                 ObservableList<LoadedFile> list = loadedFilesView.getItems();
