@@ -171,6 +171,19 @@ public class InitialViewController {
                     if (Pattern.matches(".*[.o]", lf.getFile().getName()))
                     {                      
                 runTimeString += lf.getFile().getName() + " ";
+		/**String dwarfName = ("dwarfDump" + i +".txt");//getting the file name
+        	String dwarfPath = (s + File.separator);
+        	String dwarfFullFilePath = (s + File.separator + dwarfName);//creating the full file path
+        	File dwarf = new File(dwarfFullFilePath);
+		String dwarfDump = new String("cd " + filePath + " ; dwarfdump -a " + runTimeString + "| grep 'pthread' > " + dwarfName);
+		String[] arcCmd = new String[] {"/bin/bash", "-c", dwarfDump};
+                    Process process = Runtime.getRuntime().exec(arcCmd);
+                    process.destroy();
+		if (!dwarf.getName().isEmpty())
+			{
+			tester = new String("tester tester.a -lpthread");
+			exeLinked = new String("cd " + filePath + " ; /usr/bin/g++ -o " + tester);
+			}*/
                     }
                    
                 }
@@ -256,7 +269,7 @@ public class InitialViewController {
         if(file != null)
         {
             String filepath = file.getAbsolutePath();
-            if(!fileExist(file) && (Pattern.matches(".*[.o]", filepath) || Pattern.matches(".*[.a]", filepath) /*|| !Pattern.matches(".*[.]", filepath)*/))
+            if(!fileExist(file) && (Pattern.matches(".*[.o]", filepath) || Pattern.matches(".*[.a]", filepath) || !Pattern.matches(".*[.]", filepath)))
             {
                 fileError.setText("");
                 ObservableList<LoadedFile> list = loadedFilesView.getItems();
@@ -290,11 +303,12 @@ public class InitialViewController {
         if(list != null)
         {
             int size = list.size();
-            for(int i = 0; i < size && !found; i++)
+            for(int i = 0; i < size; i++)
             {
-                if(list.get(i).getFile().getAbsoluteFile().equals(file.getAbsolutePath()))
+                if(list.get(i).getFile().getAbsolutePath().equals(file.getAbsolutePath()))
                 {
-                    found = true;//file was already imported
+                    //found = true;//file was already imported
+		return true;
                 }
             }
         }
