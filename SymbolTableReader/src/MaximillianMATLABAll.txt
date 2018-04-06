@@ -1,0 +1,502 @@
+_IO_FILE
+ |
+ |
+ |  _flags;
+ |   |
+ |   |--Type : 'int'
+ |   |--Starting_Word : '0'
+ |   |--Starting_Byte : '4'
+ |
+ |  _IO_read_ptr;
+ |   |
+ |   |--Type : 'char'
+ |   |--Starting_Word : '1'
+ |   |--Starting_Byte : '0'
+ |
+ |  _IO_read_end;
+ |   |
+ |   |--Type : 'char'
+ |   |--Starting_Word : '2'
+ |   |--Starting_Byte : '0'
+ |
+ |  _IO_read_base;
+ |   |
+ |   |--Type : 'char'
+ |   |--Starting_Word : '3'
+ |   |--Starting_Byte : '0'
+ |
+ |  _IO_write_base;
+ |   |
+ |   |--Type : 'char'
+ |   |--Starting_Word : '4'
+ |   |--Starting_Byte : '0'
+ |
+ |  _IO_write_ptr;
+ |   |
+ |   |--Type : 'char'
+ |   |--Starting_Word : '5'
+ |   |--Starting_Byte : '0'
+ |
+ |  _IO_write_end;
+ |   |
+ |   |--Type : 'char'
+ |   |--Starting_Word : '6'
+ |   |--Starting_Byte : '0'
+ |
+ |  _IO_buf_base;
+ |   |
+ |   |--Type : 'char'
+ |   |--Starting_Word : '7'
+ |   |--Starting_Byte : '0'
+ |
+ |  _IO_buf_end;
+ |   |
+ |   |--Type : 'char'
+ |   |--Starting_Word : '8'
+ |   |--Starting_Byte : '0'
+ |
+ |  _IO_save_base;
+ |   |
+ |   |--Type : 'char'
+ |   |--Starting_Word : '9'
+ |   |--Starting_Byte : '0'
+ |
+ |  _IO_backup_base;
+ |   |
+ |   |--Type : 'char'
+ |   |--Starting_Word : '10'
+ |   |--Starting_Byte : '0'
+ |
+ |  _IO_save_end;
+ |   |
+ |   |--Type : 'char'
+ |   |--Starting_Word : '11'
+ |   |--Starting_Byte : '0'
+ |
+ |  _markers;
+ |   |
+ |   |--Type : 'class _IO_marker *'
+ |   |--Starting_Word : '12'
+ |   |--Starting_Byte : '0'
+ |
+ |  _chain;
+ |   |
+ |   |--Type : 'class _IO_FILE *'
+ |   |--Starting_Word : '13'
+ |   |--Starting_Byte : '0'
+ |
+ |  _fileno;
+ |   |
+ |   |--Type : 'int'
+ |   |--Starting_Word : '14'
+ |   |--Starting_Byte : '4'
+ |
+ |  _flags2;
+ |   |
+ |   |--Type : 'int'
+ |   |--Starting_Word : '14'
+ |   |--Starting_Byte : '4'
+ |
+ |  _old_offset;
+ |   |
+ |   |--Type : '__off_t'
+ |   |--Starting_Word : '15'
+ |   |--Starting_Byte : '0'
+ |
+ |  _cur_column;
+ |   |
+ |   |--Type : 'short'
+ |   |--Starting_Word : '16'
+ |   |--Starting_Byte : '2'
+ |
+ |  _vtable_offset;
+ |   |
+ |   |--Type : 'char'
+ |   |--Starting_Word : '16'
+ |   |--Starting_Byte : '1'
+ |
+ |  _shortbuf[1];
+ |   |
+ |   |--Type : 'char'
+ |   |--Starting_Word : '16'
+ |   |--Starting_Byte : '1'
+ |
+ |  _lock;
+ |   |
+ |   |--Type : '_IO_lock_t'
+ |   |--Starting_Word : '17'
+ |   |--Starting_Byte : '0'
+ |
+ |  _offset;
+ |   |
+ |   |--Type : '__off64_t'
+ |   |--Starting_Word : '18'
+ |   |--Starting_Byte : '0'
+ |
+ |  __pad1;
+ |   |
+ |   |--Type : 'void'
+ |   |--Starting_Word : '19'
+ |   |--Starting_Byte : '0'
+ |
+ |  __pad2;
+ |   |
+ |   |--Type : 'void'
+ |   |--Starting_Word : '20'
+ |   |--Starting_Byte : '0'
+ |
+ |  __pad3;
+ |   |
+ |   |--Type : 'void'
+ |   |--Starting_Word : '21'
+ |   |--Starting_Byte : '0'
+ |
+ |  __pad4;
+ |   |
+ |   |--Type : 'void'
+ |   |--Starting_Word : '22'
+ |   |--Starting_Byte : '0'
+ |
+ |  __pad5;
+ |   |
+ |   |--Type : 'size_t'
+ |   |--Starting_Word : '23'
+ |   |--Starting_Byte : '0'
+ |
+ |  _mode;
+ |   |
+ |   |--Type : 'int'
+ |   |--Starting_Word : '24'
+ |   |--Starting_Byte : '4'
+ |
+ |  _unused2[20];
+ |   |
+ |   |--Type : 'char'
+ |   |--Starting_Word : '24'
+ |   |--Starting_Byte : '4'
+ |
+
+typedef
+ |
+ |
+ |  gp_offset;
+ |   |
+ |   |--Type : 'unsigned'
+ |   |--Starting_Word : '0'
+ |   |--Starting_Byte : '4'
+ |
+ |  fp_offset;
+ |   |
+ |   |--Type : 'unsigned'
+ |   |--Starting_Word : '0'
+ |   |--Starting_Byte : '4'
+ |
+ |  overflow_arg_area;
+ |   |
+ |   |--Type : 'void'
+ |   |--Starting_Word : '1'
+ |   |--Starting_Byte : '0'
+ |
+ |  reg_save_area;
+ |   |
+ |   |--Type : 'void'
+ |   |--Starting_Word : '2'
+ |   |--Starting_Byte : '0'
+ |
+
+tm
+ |
+ |
+ |  tm_sec;
+ |   |
+ |   |--Type : 'int'
+ |   |--Starting_Word : '0'
+ |   |--Starting_Byte : '4'
+ |
+ |  tm_min;
+ |   |
+ |   |--Type : 'int'
+ |   |--Starting_Word : '0'
+ |   |--Starting_Byte : '4'
+ |
+ |  tm_hour;
+ |   |
+ |   |--Type : 'int'
+ |   |--Starting_Word : '1'
+ |   |--Starting_Byte : '4'
+ |
+ |  tm_mday;
+ |   |
+ |   |--Type : 'int'
+ |   |--Starting_Word : '1'
+ |   |--Starting_Byte : '4'
+ |
+ |  tm_mon;
+ |   |
+ |   |--Type : 'int'
+ |   |--Starting_Word : '2'
+ |   |--Starting_Byte : '4'
+ |
+ |  tm_year;
+ |   |
+ |   |--Type : 'int'
+ |   |--Starting_Word : '2'
+ |   |--Starting_Byte : '4'
+ |
+ |  tm_wday;
+ |   |
+ |   |--Type : 'int'
+ |   |--Starting_Word : '3'
+ |   |--Starting_Byte : '4'
+ |
+ |  tm_yday;
+ |   |
+ |   |--Type : 'int'
+ |   |--Starting_Word : '3'
+ |   |--Starting_Byte : '4'
+ |
+ |  tm_isdst;
+ |   |
+ |   |--Type : 'int'
+ |   |--Starting_Word : '4'
+ |   |--Starting_Byte : '4'
+ |
+ |  tm_gmtoff;
+ |   |
+ |   |--Type : 'long'
+ |   |--Starting_Word : '5'
+ |   |--Starting_Byte : '0'
+ |
+ |  tm_zone;
+ |   |
+ |   |--Type : 'const'
+ |   |--Starting_Word : '6'
+ |   |--Starting_Byte : '0'
+ |
+
+lconv
+ |
+ |
+ |  decimal_point;
+ |   |
+ |   |--Type : 'char'
+ |   |--Starting_Word : '0'
+ |   |--Starting_Byte : '0'
+ |
+ |  thousands_sep;
+ |   |
+ |   |--Type : 'char'
+ |   |--Starting_Word : '1'
+ |   |--Starting_Byte : '0'
+ |
+ |  grouping;
+ |   |
+ |   |--Type : 'char'
+ |   |--Starting_Word : '2'
+ |   |--Starting_Byte : '0'
+ |
+ |  int_curr_symbol;
+ |   |
+ |   |--Type : 'char'
+ |   |--Starting_Word : '3'
+ |   |--Starting_Byte : '0'
+ |
+ |  currency_symbol;
+ |   |
+ |   |--Type : 'char'
+ |   |--Starting_Word : '4'
+ |   |--Starting_Byte : '0'
+ |
+ |  mon_decimal_point;
+ |   |
+ |   |--Type : 'char'
+ |   |--Starting_Word : '5'
+ |   |--Starting_Byte : '0'
+ |
+ |  mon_thousands_sep;
+ |   |
+ |   |--Type : 'char'
+ |   |--Starting_Word : '6'
+ |   |--Starting_Byte : '0'
+ |
+ |  mon_grouping;
+ |   |
+ |   |--Type : 'char'
+ |   |--Starting_Word : '7'
+ |   |--Starting_Byte : '0'
+ |
+ |  positive_sign;
+ |   |
+ |   |--Type : 'char'
+ |   |--Starting_Word : '8'
+ |   |--Starting_Byte : '0'
+ |
+ |  negative_sign;
+ |   |
+ |   |--Type : 'char'
+ |   |--Starting_Word : '9'
+ |   |--Starting_Byte : '0'
+ |
+ |  int_frac_digits;
+ |   |
+ |   |--Type : 'char'
+ |   |--Starting_Word : '10'
+ |   |--Starting_Byte : '1'
+ |
+ |  frac_digits;
+ |   |
+ |   |--Type : 'char'
+ |   |--Starting_Word : '10'
+ |   |--Starting_Byte : '1'
+ |
+ |  p_cs_precedes;
+ |   |
+ |   |--Type : 'char'
+ |   |--Starting_Word : '10'
+ |   |--Starting_Byte : '1'
+ |
+ |  p_sep_by_space;
+ |   |
+ |   |--Type : 'char'
+ |   |--Starting_Word : '10'
+ |   |--Starting_Byte : '1'
+ |
+ |  n_cs_precedes;
+ |   |
+ |   |--Type : 'char'
+ |   |--Starting_Word : '10'
+ |   |--Starting_Byte : '1'
+ |
+ |  n_sep_by_space;
+ |   |
+ |   |--Type : 'char'
+ |   |--Starting_Word : '10'
+ |   |--Starting_Byte : '1'
+ |
+ |  p_sign_posn;
+ |   |
+ |   |--Type : 'char'
+ |   |--Starting_Word : '10'
+ |   |--Starting_Byte : '1'
+ |
+ |  n_sign_posn;
+ |   |
+ |   |--Type : 'char'
+ |   |--Starting_Word : '10'
+ |   |--Starting_Byte : '1'
+ |
+ |  int_p_cs_precedes;
+ |   |
+ |   |--Type : 'char'
+ |   |--Starting_Word : '11'
+ |   |--Starting_Byte : '1'
+ |
+ |  int_p_sep_by_space;
+ |   |
+ |   |--Type : 'char'
+ |   |--Starting_Word : '11'
+ |   |--Starting_Byte : '1'
+ |
+ |  int_n_cs_precedes;
+ |   |
+ |   |--Type : 'char'
+ |   |--Starting_Word : '11'
+ |   |--Starting_Byte : '1'
+ |
+ |  int_n_sep_by_space;
+ |   |
+ |   |--Type : 'char'
+ |   |--Starting_Word : '11'
+ |   |--Starting_Byte : '1'
+ |
+ |  int_p_sign_posn;
+ |   |
+ |   |--Type : 'char'
+ |   |--Starting_Word : '11'
+ |   |--Starting_Byte : '1'
+ |
+ |  int_n_sign_posn;
+ |   |
+ |   |--Type : 'char'
+ |   |--Starting_Word : '11'
+ |   |--Starting_Byte : '1'
+ |
+
+_IO_marker
+ |
+ |
+ |  _next;
+ |   |
+ |   |--Type : 'class _IO_marker *'
+ |   |--Starting_Word : '0'
+ |   |--Starting_Byte : '0'
+ |
+ |  _sbuf;
+ |   |
+ |   |--Type : 'class _IO_FILE *'
+ |   |--Starting_Word : '1'
+ |   |--Starting_Byte : '0'
+ |
+ |  _pos;
+ |   |
+ |   |--Type : 'int'
+ |   |--Starting_Word : '2'
+ |   |--Starting_Byte : '4'
+ |
+
+__pthread_internal_list
+ |
+ |
+ |  __prev;
+ |   |
+ |   |--Type : 'class __pthread_internal_list *'
+ |   |--Starting_Word : '0'
+ |   |--Starting_Byte : '0'
+ |
+ |  __next;
+ |   |
+ |   |--Type : 'class __pthread_internal_list *'
+ |   |--Starting_Word : '1'
+ |   |--Starting_Byte : '0'
+ |
+
+CallbackInfo
+ |
+ |
+ |  object;
+ |   |
+ |   |--Type : 'void'
+ |   |--Starting_Word : '0'
+ |   |--Starting_Byte : '0'
+ |
+ |  thread;
+ |   |
+ |   |--Type : 'ThreadHandle'
+ |   |--Starting_Word : '1'
+ |   |--Starting_Byte : '4'
+ |
+ |  callback;
+ |   |
+ |   |--Type : 'void'
+ |   |--Starting_Word : '2'
+ |   |--Starting_Byte : '0'
+ |
+ |  userData;
+ |   |
+ |   |--Type : 'void'
+ |   |--Starting_Word : '3'
+ |   |--Starting_Byte : '0'
+ |
+ |  apiInfo;
+ |   |
+ |   |--Type : 'void'
+ |   |--Starting_Word : '4'
+ |   |--Starting_Byte : '0'
+ |
+ |  isRunning;
+ |   |
+ |   |--Type : 'bool'
+ |   |--Starting_Word : '5'
+ |   |--Starting_Byte : '1'
+ |
+

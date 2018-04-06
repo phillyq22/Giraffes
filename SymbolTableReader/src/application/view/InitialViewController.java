@@ -142,22 +142,28 @@ public class InitialViewController {
         boolean error = true;
         ObservableList<LoadedFile> list = loadedFilesView.getItems();
  
-        Path currentRelativePath = Paths.get("");//getting the cwd path as an object
+        /**Path currentRelativePath = Paths.get("");//getting the cwd path as an object
         String s = currentRelativePath.toAbsolutePath().toString();//cwd as a string
-        String fileName = ("paholeOutput.txt");//getting the file name
         String filePath = (s + File.separator);
         String fullFilePath = (s + File.separator + fileName);//creating the full file path
-        File file = new File(fullFilePath);
-       
-        String runTimeString = new String();
-	String tester = new String("tester tester.a -lpthread");
-        String exeLinked = new String("cd " + filePath + " ; /usr/bin/g++ -o " + tester);
-        String pahole = new String("cd " + filePath + " ; pahole -A tester.a > " + fullFilePath);
+        File file = new File(fullFilePath);*/
+
+	String runTimeString = new String();
  
         if(!list.isEmpty())
         {
             LoadedFile lf = list.get(0);
-           
+
+		String fileName = new String("pahole.txt");
+		String filePath = new String(list.get(0).getFile().getAbsoluteFile().getParentFile().getAbsolutePath().toString());
+		String fullFilePath = new String(filePath + File.separator + fileName);
+
+		File file = new File(fullFilePath);
+
+        	String pahole = new String("cd " + filePath + " ; pahole -A tester.a > " + fullFilePath);
+
+		String exeLinked = new String("cd " + filePath + " ; /usr/bin/g++ tester tester.a -lpthread");
+		
                 if(lf.getCheckBox().isSelected())
                 {
            
@@ -171,19 +177,6 @@ public class InitialViewController {
                     if (Pattern.matches(".*[.o]", lf.getFile().getName()))
                     {                      
                 runTimeString += lf.getFile().getName() + " ";
-		/**String dwarfName = ("dwarfDump" + i +".txt");//getting the file name
-        	String dwarfPath = (s + File.separator);
-        	String dwarfFullFilePath = (s + File.separator + dwarfName);//creating the full file path
-        	File dwarf = new File(dwarfFullFilePath);
-		String dwarfDump = new String("cd " + filePath + " ; dwarfdump -a " + runTimeString + "| grep 'pthread' > " + dwarfName);
-		String[] arcCmd = new String[] {"/bin/bash", "-c", dwarfDump};
-                    Process process = Runtime.getRuntime().exec(arcCmd);
-                    process.destroy();
-		if (!dwarf.getName().isEmpty())
-			{
-			tester = new String("tester tester.a -lpthread");
-			exeLinked = new String("cd " + filePath + " ; /usr/bin/g++ -o " + tester);
-			}*/
                     }
                    
                 }
@@ -207,6 +200,8 @@ public class InitialViewController {
             }
             else if (Pattern.matches(".*[.a]", lf.getFile().getName()))
             {
+		String lfNameExt = lf.getFile().getName();
+		String lfName = (lfNameExt.replaceFirst("[.][^.]+$", ""));
                 //call runtime for filename with flags to process .a into .exe
                 //then process executable
                 try {

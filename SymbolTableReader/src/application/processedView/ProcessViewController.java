@@ -196,7 +196,7 @@ public class ProcessViewController implements Initializable
 		Path currentRelativePath = Paths.get("");//getting the cwd path as an object
 		String s = currentRelativePath.toAbsolutePath().toString();//cwd as a string
 		String fileName = exportFileName.getText();//getting the file name entered into the filename textfield
-		String filePath = (s + "\\" + fileName + ".txt");//creating the full file path
+		String filePath = (s + "//" + fileName + ".txt");//creating the full file path
 		if(ReadableFormatParser.parseStructure(structs,0,filePath)){
 			saveFileError.setText("");
 		}
@@ -211,7 +211,7 @@ public class ProcessViewController implements Initializable
 		Path currentRelativePath = Paths.get("");//getting the cwd path as an object
 		String s = currentRelativePath.toAbsolutePath().toString();//cwd as a string
 		String fileName = exportFileName.getText();//getting the file name entered into the filename textfield
-		String filePath = (s + "\\" + fileName + ".txt");//creating the full file path
+		String filePath = (s + "//" + fileName + ".txt");//creating the full file path
 		if(MATLABFormatParser.parseStructure(structs,0,filePath))
 		{
 			saveFileError.setText("");
