@@ -1,7 +1,5 @@
 package swengStructure;
 
- 
-
 /**
  * @author Zac Capell 
  * @version 2/27/18
@@ -11,47 +9,38 @@ package swengStructure;
 
 public class Field extends Structure{
 	
-	private String type;
-	private int word, startByte;
+	private int bitSize, byteSize;
+	private String start;
 	
 	public Field()
 	{
 	}
 	
+	public Field(String type, String name, int bitSize, int byteSize, String start)
+	{
+		super.setType(type);
+		super.setName(name);
+		this.bitSize = bitSize;
+		this.byteSize = byteSize;
+		this.start = start;
+		
+	}
+	
 	public String getType()
 	{
-		return type;
+		return super.getType();
 	}
 	
-	
-	public int getWord()
-	{
-		return word;
-	}
-	
-	public int getStartByte()
-	{
-		return startByte;
-	}
 	
 	public void setType(String type)
 	{
-		this.type = type;
+		super.setType(type);
 	}
 	
-	public void setWord(int word)
-	{
-		this.word = word;
-	}
-	
-	public void setStartByte(int startByte)
-	{
-		this.startByte = startByte;
-	}
 	
 	public String toString()
 	{
-		return "FIELD: " + type + ", " + super.getName() + " STARTING WORD: " + word + " STARTING BYTE: " + startByte;
+		return "FIELD: " + getType() + ", " + super.getName() + " STARTING WORD: " + start + " BIT SIZE: " + bitSize + " BYTE SIZE: " + byteSize;
 	}
 
 }

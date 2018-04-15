@@ -2,12 +2,14 @@ package swengStructure;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.Iterator;
 import javax.xml.crypto.dsig.TransformException;
 
 /**
  * @author Zac Capell
- * @version 3/8/18
+ * @version 4/12/18
  * 
  * Takes in pahole files from c++ currently
  * Creates a list of structures that can then be manipulated
@@ -58,7 +60,7 @@ public class Parsing {
 								field.setType(t2[1] + " " + t2[2] + " " + t2[3]);
 								field.setName(t2[4]);
 								field.setWord(Integer.parseInt(t2[6]) / 8);
-								field.setStartByte(Integer.parseInt(t2[7]) % 8);
+								field.setStartByte(Integer.parseInt(t2[6]) % 8);
 								fields.add(field);
 							}	
 							else if(!t2[1].equals("/*")) // denotes a pahole information line
@@ -69,30 +71,39 @@ public class Parsing {
 								{
 									field.setName(t2[2]);
 									field.setWord(Integer.parseInt(t2[4]) / 8 );
-									field.setStartByte(Integer.parseInt(t2[5]) % 8);
+									field.setStartByte(Integer.parseInt(t2[4]) % 8);
 								}
 							
 								else if(t2[1].equals("signed")) // does the same as if above, but different spacing for signed fields
 								{
-									field.setType(t2[2]);
+									field.setType(t2[1] + " " + t2[2]);
 									field.setName(t2[3]);
 									field.setWord(Integer.parseInt(t2[5]) / 8 );
-									field.setStartByte(Integer.parseInt(t2[6]) % 8);
+									field.setStartByte(Integer.parseInt(t2[5]) % 8);
 								
 								}
 							
 								else if(t2[2].equals("unsigned") || t2[1].equals("const")) // does the same as if above, but different spacing for unsigned fields or const characters
 								{
+									field.setType(t2[1] + " " + t2[2] + " " + t2[3]);
 									field.setName(t2[4]);
 									field.setWord(Integer.parseInt(t2[6]) / 8 );
-									field.setStartByte(Integer.parseInt(t2[7]) % 8);
+									field.setStartByte(Integer.parseInt(t2[6]) % 8);
+								}
+								
+								else if(t2[2].equals("*"))
+								{
+									field.setType(t2[1] + " " + t2[2]);
+									field.setName(t2[3]);
+									field.setWord(Integer.parseInt(t2[5]) / 8 );
+									field.setStartByte(Integer.parseInt(t2[5]) % 8);
 								}
 								
 								else // if it requires no special spacing, do this instead
 								{
 									field.setName(t2[3]);
 									field.setWord(Integer.parseInt(t2[5]) / 8 );
-									field.setStartByte(Integer.parseInt(t2[6]) % 8);
+									field.setStartByte(Integer.parseInt(t2[5]) % 8);
 								}
 								fields.add(field);
 							}
@@ -114,7 +125,7 @@ public class Parsing {
 		return structures;
 		}
 		
-		catch(IndexOutOfBoundsException oob)
+		catch(Exception e)
 		{
 			throw new TransformException("Parsing hit a line that did not fit in expected format");
 		}
