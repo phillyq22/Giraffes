@@ -266,33 +266,40 @@ public void initialize(URL location, ResourceBundle resources) {
      * @param   e   The clicking of the selectFiles button
      */
     public void importMultiFiles(ActionEvent e)
-    {
-        FileChooser fc = new FileChooser();
-        File file = fc.showOpenDialog(null);
-        if(file != null)
-        {
-            String filepath = file.getAbsolutePath();
-            if(!fileExist(file) && (Pattern.matches(".*[.o]", filepath) || Pattern.matches(".*[.a]", filepath) || !Pattern.matches(".*[.]", filepath)))
-            {
-                fileError.setText("");
-                ObservableList<LoadedFile> list = loadedFilesView.getItems();
-                CheckBox checkBox = new CheckBox(file.getName());
-                LoadedFile lf =  new LoadedFile(file, checkBox);
-                //Makes sure that the checkboxes are displayed by checking for the field called checkBox in LoadedFile object
-                loadedFiles.setCellValueFactory(new PropertyValueFactory<LoadedFile, CheckBox>("checkBox"));
-                list.add(lf);
-                loadedFilesView.setItems(list);
-		for (int i = 0; i < list.size(); i++)
+	{
+		FileChooser fc = new FileChooser();
+		
+		ExtensionFilter ef1 = new ExtensionFilter("Archive file", "*.a");
+		ExtensionFilter ef2 = new ExtensionFilter("Executable file", "*.");
+		
+		Path currentRelativePath = Paths.get("");//getting the cwd path as an object
+		String cwd = currentRelativePath.toAbsolutePath().toString();//current working directory as a string
+		
+		fc.setInitialDirectory(new File(cwd));
+		fc.getExtensionFilters().add(ef1);
+		fc.getExtensionFilters().add(ef2);
+		File file = fc.showOpenDialog(null);
+		
+		if(file != null)
 		{
-		System.out.println(list.get(i).getFile().getName());
+			if(!fileExist(file))
+			{
+				fileError.setText("");
+				ObservableList<LoadedFile> list = loadedFilesView.getItems();
+				CheckBox checkBox = new CheckBox(file.getName());
+				LoadedFile lf =  new LoadedFile(file, checkBox);
+				//Makes sure that the checkboxes are displayed by checking for the field called checkBox in LoadedFile object
+				loadedFiles.setCellValueFactory(new PropertyValueFactory<LoadedFile, CheckBox>("checkBox"));
+				list.add(lf);
+				loadedFilesView.setItems(list);
+			}
+			else
+			{
+				fileError.setText("File was already loaded in.");
+			}
 		}
-            }
-            else
-            {
-                fileError.setText("File either already loaded in, or is of the wrong extension.");
-            }
 	}
-    }
+
    
     /*
      * Checks whether or not the selected file already has been selected.

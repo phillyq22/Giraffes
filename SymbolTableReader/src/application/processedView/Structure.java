@@ -6,7 +6,9 @@ import java.util.ArrayList;
  * @author Zac Capell
  * @version 2/26/18
  * 
- * Contains the name of a structure, then array lists for each of its variables and children
+ * Contains the name of a structure,
+ * then array lists for each of its variables
+ * and children
  */
 
 public class Structure {
@@ -69,7 +71,7 @@ public class Structure {
 	
 	public String toString()
 	{
-		return "STRUCTURE: " + name;
+		return type + ": " + name;
 	}
 	
 	public boolean equals(Object obj)
@@ -84,3 +86,4 @@ public class Structure {
 	}
 
 }
+

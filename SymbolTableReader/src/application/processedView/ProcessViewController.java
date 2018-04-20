@@ -1,6 +1,6 @@
 package application.processedView;
 
-import java.io.File;
+import java.io.File; 
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
@@ -42,6 +42,7 @@ public class ProcessViewController implements Initializable
 	@FXML private RadioButton exportXML;
 	@FXML private RadioButton exportMatlab;
 	@FXML private ToggleGroup exportFormat;
+	@FXML private Button preview;
 
 	private static ArrayList<Structure> structs = new ArrayList<Structure>();
 
@@ -129,7 +130,7 @@ public class ProcessViewController implements Initializable
 		Path currentRelativePath = Paths.get("");//getting the cwd path as an object
 		String s = currentRelativePath.toAbsolutePath().toString();//cwd as a string
 		String fileName = exportFileName.getText();//getting the file name entered into the filename textfield
-		String filePath = (s + "/" + fileName + ".txt");//creating the full file path
+		String filePath = (s + File.separator + fileName + ".txt");//creating the full file path
 		if(MATLABFormatParser.parseSelected(treeView.getSelectionModel().getSelectedItems(),filePath)){
 			saveFileError.setText("");
 		}
@@ -144,7 +145,7 @@ public class ProcessViewController implements Initializable
 		Path currentRelativePath = Paths.get("");//getting the cwd path as an object
 		String s = currentRelativePath.toAbsolutePath().toString();//cwd as a string
 		String fileName = exportFileName.getText();//getting the file name entered into the filename textfield
-		String filePath = (s + "/" + fileName + ".txt");//creating the full file path
+		String filePath = (s + File.separator + fileName + ".xml");//creating the full file path
 		if(XMLFormatParser.parseSelected(treeView.getSelectionModel().getSelectedItems(),filePath)){
 			saveFileError.setText("");
 		}
@@ -162,7 +163,7 @@ public class ProcessViewController implements Initializable
 		Path currentRelativePath = Paths.get("");//getting the cwd path as an object
 		String s = currentRelativePath.toAbsolutePath().toString();//cwd as a string
 		String fileName = exportFileName.getText();//getting the file name entered into the filename textfield
-		String filePath = (s + "/" + fileName + ".txt");//creating the full file path
+		String filePath = (s + File.separator + fileName + ".txt");//creating the full file path
 		if(ReadableFormatParser.parseSelected(treeView.getSelectionModel().getSelectedItems(),filePath)){
 			saveFileError.setText("");
 		}
@@ -196,7 +197,7 @@ public class ProcessViewController implements Initializable
 		Path currentRelativePath = Paths.get("");//getting the cwd path as an object
 		String s = currentRelativePath.toAbsolutePath().toString();//cwd as a string
 		String fileName = exportFileName.getText();//getting the file name entered into the filename textfield
-		String filePath = (s + "/" + fileName + ".txt");//creating the full file path
+		String filePath = (s + "\\" + fileName + ".txt");//creating the full file path
 		if(ReadableFormatParser.parseStructure(structs,0,filePath)){
 			saveFileError.setText("");
 		}
@@ -211,8 +212,8 @@ public class ProcessViewController implements Initializable
 		Path currentRelativePath = Paths.get("");//getting the cwd path as an object
 		String s = currentRelativePath.toAbsolutePath().toString();//cwd as a string
 		String fileName = exportFileName.getText();//getting the file name entered into the filename textfield
-		String filePath = (s + "/" + fileName + ".txt");//creating the full file path
-		if(MATLABFormatParser.parseStructure(structs,0,filePath))
+		String filePath = (s + File.separator + fileName + ".txt");//creating the full file path
+		if(MATLABFormatParser.parseStructure(structs,filePath))
 		{
 			saveFileError.setText("");
 		}
@@ -227,8 +228,8 @@ public class ProcessViewController implements Initializable
 		Path currentRelativePath = Paths.get("");//getting the cwd path as an object
 		String s = currentRelativePath.toAbsolutePath().toString();//cwd as a string
 		String fileName = exportFileName.getText();//getting the file name entered into the filename textfield
-		String filePath = (s + "/" + fileName + ".txt");//creating the full file path
-		if(XMLFormatParser.parseStructure(structs,0,filePath))
+		String filePath = (s + File.separator + fileName + ".xml");//creating the full file path
+		if(XMLFormatParser.parseStructure(structs,filePath))
 		{
 			saveFileError.setText("");
 		}
@@ -237,7 +238,13 @@ public class ProcessViewController implements Initializable
 			saveFileError.setText("File with this name already exists!");
 		}			
 	}
-
+	
+	public void showExportOptions() throws IOException
+	{
+		Main.buildExportStage();
+		Main.showExportView();
+	}
+	
 	/*
 	 * Returns the GUI back to the mainView.
 	 */

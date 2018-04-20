@@ -1,137 +1,146 @@
 package application.processedView;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 import javafx.collections.ObservableList;
 import javafx.scene.control.TreeItem;
 
-public class XMLFormatParser {
-	private final static String INDENT_STRING = "  ";
-	private static BufferedWriter writer;
-	
-	/*
-	 * Parses a list of structures to a file
-	 * 
-	 * @param	structs	 The list of structures to parse.
-	 * @param	baseIndent	The starting indentation level.
-	 * @param	filePath	The name of the filePath.
-	 * 
-	 */
-	public static boolean parseStructure(ArrayList<Structure> structs, int baseIndent, String filePath) throws IOException{
-		File file = new File(filePath);
-		boolean notFound = false;
-		if(!file.exists())
-		{
-			notFound = true;
-			writer = new BufferedWriter(new FileWriter(file));
-			String indentString = "";
-			for (int i=0;i<baseIndent; i++) {
-				indentString = indentString + INDENT_STRING;
-			}
-			parseList(structs,indentString);
-			writer.close();
-		}
-		return notFound;
-	}
-	
-	/*
-	 * Parses selected list of structures to a file.
-	 * 
-	 * @param	selected	 The list of structures to parse.
-	 * @param	filePath	The name of the filePath.
-	 * 
-	 */
-	public static boolean parseSelected(ObservableList<TreeItem<Structure>> selected, String filePath) throws IOException{
-		File file = new File(filePath);
-		boolean notFound = false;
-		if(!file.exists())
-		{
-			notFound = true;
-			BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-			for(TreeItem<Structure> item : selected)
-			{
-				TreeItem<Structure> parent = item;
-				int indentCount = -1;
-				do{
-					indentCount++;
-					parent = parent.getParent();
-				}while(parent.getParent()!=null);
-				String indentString = "";
-				for(int i =0; i<indentCount; i++){
-					indentString = indentString + INDENT_STRING;
-				}
-//				writer.write(indentString + item.getValue().toString() + "\r\n");
-//				for (TreeItem<String> child: item.getChildren()){
-//					writer.write(indentString + INDENT_STRING + child.getValue().toString() + "\r\n");
-//				}
-				Structure struct = item.getValue();
-				writer.write(indentString + "<" + struct.getName());
-				if (struct instanceof Child) {
-					writer.write(" name=" + ((Child)struct).getFieldName() +"\" Starting_Word=\"" + ((Child)struct).getWord()+ "\" Starting_Byte=\""+((Child)struct).getStartByte()+ "\"");
-				}
-				writer.write(">\r\n");
-				for (Field f:struct.getFields()) {
-					//writer.write(indent + INDENT_STRING + f.toString() + "\r\n");
-					writer.write(indentString + INDENT_STRING + "<"+ f.getName()+" Type=\""+ f.getType()+"\" Starting_Word=\"" + f.getWord()+ "\" Starting_Byte=\""+f.getStartByte()+ "\"/>\r\n");
-				}
-				if(struct.getChildren().size()>0) {
-					for(Structure child:struct.getChildren()) {
-						writer.write(indentString + INDENT_STRING + "<" + child.getName());
-						if (child instanceof Child) {
-							writer.write(" name=" + ((Child)child).getFieldName() +"\" Starting_Word=\"" + ((Child)child).getWord()+ "\" Starting_Byte=\""+((Child)child).getStartByte()+ "\"");
-						}
-						writer.write("/>\r\n");
-					}
-				}
-				
-				writer.write(indentString + "</"+ struct.getName()+">\r\n");
-				writer.write("\r\n");
-			}
-			writer.close();
-		}
-		return notFound;
-	}
-	
-	/*
-	 * Helper method to parse a structure into a file.
-	 *  
-	 * @param	struct	 The structure to parse.
-	 * @param	indent	The starting indentation level.
-	 */
-	private static void parseSingle(Structure struct, String indent) throws IOException{
-		//writer.write(indent + struct.getName() + "\r\n");
-		writer.write(indent + "<" + struct.getName());
-		if (struct instanceof Child) {
-			writer.write(" name=" + ((Child)struct).getFieldName() +"\" Starting_Word=\"" + ((Child)struct).getWord()+ "\" Starting_Byte=\""+((Child)struct).getStartByte()+ "\"");
-		}
-		writer.write(">\r\n");
-		
-		
-		for (Field f:struct.getFields()) {
-			//writer.write(indent + INDENT_STRING + f.toString() + "\r\n");
-			writer.write(indent + INDENT_STRING + "<"+ f.getName()+" Type=\""+ f.getType()+"\" Starting_Word=\"" + f.getWord()+ "\" Starting_Byte=\""+f.getStartByte()+ "\"/>\r\n");
-		}
-		if(struct.getChildren().size()>0) {
-			parseList(struct.getChildren(), indent + INDENT_STRING);
-		}
-		
-		writer.write(indent + "</"+ struct.getName()+">\r\n");
-	}
-	
-	/*
-	 * Helper method to parse a lsit of structures to a file.
-	 * 
-	 * @param	structs	 The list of structures to parse.
-	 * @param	indent	The starting indentation level.
-	 * 
-	 */
-	private static void parseList(ArrayList<Structure> structs, String indent) throws IOException {
-		for (Structure s:structs) {
-			parseSingle(s,indent);
-		}
-	}
+public class XMLFormatParser { 
+/*
+ * Parses a list of structures to a file
+ * 
+ * @param structs  The list of structures to parse.
+ * @param filePath The name of the filePath.
+ * 
+ */
+public static boolean parseStructure(ArrayList<Structure> structs, String filePath) throws IOException{
+File file = new File(filePath);
+boolean notFound = false;
+if(!file.exists())
+{
+notFound = true;
+generateAllXML(structs, file);
 }
+return notFound;
+}
+/*
+ * Parses selected list of structures to a file.
+ * 
+ * @param selected The list of structures to parse.
+ * @param filePath The name of the filePath.
+ * 
+ */
+public static boolean parseSelected(ObservableList<TreeItem<Structure>> selected, String filePath) throws IOException{
+File file = new File(filePath);
+boolean notFound = false;
+if(!file.exists())
+{
+notFound = true;
+generateSelectedXML(selected, file);
+}
+return notFound;
+}
+/*
+ * Helper method to generate an XML file  
+ * @param structs  The list of structures to parse.
+ * @param file The file destination.
+ */
+    private static void generateAllXML(ArrayList<Structure> structs, File f) {
+        DocumentBuilderFactory icFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder icBuilder;
+        try {
+            icBuilder = icFactory.newDocumentBuilder();
+            Document doc = icBuilder.newDocument();
+            Element mainRootElement = doc.createElementNS("Symbol Table Reader", “Structures");
+            doc.appendChild(mainRootElement);
+           for(Structure s:structs) {
+             mainRootElement.appendChild(getStructure(doc,s));
+            }
+            // output DOM XML to file 
+            Transformer transformer = TransformerFactory.newInstance().newTransformer();
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes"); 
+            DOMSource source = new DOMSource(doc);
+            StreamResult console = new StreamResult(f);
+            transformer.transform(source, console);
+ 
+            System.out.println("\nXML DOM Created Successfully..");
+ 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+/*
+ * Helper method to generate an XML file from selected structures 
+ * @param selected The list of selected TreeItem<Structure> objects to parse.
+ * @param file  The file destination.
+ */
+    private static void generateSelectedXML(ObservableList<TreeItem<Structure>> selected, File f) {
+        DocumentBuilderFactory icFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder icBuilder;
+        try {
+            icBuilder = icFactory.newDocumentBuilder();
+            Document doc = icBuilder.newDocument();
+            Element mainRootElement = doc.createElementNS("Symbol Table Reader", "Selected Structures");
+            doc.appendChild(mainRootElement);
+            for(TreeItem<Structure> item : selected) {
+             Structure struct = item.getValue();
+             mainRootElement.appendChild(getStructure(doc,struct));
+            }
+            // output DOM XML to file 
+            Transformer transformer = TransformerFactory.newInstance().newTransformer();
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes"); 
+            DOMSource source = new DOMSource(doc);
+            StreamResult console = new StreamResult(f);
+            transformer.transform(source, console);
+ 
+            System.out.println("\nXML DOM Created Successfully..");
+        }catch (Exception e) {
+         e.printStackTrace();
+        }
+    }
+    /*
+     * Helper method to create a Structure node
+     * @param doc The document that is the XML DOM
+     * @param struct The structure to be made into a node
+     */
+    private static Node getStructure(Document doc,Structure struct) {
+     Element structElement = doc.createElement(struct.getType());
+     structElement.setAttribute("name", struct.getName());
+     for(Structure s:struct.getChildren()) {
+     structElement.appendChild(getStructure(doc,s));
+     }
+     for(Field f: struct.getFields()) {
+     structElement.appendChild(getFieldElement(doc,f));
+     }
+     return structElement;
+    }
+    
+    /*
+     * Helper method to create a field node
+     * @param doc The document that is the XML DOM
+     * @param struct The field to be made into a node
+     */
+    private static Node getFieldElement(Document doc, Field field) {
+     Element fieldElement = doc.createElement(field.getType());
+     fieldElement.setAttribute("name", field.getName());
+     fieldElement.setAttribute("Starting Byte", field.getStart());
+     fieldElement.setAttribute("Byte Size", Integer.toString(field.getByteSize()));
+     fieldElement.setAttribute("Bit Size", Integer.toString(field.getBitSize()));
+     return fieldElement;
+    }
+}
+
