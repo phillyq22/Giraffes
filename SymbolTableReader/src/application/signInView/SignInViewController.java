@@ -1,5 +1,7 @@
 package application.signInView;
 
+import application.view.InitialViewController;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -35,7 +37,7 @@ public class SignInViewController {
 		Main.exitSignInView();
 	}
 	
-	public void loadOld()
+	public void loadOld() throws IOException
 	{
 		FileChooser fc = new FileChooser();
 		
@@ -48,7 +50,9 @@ public class SignInViewController {
 		File file = fc.showOpenDialog(null);
 		if(file != null)
 		{
-			//InitialView.takeInFile(file);//read here
+			Main.loadOldView(file);
+			//InitialViewController.readEmIn(file);
+			
 		}
 	}
 }
