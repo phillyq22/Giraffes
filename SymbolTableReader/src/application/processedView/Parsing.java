@@ -3,13 +3,12 @@ package application.processedView;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Scanner;
 import javax.xml.crypto.dsig.TransformException;
 
 /**
  * @author Zac Capell
- * @version 3/8/18
+ * @version 4/18/18
  * 
  * Takes in pahole files from c++ currently
  * Creates a list of structures that can then be manipulated
@@ -27,121 +26,126 @@ public class Parsing {
 	 * @throws FileNotFoundException - the operation should be safe, but just in case, also throws an exception if the file path doesn't lead anywhere
 	 * @throws TransformException - throws an exception if the processing hits an error, such as if something in the wrong format is fed in
 	 */
-	public static ArrayList<Structure> parse(File file) throws FileNotFoundException, TransformException
+	public static ArrayList<Structure> parse(File file) throws TransformException
 	{
+		
 		try {
-		ArrayList<Structure> structures = new ArrayList<Structure>();
-		
-		Scanner scanner = new Scanner(file);
-		
-		while(scanner.hasNextLine())
-		{
-			String[] temp = scanner.nextLine().split("\\s+");
-			// When it finds a new structure...
-			if(temp[0].equals("struct"))
-			{
-				Structure s = new Structure();
-				s.setName(temp[1]); // ... it makes a new Structure... 
-				ArrayList<Field> fields = new ArrayList<Field>();
-				ArrayList<Structure> children = new ArrayList<Structure>();
-				while(!scanner.hasNext("};")) // ... and goes until the ending bracket of that structure
+				ArrayList<Structure> result = new ArrayList<Structure>();
+				
+				Scanner scanner = new Scanner(file);
+				
+				while(scanner.hasNextLine())
 				{
-					String line = scanner.nextLine(); // Only reading first word of line?? works fine in structure 
-					if(!line.isEmpty())
+					String[] temp = scanner.nextLine().split("\\s+");
+					if(temp[temp.length - 1].equals("{"))
 					{
-						String[] t2 = line.split("\\s+");
-						// Creates a new structure and adds it to the list						
-						String[] methodTemp = t2[2].split("\\("); // checks to find methods and avoid adding them for now
-						if(methodTemp.length < 2 || !methodTemp[1].equals("class"))
-						{
-							if(t2[1].equals("class")) // if the field is a class, that means it's a child, and adds it do the children for later
-							{
-								Field field = new Field();
-								field.setType(t2[1] + " " + t2[2] + " " + t2[3]);
-								field.setName(t2[4]);
-								field.setWord(Integer.parseInt(t2[6]) / 8);
-								field.setStartByte(Integer.parseInt(t2[6]) % 8);
-								fields.add(field);
-							}	
-							else if(!t2[1].equals("/*")) // denotes a pahole information line
-							{
-								Field field = new Field();		
-								field.setType(t2[1]);
-								if(!(t2[2].equals("*") || t2[2].equals("int") || t2[2].equals("char") || t2[1].equals("signed") || t2[2].equals("unsigned"))) // checks to see what type the field is so the type and bits can be set correctly based on how many words are in the array
-								{
-									field.setName(t2[2]);
-									field.setWord(Integer.parseInt(t2[4]) / 8 );
-									field.setStartByte(Integer.parseInt(t2[4]) % 8);
-								}
-							
-								else if(t2[1].equals("signed")) // does the same as if above, but different spacing for signed fields
-								{
-									field.setType(t2[2]);
-									field.setName(t2[3]);
-									field.setWord(Integer.parseInt(t2[5]) / 8 );
-									field.setStartByte(Integer.parseInt(t2[5]) % 8);
-								
-								}
-							
-								else if(t2[2].equals("unsigned") || t2[1].equals("const")) // does the same as if above, but different spacing for unsigned fields or const characters
-								{
-									field.setName(t2[4]);
-									field.setWord(Integer.parseInt(t2[6]) / 8 );
-									field.setStartByte(Integer.parseInt(t2[6]) % 8);
-								}
-								
-								else // if it requires no special spacing, do this instead
-								{
-									field.setName(t2[3]);
-									field.setWord(Integer.parseInt(t2[5]) / 8 );
-									field.setStartByte(Integer.parseInt(t2[5]) % 8);
-								}
-								fields.add(field);
-							}
-						}
+						Structure struct = new Structure();
+						struct.setName(temp[1]);
+						struct.setType(temp[0]);
+						struct = process(struct, scanner);
+						result.add(struct);
 					}
 					
+					
 				}
-				
-			s.setChildren(children); // add the list of children generated at the end of the structure
-			s.setFields(fields); // add the list of fields generated at the end of the structure
-			structures.add(s); // add the structure to the list of structures to be returned
+			
+				scanner.close();
+				return result;
 			}
-			
-			
-		}
-		
-		//assignChildren(structures); // finds the top level children and assigns the proper fields and children to them
-		scanner.close();
-		return structures;
-		}
-		
 		catch(Exception e)
 		{
 			throw new TransformException("Parsing hit a line that did not fit in expected format");
 		}
-		
 	}
-
-	private static void assignChildren(ArrayList<Structure> structures)
+	
+	private static Structure process(Structure struct, Scanner scanner)
 	{
-		for(Structure struct : structures)
+		ArrayList<Field> fields = new ArrayList<Field>();
+		ArrayList<Structure> children = new ArrayList<Structure>();
+		while(scanner.hasNextLine())
 		{
-			ArrayList<Structure> children = struct.getChildren();
-			for(Structure child : children) // for each child in the top level...
+			String line = scanner.nextLine();
+			if(line.contains("}"))
+				break;
+			else if(!(line.isEmpty() || line.trim().equals("public:") || line.trim().equals("protected:") || line.trim().equals("private:")))
 			{
-				Iterator<Structure> it = structures.iterator();
-				while(it.hasNext()) // ... look at each structure in the list...
+				String[] temp = line.split("\\s+");
+				// When it finds a new structure...
+				if(!(temp[1].equals("/*") || temp[temp.length - 1].contains(";")))
 				{
-					Structure s = it.next();  
-					if(s.equals(child)) // ... and if the structure and child have the same name (not field name)...
+					if(temp[temp.length-1].equals("{"))
 					{
-						child.setChildren(s.getChildren()); // ... the child has that structure's children...
-						child.setFields(s.getFields()); // ... and that structure's fields
+						Structure result = new Structure();
+						result.setName(temp[2]);
+						result.setType(temp[1]);
+						process(result, scanner);
+						children.add(result);
+					}
+					else if(temp[2].equals("=") && !temp[1].contains("[")) 
+					{
+						Field field = new Field();
+						field.setType("int");
+						field.setName(temp[1]);
+						fields.add(field);
+					}
+					else
+					{							
+						for(int i = 0; i < temp.length-1; i++)
+						{
+							if(temp[i].contains(";"))
+							{
+								boolean isUnion = false;
+								if(struct.getType().equals("union"))
+								{
+									isUnion = true;
+								}
+								fields.add(setField(i, temp, isUnion));
+								break;								}
+							}
+						}
 					}
 				}
 			}
-		}
+		
+		struct.setChildren(children);
+		struct.setFields(fields);
+		return struct;
 	}
 	
+	private static Field setField(int i, String[] line, boolean isUnion)
+	{
+		String type = "", name = "", start = "";
+		int bitSize, byteSize;
+		for(int j = 0; j < i; j++)
+			type += line[j] + " ";
+		type = type.trim();
+		if(line[i].contains(":"))
+		{
+			String[] temp = line[i].split(":");
+			name = temp[0];
+			bitSize = Integer.parseInt(temp[1].substring(0, temp[1].length()-1));
+			byteSize = bitSize / 8;
+			temp = line[i + 2].split(":");
+			start = temp[0] +", STARTING BIT: " + temp[1];
+		}
+		
+		else
+		{
+			int n = 3;
+			if(isUnion)
+				n = 2;
+			
+			name = line[i];
+			byteSize = Integer.parseInt(line[i + n]);
+			bitSize = byteSize * 8;
+			if(isUnion)
+				start = "0";
+			else
+				start = line[i + 2];
+		}
+		
+		return new Field(type, name, bitSize, byteSize, start);
+		
+	}
+
 }
