@@ -1,26 +1,11 @@
 package application.view;
-/*
- * object:
- * produce archive (hardcode name)
- * produce exe from that name (hardcode new name)
- * produce pahole txt file
- *
- *
- * archive:
- * produce exe (hardcode name)
- * produce pahole txt file
- *
- *
- * exe:
- * produce pahole txt file
- *
- *
- * afterwards:
- * load pahole txt file into lf
- * run Parsing code on lf
- * load new view
- */
+
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.fxml.Initializable;
+
 import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
@@ -33,15 +18,20 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
  
+import java.io.Serializable;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import java.io.OutputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.Files;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
@@ -51,6 +41,9 @@ import application.Main;
 import application.processedView.Parsing;
 import application.processedView.ProcessViewController;
 import application.processedView.Structure;
+
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
  
 /*
  * Controller for the initial view of the Symbol Table Reader.
@@ -59,7 +52,7 @@ import application.processedView.Structure;
  * @author Philip S. Quinn
  * @version 3/1/2018
  */
-public class InitialViewController {
+public class InitialViewController implements Initializable, Serializable {
     /*Fields*/
     @FXML private TextField filename;
     @FXML private TableView<LoadedFile> loadedFilesView;
@@ -73,6 +66,37 @@ public class InitialViewController {
     @FXML private Label fileError;
     @FXML private Label processError;
     private ArrayList<Structure> structs;
+
+	Path currentRelativePath = Paths.get("");
+	String s = currentRelativePath.toAbsolutePath().toString();//cwd as a string
+        String fileName = "ObjectSavefile.ser";
+        String filePath = (s + File.separator + fileName);//creating the full file path
+	File serFile = new File(filePath);
+
+@SuppressWarnings("unchecked")
+@Override
+public void initialize(URL location, ResourceBundle resources) {
+	if (serFile.exists() && !serFile.isDirectory()) {
+	ObservableList<LoadedFile> list = loadedFilesView.getItems();
+	ObservableList<LoadedFile> listFromFile = read(serFile);
+	System.out.println(listFromFile.size());
+	int listSize = listFromFile.size();
+	System.out.println(listFromFile.get(0).getFile().getName());
+	for (int i = 0; i < listSize; i++) {
+	//list.add(i, listFromFile.get(i));
+	File file = listFromFile.get(i).getFile();
+	CheckBox checkBox = new CheckBox(file.getName());
+        LoadedFile lf =  new LoadedFile(file, checkBox);
+        //Makes sure that the checkboxes are displayed by checking for the field called checkBox in LoadedFile object
+        list.add(lf);
+	}// end of for loop
+	loadedFiles.setCellValueFactory(new PropertyValueFactory<LoadedFile, CheckBox>("checkBox"));
+	loadedFilesView.setItems(list);
+	}
+}
+	
+
+
     /*
      * Searches in the current working directory(cwd) for the file name entered by the user.
      * If the File is found in cwd, checks if file has already been imported. If not, add
@@ -139,118 +163,102 @@ public class InitialViewController {
      */
     public void process(ActionEvent e) throws IOException, InterruptedException, FileNotFoundException, TransformException
     {
-        boolean error = true;
-        ObservableList<LoadedFile> list = loadedFilesView.getItems();
- 
-        /**Path currentRelativePath = Paths.get("");//getting the cwd path as an object
-        String s = currentRelativePath.toAbsolutePath().toString();//cwd as a string
-        String filePath = (s + File.separator);
-        String fullFilePath = (s + File.separator + fileName);//creating the full file path
-        File file = new File(fullFilePath);*/
+	ObservableList<LoadedFile> list = loadedFilesView.getItems();
 
-	String runTimeString = new String();
- 
-        if(!list.isEmpty())
-        {
-            LoadedFile lf = list.get(0);
+	LoadedFile lf = getSelectedFile();
 
-		String fileName = new String("pahole.txt");
-		String filePath = new String(list.get(0).getFile().getAbsoluteFile().getParentFile().getAbsolutePath().toString());
-		String fullFilePath = new String(filePath + File.separator + fileName);
+	if (lf!=null)
+	{
+	String fileName = new String("pahole.txt");
+	String filePath = new String(lf.getFile().getAbsoluteFile().getParentFile().getAbsolutePath().toString());
+	String fullFilePath = new String(filePath + File.separator + fileName);
 
-		File file = new File(fullFilePath);
+	File file = new File(fullFilePath);
 
-        	String pahole = new String("cd " + filePath + " ; pahole -A tester.a > " + fullFilePath);
+	String pahole = new String("cd " + filePath + " ; pahole tester.a > " + fullFilePath);
 
-		String exeLinked = new String("cd " + filePath + " ; /usr/bin/g++ tester tester.a -lpthread");
-		
-                if(lf.getCheckBox().isSelected())
-                {
-           
- 
-            if (Pattern.matches(".*[.o]", lf.getFile().getName()))
-            {
-               
-                for (int i = 0; i < list.size(); i++)
-                {
-                    lf = list.get(i);
-                    if (Pattern.matches(".*[.o]", lf.getFile().getName()))
-                    {                      
-                runTimeString += lf.getFile().getName() + " ";
-                    }
-                   
-                }
-               
-                try {
-                    String archive = new String("cd " + filePath + " ; ar -cr tester.a " + runTimeString);
-                    String[] arcCmd = new String[] {"/bin/bash", "-c", archive};
-                    Process process = Runtime.getRuntime().exec(arcCmd);
-                    process.destroy();
-                    String[] exeCmd = new String[] {"/bin/bash", "-c", exeLinked};
-                    Process processor = Runtime.getRuntime().exec(exeCmd);
-                    processor.destroy();
-                    String[] paholeCmd = new String[] {"/bin/bash","-c", pahole};
-                    Process ppp = Runtime.getRuntime().exec(paholeCmd);
-                    ppp.destroy();
-                } catch (IOException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                }
-                   
+	String exeLinked = new String("cd " + filePath + " ; /usr/bin/g++ tester tester.a -lpthread");
+	
+			
+	    if (Pattern.matches(".*[.a]", lf.getFile().getName()))
+	    {
+	        //call runtime for filename with flags to process .a into .exe
+	        //then process executable
+	        try {
+	            String[] exeCmd = new String[] {"/bin/bash", "-c", exeLinked};
+	            Process p = Runtime.getRuntime().exec(exeCmd);
+	            p.destroy();
+	            String[] paholeCmd = new String[] {"/bin/bash","-c", pahole};
+	            Process pp = Runtime.getRuntime().exec(paholeCmd);
+	            pp.destroy();
+	        } catch (IOException e1) {
+	            // TODO Auto-generated catch block
+	            e1.printStackTrace();
+	        }
+	       
+	    }
+	    else if (!Pattern.matches(".*[.]", lf.getFile().getName()))
+	    {
+	        //already .exe, process executable
+	        try {
+	            String[] paholeCmd = new String[] {"/bin/bash","-c", pahole};
+	            Process pp = Runtime.getRuntime().exec(paholeCmd);
+	            pp.destroy();
+	        } catch (IOException e1) {
+	            // TODO Auto-generated catch block
+	            e1.printStackTrace();
+	        }
+	    }
+
+	    processError.setText("");
+	    try {
+	         structs = Parsing.parse(file);
+		 ProcessViewController.setStructs(structs);
+                 write(list, serFile);
+		    Main.buildProcessStage();
+		    Main.showProcessView();
+		 } 
+            catch (TransformException e1)
+	    {
+		processError.setText("File was not in proper format for parsing, please try again.");
             }
-            else if (Pattern.matches(".*[.a]", lf.getFile().getName()))
-            {
-		String lfNameExt = lf.getFile().getName();
-		String lfName = (lfNameExt.replaceFirst("[.][^.]+$", ""));
-                //call runtime for filename with flags to process .a into .exe
-                //then process executable
-                try {
-                    String[] exeCmd = new String[] {"/bin/bash", "-c", exeLinked};
-                    Process p = Runtime.getRuntime().exec(exeCmd);
-                    p.destroy();
-                    String[] paholeCmd = new String[] {"/bin/bash","-c", pahole};
-                    Process pp = Runtime.getRuntime().exec(paholeCmd);
-                    pp.destroy();
-                } catch (IOException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                }
-               
-            }
-            else if (!Pattern.matches(".*[.]", lf.getFile().getName()))
-            {
-                //already .exe, process executable
-                try {
-                    String[] paholeCmd = new String[] {"/bin/bash","-c", pahole};
-                    Process pp = Runtime.getRuntime().exec(paholeCmd);
-                    pp.destroy();
-                } catch (IOException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                }
-            }
-       
-           
-            error = false;
-            processError.setText("");
-   
-            //lf.setFile(file);
-           
-            structs = Parsing.parse(file);
-            ProcessViewController.setStructs(structs);
- 
-            Main.buildProcessStage();
-            Main.showProcessView();
-            }
-        }
-           
-        if(error)
-        {
-            processError.setText("Select a File to process!");
-        }
-       
+	}
+	else
+	{
+	    processError.setText("A single file must be selected to process!");
+	}        
        
     }
+
+	/*
+	* Returns the selected file from the list of imported files.
+	*
+	* @return	File if only one file is selected, null otherwise.
+	*/
+	public LoadedFile getSelectedFile()
+	{
+		ObservableList<LoadedFile> list = loadedFilesView.getItems();
+		int selectedFiles = 0;
+		int index = -1;
+		LoadedFile file = null;
+		int size = list.size();
+		for (int i = 0; i < size && selectedFiles < 2; i++)
+		{
+			if(list.get(i).getCheckBox().isSelected())
+			{
+				selectedFiles++;
+				if(index == -1)
+				{
+					index = i;
+				}
+			}
+		}
+		if (selectedFiles == 1)
+		{
+			file = list.get(index);
+		}
+		return file;
+	}
        
     /*
      * Allows file selection from your operating system's file browser.
@@ -274,12 +282,16 @@ public class InitialViewController {
                 loadedFiles.setCellValueFactory(new PropertyValueFactory<LoadedFile, CheckBox>("checkBox"));
                 list.add(lf);
                 loadedFilesView.setItems(list);
+		for (int i = 0; i < list.size(); i++)
+		{
+		System.out.println(list.get(i).getFile().getName());
+		}
             }
             else
             {
                 fileError.setText("File either already loaded in, or is of the wrong extension.");
             }
-        }
+	}
     }
    
     /*
@@ -315,4 +327,45 @@ public class InitialViewController {
     {
         return loadedFilesView.getItems().get(0).getFile();
     }
+
+	public void write(ObservableList<LoadedFile> loadedFiles, File file)
+    {
+    	try {
+    		FileOutputStream fos = new FileOutputStream(file);
+    		ObjectOutputStream oos = new ObjectOutputStream(fos);
+    		oos.writeObject(new ArrayList<LoadedFile>(loadedFiles));
+		/*int listSize = loadedFiles.size();
+        	for(int i = 0; i < listSize; i++)
+        	{
+            	LoadedFile curr = list.get(i);
+            		if(curr.getCheckBox().isSelected())
+				{
+					oos.writeObject(new String(list.get(i).getFile().getName()));
+				}
+		}*/
+    		oos.close();
+		System.out.printf("Files written to : " + file);
+    	} catch (FileNotFoundException e) {
+    		e.printStackTrace();
+    	} catch (IOException e) {
+    		e.printStackTrace();
+    	}
+    }
+
+	public ObservableList<LoadedFile> read(File file) {
+		try {
+		FileInputStream in = new FileInputStream(file);
+		ObjectInputStream ois = new ObjectInputStream(in);
+		List<LoadedFile> list = (List<LoadedFile>) ois.readObject();
+		System.out.printf("Files read from : " + file);
+
+	return FXCollections.observableList(list);
+	} catch (ClassNotFoundException e) {
+		e.printStackTrace();
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
+	return FXCollections.emptyObservableList();
+	}
+
 }

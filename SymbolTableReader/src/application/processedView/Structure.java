@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class Structure {
 	
-	private String name;
+	private String name, type;
 	private ArrayList<Structure> children = new ArrayList<Structure>();
 	private ArrayList<Field> fields = new ArrayList<Field>();
 	
@@ -42,6 +42,11 @@ public class Structure {
 		return fields;
 	}
 	
+	public String getType()
+	{
+		return type;
+	}
+	
 	public void setName(String name)
 	{
 		this.name = name;
@@ -55,6 +60,11 @@ public class Structure {
 	public void setFields(ArrayList<Field> fields)
 	{
 		this.fields = fields;
+	}
+	
+	public void setType(String type)
+	{
+		this.type = type;
 	}
 	
 	public String toString()

@@ -1,0 +1,1083 @@
+ls
+cat paholeOutput.txt 
+cd application/view/
+gedit InitialViewController.java
+csrt
+cd src/application/view/
+gedit InitialView
+gedit InitialViewController.java
+csrt
+cd src/application/view/
+gedit InitialViewController.java
+csrt
+ls
+cd src/
+ls
+rm paholeOutput.txt 
+srt
+ls
+cat dwarfDump.txt 
+ls
+cat paholeOutput.txt 
+rm paholeOutput.txt 
+ls
+rm tester.a
+rm dwarfDump.txt
+ls
+srt
+ls
+cat dwarfDump.txt 
+cat paholeOutput.txt 
+clr
+ls
+rm tester*
+rm paholeOutput.txt 
+srt
+ls
+rm paholeOutput.txt 
+rm tester.a 
+rm dwarfDump.txt 
+ls
+srt
+ls
+cd ..
+ls
+cd src
+ls
+cd ..
+ls
+cat yooodude.txt
+cat src\yooodude.txt
+cat src\yoooodude.txt
+cat yoooodude.txt
+ls
+rm src\yoooodude.txt
+ls
+cd src/
+ls
+rm dwarfDump.txt 
+rm tester.a 
+rm paholeOutput.txt 
+rm -r Maximilian-master/
+ls
+srt
+ls
+cd ..
+ls
+cat src*
+ls
+cd src/
+ls
+cd application/view/
+gedit InitialViewController.java
+csrt
+ls
+cd src/
+ls
+rm tester*
+rm paholeOutput.txt 
+rm dwarfDump.txt 
+ls
+srt
+ls
+cat dwarfDump0.txt
+cat dwarfDump1.txt
+cat dwarfDump2.txt
+cat dwarfDump3.txt
+ls
+rm tester*
+rm paholeOutput.txt 
+rm dwarfDump*
+ls
+cd application/view/
+gedit InitialViewController.java
+csrt
+ls
+cd src/
+ls
+srt
+ls
+cat dwarfDump1.txt
+cat dwarfDump2.txt
+cat dwarfDump0.txt
+rm tester*
+rm dwarfDump*
+rm paholeOutput.txt 
+ls
+cd application/view/
+gedit InitialViewController.java
+csrt
+ls
+cd src/
+ls
+srt
+ls
+cat dwarfDump*
+rm dwarfDump*
+rm paholeOutput.txt 
+rm tester.a 
+ls
+cd ~
+alias
+alias esrt='. ~/SymbolTableReaderEditor.sh'
+emacs SymbolTableReaderEditor.sh
+gedit SymbolTableReaderEditor.sh
+ls
+cat SymbolTableReader.sh
+gedit SymbolTableReaderEditor.sh
+chmod +x SymbolTableReaderEditor.sh 
+./SymbolTableReaderEditor.sh 
+esrt
+gedit ~/.bashrc
+cd Giraffes
+ls
+cd SymbolTableReader/
+ls
+cd src/
+ls
+srt
+ls
+rm paholeOutput.txt 
+rm tester.a
+srt
+ls
+cat paholeOutput.txt 
+pahole -a tester.a
+srt
+ls
+esrt
+csrt
+srt
+ls
+rm tester*
+rm paholeOutput.txt 
+ls
+cd ~/M
+cd ~/Maximilian-master/
+ls
+rm tester.a
+srt
+ls
+cd ~/Maximilian-master/ | ls -l
+cd ~/Maximilian-master/
+ls -l
+esrt
+csrt
+esrt
+csrt
+srt
+esrt
+csrt
+srt
+esrt
+csrt
+esrt
+csrt
+esrt
+csrt
+srt
+ls
+esrt
+csrt
+srt
+esrt
+csrt
+esrt
+csrt
+esrt
+csrt
+clr
+srt
+csrt
+esrt
+csrt
+srt
+ls
+rm tester*
+rm paholeOutput.txt 
+ls
+srt
+clr
+ls
+cd ~/Maximilian-master/
+ls
+esrt
+cat pahole.txt
+ls
+cd ~/Maximilian-master/
+ls
+cat pahole.txt 
+esrt
+csrt
+esrt
+csrt
+ls
+cd src/
+ls
+srt
+ls
+cd ~/Maximilian-master/
+ls
+cat pahole.txt 
+clr
+ls
+esrt
+ls
+gedit LoadedFile.java
+cd ..
+ls
+cd processedView/
+ls
+gedit ProcessViewController.java
+ls
+cd ..
+ls
+cd ..
+ls
+cd ..
+ls
+cd src/
+ls
+cd application/
+cd processedView/
+ls
+gedit ProcessViewController.java
+csrt
+ls
+rm *.txt.txt
+ls
+rm *\sup.txt
+ls
+csrt
+cd src/
+ls
+srt
+ls
+cd ~/Weather/
+ls
+cat pahole.txt 
+ls
+rm tester*
+rm pahole.txt 
+ls
+rm a.out
+ls
+ar -cr main.a main.o
+ls
+srt
+esrt
+csrt
+cd ~/Weather/
+ls
+rm pahole.txt 
+pahole -a main.a
+ls
+srt
+ls
+cd ~/Weather/
+ls
+rm main.a
+rm main
+ls
+rm pahole.txt 
+ls
+esrt
+ls
+cd ~/W
+cd ~/Weather/
+ls
+esrt
+csrt
+esrt
+csrt
+ls
+esrt
+csrt
+esrt
+csrt
+ls
+cd ~/W
+cd ~/Weather/
+ls
+srt
+clr
+srt
+cd ~/Weather/
+ls
+cd ~/Maximilian-master/
+ls
+cat pahole.txt 
+clr
+ls
+srt
+cd Giraffes/SymbolTableReader/
+ls
+cd src/
+ls
+esrt
+csrt
+srt
+ls
+rm pahole.txt 
+rm tester.a 
+ls
+cd ~/Weather/
+ls
+rm tester.a
+rm pahole.txt 
+cd ~/Maximilian-master/
+ls
+rm tester*
+rm pahole.txt 
+ls
+srt
+ls
+esrt
+csrt
+ls
+cd src/
+ls
+rm pahole.txt 
+rm tester.a 
+ls
+srt
+ls
+cd ..
+ls
+cd ~/Giraffes
+cd SymbolTableReader/
+ls
+cd src/
+ls
+rm pahole.txt 
+ls
+rm tester.a 
+csrt
+esrt
+csrt
+esrt
+csrt
+ls
+cd src/
+ls
+srt
+esrt
+csrt
+ls
+cd src/
+ls
+rm pahole.txt 
+rm tester.a 
+ls
+srt
+ls
+srt
+esrt
+csrt
+esrt
+csrt
+ls
+cd src/
+ls
+rm pahole.txt 
+rm tester.a 
+ls
+srt
+ls
+esrt
+csrt
+esrt
+csrt
+srt
+ls
+rm tester.a 
+rm pahole.txt 
+srt
+ls
+cat pahole.txt
+ls
+clr
+esrt
+csrt
+esrt
+csrt
+ls
+cd src/
+ls
+rm tester.a 
+rm pahole.txt 
+ls
+srt
+esrt
+ls
+cd ..
+esrt
+ls
+cd ~/Maximilian-master/
+ls
+ar -cr tester.a main.o RtAudio.o player.o maximilian.o
+g++ -o tester tester.a
+ls
+cd ..
+esrt
+csrt
+cd ~/Weather/
+ls
+rm tester.a 
+rm pahole.txt 
+cd ~/Maximilian-master/
+ls
+rm tester.a 
+cd ~/Giraffes/SymbolTableReader/
+cd src/
+ls
+srt
+ls
+g++ -o tester tester.a -lpthreads
+g++ -o tester tester.a -lpthread
+ls
+rm tester*
+rm pahole.txt 
+esrt
+csrt
+ls
+cd src/
+ls
+srt
+cd ~/Weather/
+ls
+cd ~/Maximilian-master/
+ls
+ar -cr tester.a main.o player.o RtAudio.o maximilian.o
+g++ -oWall tester tester.a
+g++ -o -Wall tester tester.a
+ls
+g++ -o -Wall tester tester.a lpthread
+g++ -o -Wall tester tester.a -lpthread
+g++ -o -W tester tester.a -lpthread
+g++ -Wall tester tester.a -lpthread
+g++ -o tester tester.a -lpthread
+ls
+srt
+rm pahole.txt 
+cd ~/Maximilian-master/
+ls
+rm pahole.txt 
+srt
+rm pahole.txt 
+rm tester
+srt
+ls
+cd Giraffes
+ls
+cd SymbolTableReader/
+ls
+cd src/
+ls
+cp MaximillianMATLABAll.txt MaxiMa.xml
+ls
+cat maxiMa.xml
+more maxiMa.xml
+ls
+MaxiMa.xml
+gedit MaxiMa.xml
+ls
+rm pahole.txt
+tester*
+ls
+rm tester
+rm tester.a
+ls
+rm MaxiMa.xml
+ls
+rm paholeArc.txt
+ls
+reboot
+mkdir SevAccGen
+cd SevAccGen/
+gedit sev.php
+ls
+chmod u+x sev.php 
+ls
+./sev.php
+php -f sev.php
+sudo yum install php
+ls
+cd AdaStuff/
+ls
+cd ChrisCTest/
+ls
+gedit dataexamples.c 
+ls
+g++ -c -O -gdwarf-2 dataexamples.c
+gedit dataexamples.c 
+g++ -c -O -gdwarf-2 dataexamples.c
+ls
+mv dataexamples.c christ_test.c
+mv christ_test.c chris_test.c
+ls
+clr
+g++ -c -O -gdwarf-2 chris_test.c
+gedit chris_test.c 
+g++ -c -O -gdwarf-2 chris_test.c
+ls
+g++ -c -O -gdwarf-2 chris_test.o
+pahole -A chris_test.o
+clr
+pahole chris_test.
+pahole chris_test.o
+ls
+cd AdaStuff/
+ls
+cd ChrisCTest/
+ls
+pahole chris_test.o
+ls
+rm chris_test.o
+g++ -c -O -gdwarf-2 chris_test.c
+ls
+g++ -c -O -gdwarf-2 chris_test.o
+g++ -o -gdwarf-2 chris_test.o
+ls
+g++ -o tester chris_test.o
+ls
+rm /-gdwarf2
+rm ./-gdwarf2
+rm /.-gdwarf-2
+rm ./-gdwarf-2
+ls
+pahole tester
+pahole -A tester
+pahole -A tester > testerA.txt
+pahole tester > tester.txt
+ls
+diff testerA.txt tester.txt
+rm testerA.txt 
+ls
+srt
+ls
+rm paholeB.txt 
+ls
+rm tester.a 
+ls
+cd ..
+ls
+cat testerAflag.txt 
+ls
+cd AdaStuff/
+cd ChrisCTest/
+ls
+gedit chris_test.c
+cd ..
+ls
+pahole checkpres
+gedit zip.adb
+ls
+g++ -c -O -gdwarf-2 zip.adb
+ls
+pahole zip.o
+pahole -A zip.o
+g++ -c -O -gdwarf-2 zip.o
+g++ -o -gdwarf-2 zip.o
+ls
+gnatmake -o -gdwarf-2 zip.adb
+gnatmake -gdwarf-2 zip.adb
+ls
+pahole -A zip
+ls
+cd ChrisCTest/
+ls
+gedit chris_test.c
+ls
+pahole -A tester.a
+srt
+ls
+cd ~/AdaStuff/ChrisCTest/
+ls
+cat pahole.txt 
+esrt
+csrt
+srt
+ls
+cd ~/AdaStuff/ChrisCTest/
+ls
+cat pahole.txt 
+ls
+srt
+ls
+cd ~/AdaStuff/ChrisCTest/
+ls
+cd ..
+ls
+pahole -B zip
+pahole --bit_holes=0 zip
+gedit zip.adb
+ls
+pahole zip
+dwarfdump zip
+dwarfdump zip.o
+clr
+pahole zip
+./zip
+ls
+./checkpres
+gedit checkpres.adb
+whatis -o checkpres.adb
+whatis --help
+whatis /c zip.adb
+whatis /c
+whatis c
+whatis c zip.adb
+whatis -o
+whatis /o
+whatis /o zip.adb
+whatis o zip.adb
+ptype
+print type
+print type /o
+p
+symbol-file
+sumbole-file zip.adb
+ls
+symbol-file zip.adb
+gdb
+ls
+gdb
+ls
+cat zip.adb
+gdb
+ls
+gdb
+ls
+rm hello.ali
+rm zip.ali
+rm zip
+rm zip.o
+ls
+clr
+gcc -c -gdwarf-2 hello.adb
+ls
+gnatmind hello.ali
+gnatbind hello.ali
+gnatlink hello
+ls
+pahole hello
+ls
+gcc -c  hello.adb
+gnatbind hello.ali
+gnatlink hello
+ls
+pahole hello
+gcc -c -gdwarf-4 hello.adb
+gnatbind hello.ali
+gnatlink hello
+pahole hello
+gcc -c -gdwarf-2 zip.adb
+gnatbind zip.ali
+gnatlink zip
+ls
+pahole zip
+gdb
+dwarfdump zip
+ls
+cd ~
+ls
+cd libdwarf-master/
+ls
+findcd libdwarf/
+ls
+cd libdwarf/
+ls
+cd ..
+ls
+cd ..
+ls
+locate
+locate dwarves
+locate pahole
+cd ~/usr/bin/pahole
+cd ~/
+cd /usr/bin/pa
+cd /usr/bin/
+ls
+find pahole
+cd ~
+cd libdwarf-master/
+locate dwarves
+find dwarves
+find *.h
+ls
+find -r *.h
+locate *.h
+locate dwarves.h
+locate dwarves
+locate dwarves | grep 'enum'
+locate dwarf
+cd ~
+cd /usr/src/debug/dwarf-20130207/libdwarf/
+ls
+grep 'enum' *.h
+grep 'enum dwarf' *.h
+cat pro_types.h
+grep 'enum dwarf' *.h
+cat pro_opaque.h 
+grep 'Ada' .
+grep 'Ada' *.h
+grep 'Ada' *.c
+cat dwarf_names.c 
+pahole --help
+history -a
+~/.bashrc
+gedit ~/.bashrc
+alias
+alias ll='ls -l'
+alias la='ls -A'
+alias bye='history -a ; cat ~/.bash_history > history.txt'
+alias ebash='gedit ~/.bashrc'
+alias
+ls
+bye
+rm history.txt 
+bye
+ls -l
+cat history.txt 
+clr
+reboot
+reboot -i
+kill 1826
+sudo reboot
+ls
+cd Giraffes
+ls
+cd SymbolTableReader/
+ls
+cd src/
+srt
+ls
+srt
+ls
+cd Giraffes
+cd SymbolTableReader/
+srt
+ls
+rm pahole.txt
+g++ -o tester tester.a
+ls
+esrt
+cd ..
+ls
+rm tester.a 
+csrt
+srt
+ls
+clr
+g++ -o tester tester.a
+esrt
+ls
+cd ..
+ls
+rm tester.a 
+rm pahole
+rm pahole.txt
+g++ -o tester tester.a -lpthread
+ls
+ar -cr tester.a main.o maximilian.o player.o RtAudio.o 
+g++ tester tester.a -lpthread
+g++ -o tester tester.a -lpthread
+ls
+pahole tester
+pahole -A tester
+ls
+csrt
+srt
+ls
+rm pahole.txt
+rm tester*
+srt
+clr
+ls
+srt
+ls
+rm pahole.txt
+rm tester.a 
+ls
+clr
+cd application/
+cd view/
+esrt
+csrt
+esrt
+csrt
+ls
+srt
+ls
+cat ObjectSaveFile.ser 
+clr
+ls
+esrt
+csrt
+esrt
+csrt
+esrt
+csrt
+esrt
+csrt
+esrt
+csrt
+esrt
+csrt
+esrt
+csrt
+esrt
+csrt
+ls
+cd src/
+ls
+cd application/
+ls
+cd processedView/
+ls
+cd ..
+ls
+cd view/
+ls
+gedit LoadedFile.java
+csrt
+srt
+ls
+cd GiraffesS
+ls
+cd Giraffes/SymbolTableReader/
+ls
+cd src/
+ls
+mv ObjectSaveFile.ser ObjectSavefile.ser
+ls
+srt
+ls
+cd Giraffes/SymbolTableReader/
+ls
+cd src/
+ls
+srt
+esrt
+srt
+esrt
+csrt
+esrt
+csrt
+esrt
+csrt
+esrt
+csrt
+srt
+esrt
+csrt
+esrt
+csrt
+srt
+ls
+cd AdaStuff/
+ls
+gdb zip.adb
+ls
+gdb zip
+ls
+gedit zip.adb
+gdb zip
+./zip
+pahole zip
+history | grep 'gnat'
+ls
+cd ~
+ls
+ls
+cd AdaStuff/
+ls
+gedit zip.adb
+set
+set ada trust-PAD-over-XVS on
+ls
+rm zip
+rm zip.ali
+rm zip.o
+ls
+gnatmake zip.adb
+./zip
+pahole zip
+pahole -A zip
+pahole zip.o
+rm zip
+rm zip.o
+rm zip.ali
+ls
+gnatmake -gdwarf-2 zip.adb
+ls
+pahole zip
+dwarfdump zip
+clr
+objdump zip
+objdump -g zip
+objdump
+objdump --dwarf
+objdump --dwarf zip
+objdump
+objdump -h zip
+dawrfdump
+dwarfdump
+dwarfdump -a zip
+gdb
+ls
+cd ~
+ls
+rpm -Uvh gdb-7.6.1-100.el7.x86_64.rpm 
+sudo rpm -Uvh gdb-7.6.1-100.el7.x86_64.rpm 
+ls
+untar gdb-8.1.tar.gz 
+tar gdb-8.1.tar.gz 
+tar -xf gdb-8.1.tar.gz 
+cd gdb-8.1/
+ls
+make install
+./install-sh
+./mkinstalldirs
+ls
+gdb
+ls
+make
+sudo make install
+cd ..
+ls
+make
+make --help
+cd gdb-8.1/
+make install gdb/
+cd gdb/
+ls
+cd ..
+ls
+./compile
+ls
+cd ..
+sudo rpm -Uvh gdb-8.1-14.fc29.x86_64.rpm 
+sudo yum install gdb
+reboot
+gdb
+gdb --version
+gdb
+ls
+sudo rpm -Uvh gdb-8.1-14.fc29.x86_64.rpm 
+sudo rpm -Uvh gdb-headless-8.1-14.fc29.x86_64.rpm 
+ls
+cd gdb-8.1/
+ls
+cd gdb/
+ls
+make install
+cd ..
+./compile
+./configure
+make
+gdb
+make install
+sudo make install
+gdb --version
+reboot
+ls
+cd AdaStuff/
+ls
+cd ChrisCTest/
+ls
+gdb chris_test.o
+ls
+cat symbols.txt 
+ls
+gdb chris_test.o
+ls
+cd ..
+ls
+gdb zip
+cat zipsymbols.txt 
+set ada trust-PAD-over-XVS off
+maintenance ada show ignore-descriptive-types
+maintenance ada set ignore-descriptive-types off
+sudo apt-get install maintenance
+sudo yum install maintenance
+kill 2940
+fg
+bg
+cd AdaStuff/
+ls
+cd ChrisCTest
+ls
+cat symbols.txt 
+ptype /o struct data_examples
+gdb chris_test.o
+gdb zip
+ls
+cd ..
+gdb zip
+ls
+cat zipPSymbols.txt 
+cat zipMSymbols.txt 
+set ada ignore-descriptive-types off
+ls
+rm zip
+rm zip.o
+rm zip.ali
+gnatmake -gdwarf-2 zip.adb
+pahole zip
+gdb zip
+ls
+rm zip
+rm zip.o
+rm zip.ali
+gedit zip.adb
+ls
+g++ -c -gdwarf-2 zip.adb
+ls
+gdb zip.o
+ls
+cd ChrisCTest/
+ls
+gdb chris_test.o
+ls
+cd ..
+ls
+rm zip.o
+rm zip.ali
+gnatmake -gdwarf-2 zip.adb
+ls
+gdb zip
+ls
+gdb zip.o
+ls
+gdb zip.adb
+ls
+cd ..
+cd ~/Giraffes/SymbolTableReader/
+ls
+cd src/
+ls
+g++ -o tester tester.a -lpthread
+ls
+gdb tester
+ls
+gdb main.o
+ls
+gdb tester
+cat testerSymbols.txt 
+gdb tester
+ls
+grep testerSymbols.txt 'class'
+grep 'class' testerSymbols.txt 
+gdb tester
+pahole RtAudio.o 
+gdb tester
+ls
+gdb tester
+gdb maximilian.o 
+pahole maximilian.o 
+gdb maximilian.o 
+history
+bye

@@ -3,6 +3,7 @@ package application.view;
 import java.io.File;
 
 import javafx.scene.control.CheckBox;
+import java.io.Serializable;
 
 /*
  * Class that stores instances of loaded files. Knows the loaded files full file file and the checkbox associated with it.
@@ -10,9 +11,11 @@ import javafx.scene.control.CheckBox;
  * @author Philip S. Quinn
  * @version 3/1/2018
  */
-public class LoadedFile {
+public class LoadedFile implements Serializable {
+
+	//private static final long serialVersionUID = 3675362239882535886L;
 	private File file;//full file file
-	private CheckBox checkBox;
+	private transient CheckBox checkBox;
 	
 	public LoadedFile(File file, CheckBox checkBox)
 	{

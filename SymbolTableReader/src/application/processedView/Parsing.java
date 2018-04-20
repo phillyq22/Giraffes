@@ -60,7 +60,7 @@ public class Parsing {
 								field.setType(t2[1] + " " + t2[2] + " " + t2[3]);
 								field.setName(t2[4]);
 								field.setWord(Integer.parseInt(t2[6]) / 8);
-								field.setStartByte(Integer.parseInt(t2[7]) % 8);
+								field.setStartByte(Integer.parseInt(t2[6]) % 8);
 								fields.add(field);
 							}	
 							else if(!t2[1].equals("/*")) // denotes a pahole information line
@@ -71,7 +71,7 @@ public class Parsing {
 								{
 									field.setName(t2[2]);
 									field.setWord(Integer.parseInt(t2[4]) / 8 );
-									field.setStartByte(Integer.parseInt(t2[5]) % 8);
+									field.setStartByte(Integer.parseInt(t2[4]) % 8);
 								}
 							
 								else if(t2[1].equals("signed")) // does the same as if above, but different spacing for signed fields
@@ -79,7 +79,7 @@ public class Parsing {
 									field.setType(t2[2]);
 									field.setName(t2[3]);
 									field.setWord(Integer.parseInt(t2[5]) / 8 );
-									field.setStartByte(Integer.parseInt(t2[6]) % 8);
+									field.setStartByte(Integer.parseInt(t2[5]) % 8);
 								
 								}
 							
@@ -87,14 +87,14 @@ public class Parsing {
 								{
 									field.setName(t2[4]);
 									field.setWord(Integer.parseInt(t2[6]) / 8 );
-									field.setStartByte(Integer.parseInt(t2[7]) % 8);
+									field.setStartByte(Integer.parseInt(t2[6]) % 8);
 								}
 								
 								else // if it requires no special spacing, do this instead
 								{
 									field.setName(t2[3]);
 									field.setWord(Integer.parseInt(t2[5]) / 8 );
-									field.setStartByte(Integer.parseInt(t2[6]) % 8);
+									field.setStartByte(Integer.parseInt(t2[5]) % 8);
 								}
 								fields.add(field);
 							}
