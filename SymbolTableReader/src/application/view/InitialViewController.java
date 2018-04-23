@@ -53,8 +53,8 @@ import java.io.ObjectOutputStream;
  * @author Philip S. Quinn
  * @version 3/1/2018
  */
-public class InitialViewController implements Serializable {
-    /*Fields*/
+public class InitialViewController implements Serializable, Initializable {
+	/*Fields*/
     @FXML private TextField filename;
     @FXML private TableView<LoadedFile> loadedFilesView = new TableView<LoadedFile>();
     @FXML private TableColumn<LoadedFile, CheckBox> loadedFiles = new TableColumn<LoadedFile, CheckBox>();
@@ -66,21 +66,32 @@ public class InitialViewController implements Serializable {
     @FXML private RadioButton dwarf5;
     @FXML private Label fileError;
     @FXML private Label processError;
+    @FXML private Label saveConfirmation;
     @FXML private TextField saveName;
+    private static File file = null;
     private ArrayList<Structure> structs;
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources)
+    {
+    	if(file != null)
+    	{
+    		readEmIn(file);
+    	}
+    }
+    
 	public void save(ActionEvent e)
-		{
+	{
 		ObservableList<LoadedFile> list = loadedFilesView.getItems();
 		Path currentRelativePath = Paths.get("");
 		String s = currentRelativePath.toAbsolutePath().toString();//cwd as a string
-    		String fileName = saveName.getText(); //txtboxName.getText();
-    		String filePath = (s + File.separator + fileName + ".ser");//creating the full file path
+    	String fileName = saveName.getText(); //txtboxName.getText();
+    	String filePath = (s + File.separator + fileName + ".ser");//creating the full file path
 		File serFile = new File(filePath);
 		write(list, serFile);
-		}	
+		saveConfirmation.setText("Save Successful!");
+	}	
 
-	
 
     /*
      * Searches in the current working directory(cwd) for the file name entered by the user.
@@ -333,7 +344,6 @@ public class InitialViewController implements Serializable {
 				}
 		}*/
     		oos.close();
-		System.out.printf("Files written to : " + file);
     	} catch (FileNotFoundException e) {
     		e.printStackTrace();
     	} catch (IOException e) {
@@ -341,50 +351,48 @@ public class InitialViewController implements Serializable {
     	}
     }
 
-	public ObservableList<LoadedFile> read(File file) {
-		try {
-		FileInputStream in = new FileInputStream(file);
-		ObjectInputStream ois = new ObjectInputStream(in);
-		List<LoadedFile> list = (List<LoadedFile>) ois.readObject();
-		System.out.printf("Files read from : " + file);
-
-	return FXCollections.observableList(list);
-	} catch (ClassNotFoundException e) {
-		e.printStackTrace();
-	} catch (IOException e) {
-		e.printStackTrace();
+	public ObservableList<LoadedFile> read(File file) 
+	{
+		try 
+		{
+			FileInputStream in = new FileInputStream(file);
+			ObjectInputStream ois = new ObjectInputStream(in);
+			ArrayList<LoadedFile> list = (ArrayList<LoadedFile>)(ois.readObject());
+			return FXCollections.observableList(list);
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			return FXCollections.emptyObservableList();
+		} 
 	}
-	return FXCollections.emptyObservableList();
-	}
 
-	public void readEmIn(File file) {
-
+	public void readEmIn(File file) 
+	{
 		/*TableView<LoadeFile> loadedFilesView = new TableView<LoadedFile>();
 		TableColumn<LoadedFile, CheckBox> loadedView = = new TableColumn<LoadedFile, CheckBox>();*/
-
-		System.out.println("file:" + file);
-
-		if (file.exists() && !file.isDirectory()) {
-			
+		if (file.exists() && !file.isDirectory()) 
+		{			
 			ObservableList<LoadedFile> list = loadedFilesView.getItems();
 			ObservableList<LoadedFile> listFromFile = read(file);
 			int listSize = listFromFile.size();
 			loadedFiles.setCellValueFactory(new PropertyValueFactory<LoadedFile, CheckBox>("checkBox"));
-			for (int i = 0; i < listSize; i++) {
-			File fileInSer = listFromFile.get(i).getFile();
-			CheckBox checkBox = new CheckBox(fileInSer.getName());
-			LoadedFile lf =  new LoadedFile(fileInSer, checkBox);
-			//Makes sure that the checkboxes are displayed by checking for the field called checkBox in LoadedFile object
-			list.add(lf);
-							   }// end for
-			for (int i = 0; i < list.size(); i++)
-				{
-					System.out.println(list.get(i).getFile().getName());
-				}
-		
-		loadedFilesView.setItems(list); //}
+			for (int i = 0; i < listSize; i++) 
+			{
+				File fileInSer = listFromFile.get(i).getFile();
+				CheckBox checkBox = new CheckBox(fileInSer.getName());
+				LoadedFile lf =  new LoadedFile(fileInSer, checkBox);
+				//Makes sure that the checkboxes are displayed by checking for the field called checkBox in LoadedFile object
+				list.add(lf);
+			}// end for
+			loadedFilesView.setItems(list);
 		}
 
+	}
+	
+	public static void setFile(File newFile)
+	{
+		file  = newFile;
 	}
 
 }

@@ -29,6 +29,7 @@
                   <Label fx:id="fileError" layoutX="223.0" layoutY="113.0" prefHeight="17.0" prefWidth="320.0" textFill="RED" />
                   <Button layoutX="65.0" layoutY="78.0" mnemonicParsing="false" onAction="#save" text="Save Progress" />
                   <TextField fx:id="saveName" layoutX="36.0" layoutY="37.0" promptText="Name file to save" />
+                  <Label fx:id="saveConfirmation" layoutX="67.0" layoutY="113.0" textFill="RED" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="196.0">
