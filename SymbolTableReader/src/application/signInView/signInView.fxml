@@ -5,15 +5,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="248.0" prefWidth="319.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.signInView.SignInViewController">
    <center>
       <AnchorPane prefHeight="229.0" prefWidth="261.0" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutX="40.0" layoutY="144.0" mnemonicParsing="false" text="Start New" onAction="#startNew" />
-            <Button layoutX="167.0" layoutY="144.0" mnemonicParsing="false" text="Resume old session" onAction="#loadOld"/>
+            <Button layoutX="40.0" layoutY="144.0" mnemonicParsing="false" onAction="#startNew" text="Start New" />
+            <Button layoutX="167.0" layoutY="144.0" mnemonicParsing="false" onAction="#loadOld" text="Resume old session" />
             <Label layoutX="67.0" layoutY="45.0" text="Welcome to Symbol Table Reader! " />
             <Label layoutX="18.0" layoutY="74.0" prefHeight="54.0" prefWidth="283.0" text="Select whether or not you would like to begin a new session, or load from an old one." textAlignment="CENTER" wrapText="true" />
+            <Label layoutX="171.0" layoutY="197.0" textFill="RED" />
          </children>
       </AnchorPane>
    </center>

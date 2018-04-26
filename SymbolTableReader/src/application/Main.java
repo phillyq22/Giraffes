@@ -29,6 +29,12 @@ public class Main extends Application {
 	
 	private static Stage exportStage;
 	private static AnchorPane exportLayout;
+	
+	private static Stage helpStage;
+	private static AnchorPane helpLayout;
+	
+	private static Stage helpStage2;
+	private static AnchorPane helpLayout2;
 	/*
 	* Starts the JavaFX program
 	* @see javafx.application.Application#start(javafx.stage.Stage)
@@ -39,10 +45,15 @@ public class Main extends Application {
 		this.processStage = new Stage();
 		this.primaryStage = new Stage();
 		this.exportStage = new Stage();
+		this.helpStage = new Stage();
+		this.helpStage2 = new Stage();
+
 		this.primaryStage.setResizable(false);
 		this.processStage.setResizable(false);
 		this.signInStage.setResizable(false);
 		this.exportStage.setResizable(false);
+		this.helpStage.setResizable(false);
+		this.helpStage2.setResizable(false);
 
 		buildSignInStage();
 		signInStage.show();	
@@ -74,6 +85,34 @@ public class Main extends Application {
 	}
 	
 	/*
+	 * Builds and shows the help view window.
+	 */
+	public static void showHelpView() throws IOException
+	{
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("view/helpView.fxml"));
+		helpLayout = loader.load();
+		Scene scene = new Scene(helpLayout);
+		helpStage.setTitle("Directions");
+		helpStage.setScene(scene);
+		helpStage.show();
+	}
+	
+	/*
+	 * Builds and shows the help view window.
+	 */
+	public static void showHelpView2() throws IOException
+	{
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("processedView/helpView.fxml"));
+		helpLayout = loader.load();
+		Scene scene = new Scene(helpLayout);
+		helpStage.setTitle("Directions");
+		helpStage.setScene(scene);
+		helpStage.show();
+	}
+	
+	/*
 	* Loads in the ProvessView to display it on the primary stage
 	*/
 	public static void showProcessView() throws IOException
@@ -83,7 +122,7 @@ public class Main extends Application {
 	}
 	
 	/*
-	* Loads in the exportView to display.
+	* Makes the exportView display.
 	*/
 	public static void showExportView() throws IOException
 	{
@@ -143,6 +182,7 @@ public class Main extends Application {
 		exportStage.setScene(scene);
 		exportStage.show();
 	}
+	
 	
 	/*
 	* launches the program

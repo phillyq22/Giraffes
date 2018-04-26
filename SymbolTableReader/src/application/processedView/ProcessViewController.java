@@ -7,10 +7,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import application.Main;
-import application.view.InitialViewController;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -43,6 +42,10 @@ public class ProcessViewController implements Initializable
 	@FXML private RadioButton exportMatlab;
 	@FXML private ToggleGroup exportFormat;
 	@FXML private Button preview;
+	@FXML private Button helpButton;
+	@FXML private Label helpError;
+	@FXML private Label exportError;
+
 
 	private static ArrayList<Structure> structs = new ArrayList<Structure>();
 
@@ -62,7 +65,7 @@ public class ProcessViewController implements Initializable
 		treeView.setRoot(root);
 		treeView.refresh();
 	}
-	
+
 	/*
 	 * Parses several structures.
 	 * 
@@ -78,7 +81,7 @@ public class ProcessViewController implements Initializable
 			parent.getChildren().add(node);
 		}
 	}
-	
+
 	/*
 	 * Parses a single treeItem for a single structure.
 	 * 
@@ -89,14 +92,14 @@ public class ProcessViewController implements Initializable
 	{
 		for (Field f : s.getFields())
 		{
-		parent.getChildren().add(new TreeItem<Structure>(f));
+			parent.getChildren().add(new TreeItem<Structure>(f));
 		}
 		if (!s.getChildren().isEmpty())
 		{
 			parseMany(s.getChildren(), parent);
 		}
 	}
-	
+
 	/**
 	 * Recognizes mouse click as selection for a certain node/item. Multiple items can be selected with control.
 	 * @param mouseEvent
@@ -109,8 +112,11 @@ public class ProcessViewController implements Initializable
 		}
 		treeView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 	}
-	
-	public void detectExportSelectedFormat() throws IOException
+
+	/*
+	 * Detects which format was chosen by the user to export selected structures in.
+	 */
+	public void detectExportSelectedFormat()
 	{
 		if(exportText.isSelected())
 		{
@@ -125,55 +131,106 @@ public class ProcessViewController implements Initializable
 			exportSelectedToMatlab();
 		}
 	}
-	
-	private void exportSelectedToMatlab() throws IOException {
-		Path currentRelativePath = Paths.get("");//getting the cwd path as an object
-		String s = currentRelativePath.toAbsolutePath().toString();//cwd as a string
-		String fileName = exportFileName.getText();//getting the file name entered into the filename textfield
-		String filePath = (s + File.separator + fileName + ".mat");//creating the full file path
-		if(MATLABFormatParser.parseSelected(treeView.getSelectionModel().getSelectedItems(),filePath)){
-			saveFileError.setText("");
-		}
-		else
-		{
-			saveFileError.setText("File with this name already exists!");
-		}		
-	}
 
-	private void exportSelectedToXML() throws IOException 
+	/*
+	 * Exports the structures selected by the user to a Matlab file in their current working directory.
+	 */
+	private void exportSelectedToMatlab() 
 	{
-		Path currentRelativePath = Paths.get("");//getting the cwd path as an object
-		String s = currentRelativePath.toAbsolutePath().toString();//cwd as a string
 		String fileName = exportFileName.getText();//getting the file name entered into the filename textfield
-		String filePath = (s + File.separator + fileName + ".xml");//creating the full file path
-		if(XMLFormatParser.parseSelected(treeView.getSelectionModel().getSelectedItems(),filePath)){
-			saveFileError.setText("");
+		if(isValid(fileName))
+		{
+			Path currentRelativePath = Paths.get("");//getting the cwd path as an object
+			String s = currentRelativePath.toAbsolutePath().toString();//cwd as a string
+			String filePath = (s + File.separator + fileName + ".mat");//creating the full file path
+			try 
+			{
+				if(MATLABFormatParser.parseSelected(treeView.getSelectionModel().getSelectedItems(),filePath)){
+					saveFileError.setText("Structures successfully saved.");
+				}
+				else
+				{
+					saveFileError.setText("File with this name already exists!");
+				}
+			} 
+			catch (IOException e) 
+			{
+				saveFileError.setText("Sorry, error saving file. Please try agian.");
+			}
 		}
 		else
 		{
-			saveFileError.setText("File with this name already exists!");
-		}		
+			saveFileError.setText("Invalid file name.");
+		}
+	}
+	
+	/*
+	 * Exports the structures selected by the user to an XML file in their current working directory.
+	 */
+	private void exportSelectedToXML()
+	{
+		String fileName = exportFileName.getText();//getting the file name entered into the filename textfield
+		if(isValid(fileName))
+		{
+			Path currentRelativePath = Paths.get("");//getting the cwd path as an object
+			String s = currentRelativePath.toAbsolutePath().toString();//cwd as a string
+			String filePath = (s + File.separator + fileName + ".xml");//creating the full file path
+			try {
+				if(XMLFormatParser.parseSelected(treeView.getSelectionModel().getSelectedItems(),filePath)){
+					saveFileError.setText("Structures successfully saved.");
+				}
+				else
+				{
+					saveFileError.setText("File with this name already exists!");
+				}
+			} 
+			catch (IOException e) 
+			{
+				saveFileError.setText("Sorry, error saving file. Please try agian.");
+			}	
+		}
+		else
+		{
+			saveFileError.setText("Invalid file name.");
+		}
 	}
 
 	/*
 	 * Exports the structures selected by the user to a file in their current working directory.
 	 */
-	public void exportSelectedToText() throws IOException
+	public void exportSelectedToText()
 	{
-		Path currentRelativePath = Paths.get("");//getting the cwd path as an object
-		String s = currentRelativePath.toAbsolutePath().toString();//cwd as a string
 		String fileName = exportFileName.getText();//getting the file name entered into the filename textfield
-		String filePath = (s + File.separator + fileName + ".txt");//creating the full file path
-		if(ReadableFormatParser.parseSelected(treeView.getSelectionModel().getSelectedItems(),filePath)){
-			saveFileError.setText("");
-		}
+		if(isValid(fileName))
+		{
+			Path currentRelativePath = Paths.get("");//getting the cwd path as an object
+			String s = currentRelativePath.toAbsolutePath().toString();//cwd as a string
+			String filePath = (s + File.separator + fileName + ".txt");//creating the full file path
+			try 
+			{
+				if(ReadableFormatParser.parseSelected(treeView.getSelectionModel().getSelectedItems(),filePath)){
+					saveFileError.setText("Structures successfully saved.");
+				}
+				else
+				{
+					saveFileError.setText("File with this name already exists!");
+				}
+			} 
+			catch (IOException e) 
+			{
+				saveFileError.setText("Sorry, error saving file. Please try agian.");
+			}
+		}	
 		else
 		{
-			saveFileError.setText("File with this name already exists!");
+			saveFileError.setText("Invalid file name.");
 		}
 	}
-	
-	public void detectExportAllFormat() throws IOException
+
+	/*
+	 * Detects which format was chosen by the user to export structures in.
+	 */
+	public void detectExportAllFormat()
 	{
 		if(exportText.isSelected())
 		{
@@ -188,79 +245,168 @@ public class ProcessViewController implements Initializable
 			exportAllToMatlab();
 		}
 	}
-	
+
 	/*
 	 * Exports all the loaded structures to a file in their current working directory.
 	 */
-	public void exportAllToText() throws IOException
+	public void exportAllToText()
 	{
-		Path currentRelativePath = Paths.get("");//getting the cwd path as an object
-		String s = currentRelativePath.toAbsolutePath().toString();//cwd as a string
 		String fileName = exportFileName.getText();//getting the file name entered into the filename textfield
-		String filePath = (s + File.separator + fileName + ".txt");//creating the full file path
-		if(ReadableFormatParser.parseStructure(structs,0,filePath)){
-			saveFileError.setText("");
+		if(isValid(fileName))
+		{
+			Path currentRelativePath = Paths.get("");//getting the cwd path as an object
+			String s = currentRelativePath.toAbsolutePath().toString();//cwd as a string
+			String filePath = (s + File.separator + fileName + ".txt");//creating the full file path
+			try {
+				if(ReadableFormatParser.parseStructure(structs,0,filePath)){
+					saveFileError.setText("Structures successfully saved.");
+				}
+				else
+				{
+					saveFileError.setText("File with this name already exists!");
+				}
+			} 
+			catch (IOException e) 
+			{
+				saveFileError.setText("Sorry, error saving file. Please try agian.");
+			}
 		}
 		else
 		{
-			saveFileError.setText("File with this name already exists!");
+			saveFileError.setText("Invalid file name.");
 		}
-	}
-	
-	public void exportAllToMatlab() throws IOException 
-	{
-		Path currentRelativePath = Paths.get("");//getting the cwd path as an object
-		String s = currentRelativePath.toAbsolutePath().toString();//cwd as a string
-		String fileName = exportFileName.getText();//getting the file name entered into the filename textfield
-		String filePath = (s + File.separator + fileName + ".mat");//creating the full file path
-		if(MATLABFormatParser.parseStructure(structs,0,filePath))
-		{
-			saveFileError.setText("");
-		}
-		else
-		{
-			saveFileError.setText("File with this name already exists!");
-		}		
-	}
-
-	public void exportAllToXML() throws IOException 
-	{
-		Path currentRelativePath = Paths.get("");//getting the cwd path as an object
-		String s = currentRelativePath.toAbsolutePath().toString();//cwd as a string
-		String fileName = exportFileName.getText();//getting the file name entered into the filename textfield
-		String filePath = (s + File.separator + fileName + ".xml");//creating the full file path
-		if(XMLFormatParser.parseStructure(structs,filePath))
-		{
-			saveFileError.setText("");
-		}
-		else
-		{
-			saveFileError.setText("File with this name already exists!");
-		}			
-	}
-	
-	public void showExportOptions() throws IOException
-	{
-		Main.buildExportStage();
-		Main.showExportView();
 	}
 	
 	/*
+	 * Action to export all structures to a Matlab file.
+	 */
+	public void exportAllToMatlab()
+	{
+		String fileName = exportFileName.getText();//getting the file name entered into the filename textfield
+		if(isValid(fileName))
+		{
+			Path currentRelativePath = Paths.get("");//getting the cwd path as an object
+			String s = currentRelativePath.toAbsolutePath().toString();//cwd as a string
+			String filePath = (s + File.separator + fileName + ".mat");//creating the full file path
+			try 
+			{
+				if(MATLABFormatParser.parseStructure(structs,0,filePath))
+				{
+					saveFileError.setText("Structures successfully saved.");
+				}
+				else
+				{
+					saveFileError.setText("File with this name already exists!");
+				}
+			} 
+			catch (IOException e) 
+			{
+				saveFileError.setText("Sorry, error saving file. Please try agian.");
+			}	
+		}
+		else
+		{
+			saveFileError.setText("Invalid file name.");
+		}
+	}
+
+	/*
+	 * Action to export all structures to an XML file.
+	 */
+	public void exportAllToXML()
+	{
+		String fileName = exportFileName.getText();//getting the file name entered into the filename textfield
+		if(isValid(fileName))
+		{
+			Path currentRelativePath = Paths.get("");//getting the cwd path as an object
+			String s = currentRelativePath.toAbsolutePath().toString();//cwd as a string
+			String filePath = (s + File.separator + fileName + ".xml");//creating the full file path
+			try 
+			{
+				if(XMLFormatParser.parseStructure(structs,filePath))
+				{
+					saveFileError.setText("Structures successfully saved.");
+				}
+				else
+				{
+					saveFileError.setText("File with this name already exists!");
+				}
+			} 
+			catch (IOException e) 
+			{
+				saveFileError.setText("Sorry, error saving file. Please try agian.");
+			}			
+		}
+		else
+		{
+			saveFileError.setText("Invalid file name.");
+		}
+	}
+
+	/*
+	 * Action to display the export format options.
+	 */
+	public void showExportOptions()
+	{
+		try 
+		{
+			Main.buildExportStage();
+			Main.showExportView();
+		} 
+		catch (IOException e) 
+		{
+			exportError.setText("Unable to show the export options.");
+		}
+	}
+
+	/*
 	 * Returns the GUI back to the mainView.
 	 */
-	public void back(ActionEvent e) throws IOException
+	public void back(ActionEvent e)
 	{
 		Main.showMainView();
 	}
-	
+
 	public ArrayList<Structure> getStructs()
 	{
 		return structs;
 	}
-	
+
 	public static void setStructs(ArrayList<Structure> structures)
 	{
 		structs = structures;
 	}
-	
+
+	/*
+	 * Confirms that a fileName is valid
+	 * 
+	 * @param	fileName	The fileName that is to be checked.
+	 * @return	boolean		True if the fileName is valid, false if it is not.
+	 */
+	private static boolean isValid(String fileName) 
+	{
+		Pattern p = Pattern.compile("[a-zA-Z_0-9]+");
+		Matcher m = p.matcher(fileName);
+		boolean isValid = false;
+		if(!fileName.replaceAll("\\s+", "").isEmpty() && m.matches())
+		{
+			isValid = true;
+		}
+		return isValid;
+	}
+
+	/*
+	 * Action to display the help window.
+	 */
+	public void help()
+	{
+		try 
+		{
+			Main.showHelpView2();
+		} 
+		catch (IOException e) 
+		{
+			helpError.setText("Sorry, we are unable to provide help information at this time.");
+		}
+	}
 }

@@ -34,6 +34,7 @@ import java.nio.file.Paths;
 import java.nio.file.Files;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.xml.crypto.dsig.TransformException;
@@ -53,17 +54,20 @@ import java.io.ObjectOutputStream;
  * @author Philip S. Quinn
  * @version 3/1/2018
  */
-public class InitialViewController implements Serializable, Initializable {
+public class InitialViewController implements Serializable, Initializable 
+{
 	/*Fields*/
     @FXML private TextField filename;
     @FXML private TableView<LoadedFile> loadedFilesView = new TableView<LoadedFile>();
     @FXML private TableColumn<LoadedFile, CheckBox> loadedFiles = new TableColumn<LoadedFile, CheckBox>();
     @FXML private Button removeFileButton;
     @FXML private Button processButton;
+    @FXML private Button helpButton;
     @FXML private RadioButton dwarf2;
     @FXML private RadioButton dwarf3;
     @FXML private RadioButton dwarf4;
     @FXML private RadioButton dwarf5;
+    @FXML private Label helpError;
     @FXML private Label fileError;
     @FXML private Label processError;
     @FXML private Label saveConfirmation;
@@ -82,14 +86,29 @@ public class InitialViewController implements Serializable, Initializable {
     
 	public void save(ActionEvent e)
 	{
-		ObservableList<LoadedFile> list = loadedFilesView.getItems();
-		Path currentRelativePath = Paths.get("");
-		String s = currentRelativePath.toAbsolutePath().toString();//cwd as a string
-    	String fileName = saveName.getText(); //txtboxName.getText();
-    	String filePath = (s + File.separator + fileName + ".ser");//creating the full file path
-		File serFile = new File(filePath);
-		write(list, serFile);
-		saveConfirmation.setText("Save Successful!");
+		String input = saveName.getText();
+		Pattern p = Pattern.compile("[a-zA-Z_0-9]+");
+		Matcher m = p.matcher(input);
+		if(!input.replaceAll("\\s+", "").isEmpty() && m.matches())
+		{
+			ObservableList<LoadedFile> list = loadedFilesView.getItems();
+			Path currentRelativePath = Paths.get("");
+			String s = currentRelativePath.toAbsolutePath().toString();//cwd as a string
+	    	String filePath = (s + File.separator + input + ".ser");//creating the full file path
+			File serFile = new File(filePath);
+			if(!serFile.exists()){
+				write(list, serFile);
+				saveConfirmation.setText("Save Successful!");
+			}
+			else
+			{
+				saveConfirmation.setText("File with this name already exists.");
+			}
+		}
+		else
+		{
+			saveConfirmation.setText("File name is invalid.");
+		}
 	}	
 
 
@@ -157,22 +176,22 @@ public class InitialViewController implements Serializable, Initializable {
      *
      * @param   e   The pressing of the process button
      */
-    public void process(ActionEvent e) throws IOException, InterruptedException, FileNotFoundException, TransformException
+    public void process(ActionEvent e)
     {
 	LoadedFile lf = getSelectedFile();
 
 	if (lf!=null)
 	{
-	String fileName = new String("pahole.txt");
-	String filePath = new String(lf.getFile().getAbsoluteFile().getParentFile().getAbsolutePath().toString());
-	String fullFilePath = new String(filePath + File.separator + fileName);
-
-	File file = new File(fullFilePath);
-
-	String pahole = new String("cd " + filePath + " ; pahole tester.a > " + fullFilePath);
-
-	String exeLinked = new String("cd " + filePath + " ; /usr/bin/g++ tester tester.a -lpthread");
+		String fileName = new String("pahole.txt");
+		String filePath = new String(lf.getFile().getAbsoluteFile().getParentFile().getAbsolutePath().toString());
+		String fullFilePath = new String(filePath + File.separator + fileName);
 	
+		File file = new File(fullFilePath);
+	
+		String pahole = new String("cd " + filePath + " ; pahole tester.a > " + fullFilePath);
+	
+		String exeLinked = new String("cd " + filePath + " ; /usr/bin/g++ tester tester.a -lpthread");
+		
 			
 	    if (Pattern.matches(".*[.a]", lf.getFile().getName()))
 	    {
@@ -186,8 +205,7 @@ public class InitialViewController implements Serializable, Initializable {
 	            Process pp = Runtime.getRuntime().exec(paholeCmd);
 	            pp.destroy();
 	        } catch (IOException e1) {
-	            // TODO Auto-generated catch block
-	            e1.printStackTrace();
+	    		processError.setText("File was not in proper format for parsing, please try again.");
 	        }
 	       
 	    }
@@ -199,29 +217,36 @@ public class InitialViewController implements Serializable, Initializable {
 	            Process pp = Runtime.getRuntime().exec(paholeCmd);
 	            pp.destroy();
 	        } catch (IOException e1) {
-	            // TODO Auto-generated catch block
-	            e1.printStackTrace();
+	    		processError.setText("File was not in proper format for parsing, please try again.");
 	        }
 	    }
 
 	    processError.setText("");
-	    try {
-	         structs = Parsing.parse(file);
-		 ProcessViewController.setStructs(structs);
-		    Main.buildProcessStage();
-		    Main.showProcessView();
-		 } 
-            catch (TransformException e1)
+	    try 
 	    {
-		processError.setText("File was not in proper format for parsing, please try again.");
-            }
+	         structs = Parsing.parse(file);
+	         ProcessViewController.setStructs(structs);
+		     try 
+		     {
+				Main.buildProcessStage();
+				Main.showProcessView();
+			 } 
+		     catch (IOException e1) 
+		     {
+		        processError.setText("Sorry, something went wrong with your processing. Please try again.");
+			 }
+		} 
+        catch (TransformException e1)
+	    {
+        	processError.setText("File was not in proper format for parsing, please try again.");
+        }
 	}
 	else
 	{
 	    processError.setText("A single file must be selected to process!");
 	}        
        
-    }
+ }
 
 	/*
 	* Returns the selected file from the list of imported files.
@@ -264,27 +289,36 @@ public class InitialViewController implements Serializable, Initializable {
 		
 		ExtensionFilter ef1 = new ExtensionFilter("Archive file", "*.a");
 		ExtensionFilter ef2 = new ExtensionFilter("Executable file", "*.");
-		
+		ExtensionFilter ef3 = new ExtensionFilter("Symbol Table Reader File", "*.ser");
+
 		Path currentRelativePath = Paths.get("");//getting the cwd path as an object
 		String cwd = currentRelativePath.toAbsolutePath().toString();//current working directory as a string
 		
 		fc.setInitialDirectory(new File(cwd));
 		fc.getExtensionFilters().add(ef1);
 		fc.getExtensionFilters().add(ef2);
+		fc.getExtensionFilters().add(ef3);
 		File file = fc.showOpenDialog(null);
 		
 		if(file != null)
 		{
 			if(!fileExist(file))
 			{
-				fileError.setText("");
-				ObservableList<LoadedFile> list = loadedFilesView.getItems();
-				CheckBox checkBox = new CheckBox(file.getName());
-				LoadedFile lf =  new LoadedFile(file, checkBox);
-				//Makes sure that the checkboxes are displayed by checking for the field called checkBox in LoadedFile object
-				loadedFiles.setCellValueFactory(new PropertyValueFactory<LoadedFile, CheckBox>("checkBox"));
-				list.add(lf);
-				loadedFilesView.setItems(list);
+				if(Pattern.matches(".*[.ser]", file.getName()))
+				{
+					readEmIn(file);
+				}
+				else
+				{
+					fileError.setText("");
+					ObservableList<LoadedFile> list = loadedFilesView.getItems();
+					CheckBox checkBox = new CheckBox(file.getName());
+					LoadedFile lf =  new LoadedFile(file, checkBox);
+					//Makes sure that the checkboxes are displayed by checking for the field called checkBox in LoadedFile object
+					loadedFiles.setCellValueFactory(new PropertyValueFactory<LoadedFile, CheckBox>("checkBox"));
+					list.add(lf);
+					loadedFilesView.setItems(list);
+				}
 			}
 			else
 			{
@@ -330,25 +364,17 @@ public class InitialViewController implements Serializable, Initializable {
 
 	public void write(ObservableList<LoadedFile> loadedFiles, File file)
     {
-    	try {
+    	try 
+    	{
     		FileOutputStream fos = new FileOutputStream(file);
     		ObjectOutputStream oos = new ObjectOutputStream(fos);
     		oos.writeObject(new ArrayList<LoadedFile>(loadedFiles));
-		/*int listSize = loadedFiles.size();
-        	for(int i = 0; i < listSize; i++)
-        	{
-            	LoadedFile curr = list.get(i);
-            		if(curr.getCheckBox().isSelected())
-				{
-					oos.writeObject(new String(list.get(i).getFile().getName()));
-				}
-		}*/
     		oos.close();
-    	} catch (FileNotFoundException e) {
-    		e.printStackTrace();
-    	} catch (IOException e) {
-    		e.printStackTrace();
-    	}
+    	} 
+    	catch (Exception e) 
+    	{
+    		saveConfirmation.setText("Error saving, please try again.");
+    	} 
     }
 
 	public ObservableList<LoadedFile> read(File file) 
@@ -362,7 +388,6 @@ public class InitialViewController implements Serializable, Initializable {
 		}
 		catch (Exception e) 
 		{
-			e.printStackTrace();
 			return FXCollections.emptyObservableList();
 		} 
 	}
@@ -380,19 +405,33 @@ public class InitialViewController implements Serializable, Initializable {
 			for (int i = 0; i < listSize; i++) 
 			{
 				File fileInSer = listFromFile.get(i).getFile();
-				CheckBox checkBox = new CheckBox(fileInSer.getName());
-				LoadedFile lf =  new LoadedFile(fileInSer, checkBox);
-				//Makes sure that the checkboxes are displayed by checking for the field called checkBox in LoadedFile object
-				list.add(lf);
+				if(!fileExist(fileInSer))
+				{
+					CheckBox checkBox = new CheckBox(fileInSer.getName());
+					LoadedFile lf =  new LoadedFile(fileInSer, checkBox);
+					//Makes sure that the checkboxes are displayed by checking for the field called checkBox in LoadedFile object
+					list.add(lf);
+				}
 			}// end for
 			loadedFilesView.setItems(list);
 		}
-
 	}
 	
 	public static void setFile(File newFile)
 	{
 		file  = newFile;
+	}
+	
+	public void help()
+	{
+		try 
+		{
+			Main.showHelpView();
+		} 
+		catch (IOException e) 
+		{
+			helpError.setText("Sorry, we are unable to provide help information at this time.");
+		}
 	}
 
 }

@@ -30,6 +30,8 @@
                   <Button layoutX="65.0" layoutY="78.0" mnemonicParsing="false" onAction="#save" text="Save Progress" />
                   <TextField fx:id="saveName" layoutX="36.0" layoutY="37.0" promptText="Name file to save" />
                   <Label fx:id="saveConfirmation" layoutX="67.0" layoutY="113.0" textFill="RED" />
+                  <Button fx:id="helpButton" layoutX="551.0" layoutY="14.0" mnemonicParsing="false" onAction="#help" text="?" />
+                  <Label fx:id="helpError" layoutX="222.0" layoutY="18.0" textFill="RED" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="196.0">

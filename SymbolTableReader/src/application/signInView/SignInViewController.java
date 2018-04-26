@@ -1,7 +1,5 @@
 package application.signInView;
 
-import application.view.InitialViewController;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -10,6 +8,7 @@ import application.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 
@@ -25,6 +24,7 @@ public class SignInViewController {
 
 	@FXML private Button startNewButton;
 	@FXML private Button loadOldButton;
+	@FXML private Label loadOldError;
 
 	/*
 	 * Searches in the current working directory(cwd) for the file name entered by the user.
@@ -37,7 +37,7 @@ public class SignInViewController {
 		Main.exitSignInView();
 	}
 	
-	public void loadOld() throws IOException
+	public void loadOld()
 	{
 		FileChooser fc = new FileChooser();
 		
@@ -50,9 +50,13 @@ public class SignInViewController {
 		File file = fc.showOpenDialog(null);
 		if(file != null)
 		{
-			Main.loadOldView(file);
-			//InitialViewController.readEmIn(file);
-			
+			try 
+			{
+				Main.loadOldView(file);
+			} 
+			catch (IOException e) {
+				loadOldError.setText("Error loading old file.");
+			}
 		}
 	}
 }
