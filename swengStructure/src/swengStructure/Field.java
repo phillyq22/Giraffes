@@ -40,7 +40,7 @@ public class Field extends Structure{
 	
 	public String toString()
 	{
-		return "FIELD: " + getType() + ", " + super.getName() + " STARTING WORD: " + start + " BIT SIZE: " + bitSize + " BYTE SIZE: " + byteSize;
+		return "FIELD: " + getType() + ", " + super.getName() + " STARTING BYTE: " + start + " BIT SIZE: " + bitSize + " BYTE SIZE: " + byteSize;
 	}
 
 }
