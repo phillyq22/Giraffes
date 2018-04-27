@@ -9,17 +9,17 @@
    <children>
       <ImageView fx:id="humanReadable" fitHeight="234.0" fitWidth="350.0" layoutX="10.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="file:/C:/Users/Philip/Documents/GUITest/STR/SymbolTableReader/src/application/textexample.PNG" />
+            <Image url="file:textexample.PNG" />
          </image>
       </ImageView>
       <ImageView fitHeight="212.0" fitWidth="370.0" layoutX="365.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" fx:id="xml">
          <image>
-            <Image url="file:/xmlexample.PNG" />
+            <Image url="file:xmlexample.PNG" />
          </image>
       </ImageView>
       <ImageView fx:id="matlab" fitHeight="245.0" fitWidth="382.0" layoutX="171.0" layoutY="241.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="file:/matlabexample.PNG" />
+            <Image url="file:matlabexample.PNG" />
          </image>
       </ImageView>
       <Label layoutX="89.0" layoutY="223.0" text="Human Readable Format" />

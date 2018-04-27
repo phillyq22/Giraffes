@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Selected_Structures xmlns="XML_Format">
+    <struct name="_IO_FILE">
+        <_flags Bit_Size="32" Byte_Size="4" Starting_Byte="0" type="int"/>
+        <_IO_read_ptr Bit_Size="64" Byte_Size="8" Starting_Byte="8" type="char *"/>
+        <_IO_read_end Bit_Size="64" Byte_Size="8" Starting_Byte="16" type="char *"/>
+        <_IO_read_base Bit_Size="64" Byte_Size="8" Starting_Byte="24" type="char *"/>
+        <_IO_write_base Bit_Size="64" Byte_Size="8" Starting_Byte="32" type="char *"/>
+        <_IO_write_ptr Bit_Size="64" Byte_Size="8" Starting_Byte="40" type="char *"/>
+        <_IO_write_end Bit_Size="64" Byte_Size="8" Starting_Byte="48" type="char *"/>
+        <_IO_buf_base Bit_Size="64" Byte_Size="8" Starting_Byte="56" type="char *"/>
+        <_IO_buf_end Bit_Size="64" Byte_Size="8" Starting_Byte="64" type="char *"/>
+        <_IO_save_base Bit_Size="64" Byte_Size="8" Starting_Byte="72" type="char *"/>
+        <_IO_backup_base Bit_Size="64" Byte_Size="8" Starting_Byte="80" type="char *"/>
+        <_IO_save_end Bit_Size="64" Byte_Size="8" Starting_Byte="88" type="char *"/>
+        <_markers Bit_Size="64" Byte_Size="8" Starting_Byte="96" type="class _IO_marker *"/>
+        <_chain Bit_Size="64" Byte_Size="8" Starting_Byte="104" type="class _IO_FILE *"/>
+        <_fileno Bit_Size="32" Byte_Size="4" Starting_Byte="112" type="int"/>
+        <_flags2 Bit_Size="32" Byte_Size="4" Starting_Byte="116" type="int"/>
+        <_old_offset Bit_Size="64" Byte_Size="8" Starting_Byte="120" type="__off_t"/>
+        <_cur_column Bit_Size="16" Byte_Size="2" Starting_Byte="128" type="short unsigned int"/>
+        <_vtable_offset Bit_Size="8" Byte_Size="1" Starting_Byte="130" type="signed char"/>
+        <_shortbuf-1- Bit_Size="8" Byte_Size="1" Starting_Byte="131" type="char"/>
+        <_lock Bit_Size="64" Byte_Size="8" Starting_Byte="136" type="_IO_lock_t *"/>
+        <_offset Bit_Size="64" Byte_Size="8" Starting_Byte="144" type="__off64_t"/>
+        <__pad1 Bit_Size="64" Byte_Size="8" Starting_Byte="152" type="void *"/>
+        <__pad2 Bit_Size="64" Byte_Size="8" Starting_Byte="160" type="void *"/>
+        <__pad3 Bit_Size="64" Byte_Size="8" Starting_Byte="168" type="void *"/>
+        <__pad4 Bit_Size="64" Byte_Size="8" Starting_Byte="176" type="void *"/>
+        <__pad5 Bit_Size="64" Byte_Size="8" Starting_Byte="184" type="size_t"/>
+        <_mode Bit_Size="32" Byte_Size="4" Starting_Byte="192" type="int"/>
+        <_unused2-20- Bit_Size="160" Byte_Size="20" Starting_Byte="196" type="char"/>
+    </struct>
+</Selected_Structures>
