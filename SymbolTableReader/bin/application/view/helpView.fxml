@@ -3,9 +3,13 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="170.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label alignment="TOP_LEFT" layoutX="31.0" layoutY="31.0" prefHeight="341.0" prefWidth="542.0" text="Thank you for using Symbol Table Reader! " textAlignment="CENTER" />
+      <Label alignment="TOP_LEFT" layoutX="187.0" layoutY="14.0" prefHeight="17.0" prefWidth="226.0" text="Thank you for using Symbol Table Reader!" wrapText="true" />
+      <Label layoutX="14.0" layoutY="31.0" text="Import By Filename: Enter the name of a file that exists in your current working directory." />
+      <Label layoutX="14.0" layoutY="55.0" prefHeight="36.0" prefWidth="583.0" text="Select Files: Use a file browser to find the file to process. Take notice of the ability to filter which files you're searching for! Bring in files from previous sessions by importing .ser files." wrapText="true" />
+      <Label layoutX="14.0" layoutY="98.0" text="Save Progress: Save your Symbol Table Reader session." />
+      <Label layoutX="14.0" layoutY="122.0" text="Remove File: Removes all selected files from your current Symbol Table Session." />
+      <Label layoutX="14.0" layoutY="146.0" text="Process: Processes the selected file. Remember, only 1 file at a time!" />
    </children>
 </AnchorPane>

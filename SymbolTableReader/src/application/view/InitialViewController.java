@@ -128,7 +128,7 @@ public class InitialViewController implements Serializable, Initializable
         if(file.exists() && !fileName.equals("") && file.isFile())
         {
             ObservableList<LoadedFile> list = loadedFilesView.getItems();
-            if(!fileExist(file) && (Pattern.matches(".*[.o]", fileName) || Pattern.matches(".*[.a]", fileName) || !Pattern.matches(".*[.]", fileName)))
+            if(!fileExist(file) && (Pattern.matches(".*[.ser]", fileName) || Pattern.matches(".*[.a]", fileName) || Pattern.matches("^([^.]+)$", fileName)))
             {
                 fileError.setText("");
                 CheckBox checkBox = new CheckBox(fileName);
@@ -191,9 +191,9 @@ public class InitialViewController implements Serializable, Initializable
 		String pahole = new String("cd " + filePath + " ; pahole tester.a > " + fullFilePath);
 	
 		String exeLinked = new String("cd " + filePath + " ; /usr/bin/g++ tester tester.a -lpthread");
-		
+		String lfName = lf.getFile().getName();
 			
-	    if (Pattern.matches(".*[.a]", lf.getFile().getName()))
+	    if (Pattern.matches(".*[.a]", lfName))
 	    {
 	        //call runtime for filename with flags to process .a into .exe
 	        //then process executable
@@ -209,7 +209,7 @@ public class InitialViewController implements Serializable, Initializable
 	        }
 	       
 	    }
-	    else if (!Pattern.matches(".*[.]", lf.getFile().getName()))
+	    else if (!Pattern.matches("^([^.]+)$", lfName))
 	    {
 	        //already .exe, process executable
 	        try {
@@ -287,8 +287,8 @@ public class InitialViewController implements Serializable, Initializable
 	{
 		FileChooser fc = new FileChooser();
 		
-		ExtensionFilter ef1 = new ExtensionFilter("Archive file", "*.a");
-		ExtensionFilter ef2 = new ExtensionFilter("Executable file", "*.");
+		ExtensionFilter ef1 = new ExtensionFilter("All files", "*");
+		ExtensionFilter ef2 = new ExtensionFilter("Archive file", "*.a");
 		ExtensionFilter ef3 = new ExtensionFilter("Symbol Table Reader File", "*.ser");
 
 		Path currentRelativePath = Paths.get("");//getting the cwd path as an object
@@ -299,16 +299,16 @@ public class InitialViewController implements Serializable, Initializable
 		fc.getExtensionFilters().add(ef2);
 		fc.getExtensionFilters().add(ef3);
 		File file = fc.showOpenDialog(null);
-		
 		if(file != null)
 		{
 			if(!fileExist(file))
 			{
+				String fileName = file.getName();
 				if(Pattern.matches(".*[.ser]", file.getName()))
 				{
 					readEmIn(file);
 				}
-				else
+				else if((Pattern.matches(".*[.a]", fileName) || Pattern.matches("^([^.]+)$", fileName)))
 				{
 					fileError.setText("");
 					ObservableList<LoadedFile> list = loadedFilesView.getItems();
@@ -318,6 +318,10 @@ public class InitialViewController implements Serializable, Initializable
 					loadedFiles.setCellValueFactory(new PropertyValueFactory<LoadedFile, CheckBox>("checkBox"));
 					list.add(lf);
 					loadedFilesView.setItems(list);
+				}
+				else
+				{
+					fileError.setText("Invalid file type.");
 				}
 			}
 			else
@@ -356,12 +360,7 @@ public class InitialViewController implements Serializable, Initializable
         return found;
     }
    
-   
-    public File getFile()
-    {
-        return loadedFilesView.getItems().get(0).getFile();
-    }
-
+    
 	public void write(ObservableList<LoadedFile> loadedFiles, File file)
     {
     	try 

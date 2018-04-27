@@ -135,7 +135,7 @@ public class Parsing {
 			if(isUnion)
 				n = 2;
 			
-			name = line[i];
+			name = line[i].substring(0, line[i].length()-1);
 			byteSize = Integer.parseInt(line[i + n]);
 			bitSize = byteSize * 8;
 			if(isUnion)

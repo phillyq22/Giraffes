@@ -1,0 +1,48 @@
+class data_examples {
+	struct repped {
+		int                        byte:8;               /*     0:24  4 */
+		int                        bit0:1;               /*     0:23  4 */
+		int                        bit1:1;               /*     0:22  4 */
+		int                        bit2:1;               /*     0:21  4 */
+		int                        bit3:1;               /*     0:20  4 */
+		int                        twobits1:2;           /*     0:18  4 */
+		int                        twobits2:2;           /*     0:16  4 */
+
+		/* size: 4, cachelines: 1, members: 7 */
+		/* bit_padding: 16 bits */
+		/* last cacheline: 4 bytes */
+	};
+
+	struct wrecked {
+		int                        byte;                 /*     0     4 */
+		int                        bit0;                 /*     4     4 */
+		int                        bit1;                 /*     8     4 */
+		int                        bit2;                 /*    12     4 */
+		int                        bit3;                 /*    16     4 */
+		int                        twobits1;             /*    20     4 */
+		int                        twobits2;             /*    24     4 */
+
+		/* size: 28, cachelines: 1, members: 7 */
+		/* last cacheline: 28 bytes */
+	};
+
+	union Union_Data {
+		int                        i;                    /*           4 */
+		float                      f;                    /*           4 */
+		char                       str[20];              /*          20 */
+	};
+
+	int ()(void) * *           _vptr.data_examples;  /*     0     8 */
+	struct repped              data_set1;            /*     8     4 */
+	struct wrecked             data_set3;            /*    12    28 */
+	union Union_Data           data_set2;            /*    40    20 */
+	void data_examples(class data_examples *, const class data_examples  &);
+
+	void data_examples(class data_examples *);
+
+	virtual void ~data_examples(class data_examples *, int);
+
+
+	/* size: 64, cachelines: 1, members: 4 */
+	/* padding: 4 */
+};

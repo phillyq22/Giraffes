@@ -14,6 +14,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TreeView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -45,6 +47,9 @@ public class ProcessViewController implements Initializable
 	@FXML private Button helpButton;
 	@FXML private Label helpError;
 	@FXML private Label exportError;
+	@FXML private ImageView humanReadable = new ImageView();
+	@FXML private ImageView matlab = new ImageView();
+	@FXML private ImageView xml = new ImageView();
 
 
 	private static ArrayList<Structure> structs = new ArrayList<Structure>();
@@ -350,6 +355,15 @@ public class ProcessViewController implements Initializable
 	{
 		try 
 		{
+			Path currentRelativePath = Paths.get("");//getting the cwd path as an object
+			String cwd = currentRelativePath.toAbsolutePath().toString();//current working directory as a string
+			System.out.print(cwd);
+			Image hr = new Image("file:" + File.separator + cwd + File.separator + "textexample.PNG");
+			Image ml =  new Image("file:" + File.separator + cwd + File.separator + "matlabexample.PNG");
+			Image x = new Image("file:" + File.separator + cwd + File.separator + "xmlexample.PNG");
+			humanReadable.setImage(hr);
+			matlab.setImage(ml);
+			xml.setImage(x);
 			Main.buildExportStage();
 			Main.showExportView();
 		} 
@@ -409,4 +423,5 @@ public class ProcessViewController implements Initializable
 			helpError.setText("Sorry, we are unable to provide help information at this time.");
 		}
 	}
+	
 }

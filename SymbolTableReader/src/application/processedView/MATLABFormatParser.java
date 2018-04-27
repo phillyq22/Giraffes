@@ -3,9 +3,10 @@ package application.processedView;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-
-import com.jmatio.io.*;
-import com.jmatio.types.*;
+import com.jmatio.io.MatFileWriter;
+import com.jmatio.types.MLArray;
+import com.jmatio.types.MLChar;
+import com.jmatio.types.MLStructure;
 
 import javafx.collections.ObservableList;
 import javafx.scene.control.TreeItem;
@@ -58,31 +59,43 @@ public class MATLABFormatParser {
 	}
 	
 	public static MLArray makeStruct(Structure struct) {
-		MLStructure mlStruct = new MLStructure(struct.getName(), new int[] {1,1});
-		mlStruct.setField("Type", new MLChar(null,struct.getType()));
+		MLStructure mlStruct = new MLStructure(validateName(struct.getName()), new int[] {1,1});
+		mlStruct.setField("Type", new MLChar(null,validateMAT(struct.getType())));
 		for(Structure s: struct.getChildren()) {
 			MLStructure temp = (MLStructure) makeStruct(s);
-			mlStruct.setField(s.getName(), temp);
+			mlStruct.setField(validateName(s.getName()), temp);
 		}
 		for (Field f: struct.getFields()) {
 			MLStructure fieldStruct = (MLStructure) makeField(f);
-			mlStruct.setField(f.getName(), fieldStruct);
+			mlStruct.setField(validateName(f.getName()), fieldStruct);
 		}
 		return mlStruct;
 	}
 	
 	public static MLArray makeField(Field field) {
-		MLStructure mlField = new MLStructure(field.getName(),new int[] {1,1});
-		mlField.setField("Type", new MLChar(null,field.getType()));
-		mlField.setField("StartingWord", new MLChar(null,field.getStart()));
-		mlField.setField("ByteSize", new MLChar(null,Integer.toString(field.getByteSize())));
-		mlField.setField("BitSize", new MLChar(null,Integer.toString(field.getBitSize())));
+		MLStructure mlField = new MLStructure(validateName(field.getName()),new int[] {1,1});
+		mlField.setField("Type", new MLChar(null,validateMAT(field.getType())));
+		mlField.setField("StartingWord", new MLChar(null,validateMAT(field.getStart())));
+		mlField.setField("ByteSize", new MLChar(null,validateMAT(Integer.toString(field.getByteSize()))));
+		mlField.setField("BitSize", new MLChar(null,validateMAT(Integer.toString(field.getBitSize()))));
 		return mlField;
 	}
-	/*
-	 * Helper method to parse a structure into a file.
-	 *  
-	 * @param	struct	 The structure to parse.
-	 * @param	indent	The starting indentation level.
-	 */
+
+    private static String validateMAT(String input) {
+    	if(input == null ||input.isEmpty()) {
+    		input = " ";
+    	}
+    	return input;
+    }
+    private static String validateName(String input) {
+    	input = input.replaceAll(" ", "_");
+    	input = input.replaceAll("\\*", "ptr");
+    	input = input.replaceAll("[^A-Za-z0-9]", "");
+    	if(input.isEmpty()) {
+    		input = "empty_name";
+    	}
+
+    	return input;
+    }
+    
 }

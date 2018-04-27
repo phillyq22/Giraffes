@@ -27,6 +27,7 @@ public class XMLFormatParser {
 	 * @param	filePath	The name of the filePath.
 	 * 
 	 */
+	
 	public static boolean parseStructure(ArrayList<Structure> structs, String filePath) throws IOException{
 		File file = new File(filePath);
 		boolean notFound = false;
@@ -67,7 +68,7 @@ public class XMLFormatParser {
         try {
             icBuilder = icFactory.newDocumentBuilder();
             Document doc = icBuilder.newDocument();
-            Element mainRootElement = doc.createElementNS("TestFile", "XMLFormat");
+            Element mainRootElement = doc.createElementNS("XML_Format", "All_Structures");
             doc.appendChild(mainRootElement);
            for(Structure s:structs) {
             	mainRootElement.appendChild(getStructure(doc,s));
@@ -97,7 +98,7 @@ public class XMLFormatParser {
         try {
             icBuilder = icFactory.newDocumentBuilder();
             Document doc = icBuilder.newDocument();
-            Element mainRootElement = doc.createElementNS("SelectedStructures", "XMLFormat");
+            Element mainRootElement = doc.createElementNS("XML_Format", "Selected_Structures");
             doc.appendChild(mainRootElement);
             for(TreeItem<Structure> item : selected) {
             	Structure struct = item.getValue();
@@ -109,9 +110,7 @@ public class XMLFormatParser {
             DOMSource source = new DOMSource(doc);
             StreamResult console = new StreamResult(f);
             transformer.transform(source, console);
- 
-            System.out.println("\nXML DOM Created Successfully..");
-        }catch (Exception e) {
+         }catch (Exception e) {
         	e.printStackTrace();
         }
     }
@@ -122,7 +121,7 @@ public class XMLFormatParser {
      * @param struct The structure to be made into a node
      */
     private static Node getStructure(Document doc,Structure struct) {
-    	Element structElement = doc.createElement(struct.getType());
+    	Element structElement = doc.createElement(validateXML(struct.getType()));
     	structElement.setAttribute("name", struct.getName());
     	for(Structure s:struct.getChildren()) {
     		structElement.appendChild(getStructure(doc,s));
@@ -139,13 +138,25 @@ public class XMLFormatParser {
      * @param struct The field to be made into a node
      */
     private static Node getFieldElement(Document doc, Field field) {
-    	Element fieldElement = doc.createElement(field.getType());
-    	fieldElement.setAttribute("name", field.getName());
+    	Element fieldElement = doc.createElement(validateXML(field.getName()));
+
+    	fieldElement.setAttribute("type", field.getType());
     	fieldElement.setAttribute("Starting_Byte", field.getStart());
     	fieldElement.setAttribute("Byte_Size", Integer.toString(field.getByteSize()));
     	fieldElement.setAttribute("Bit_Size", Integer.toString(field.getBitSize()));
     	return fieldElement;
     }
 	
+    private static String validateXML(String input) {
+    	input = input.replace(" ", "_");
+    	input = input.replaceAll("\\*", "ptr");
+    	input = input.replaceAll("\\p{Cntrl}|;", "");
+    	input = input.replaceAll("\\[|\\]", "-");
+    	
+    	if(input.isEmpty()) {
+    		input = "_";
+    	}
+    	return input;
+    }
+    
 }
-

@@ -4,7 +4,7 @@ package application.processedView;
  * @author Zac Capell 
  * @version 2/27/18
  *
- * Contains the variable type, name, starting word, and byte within that word of a single variable in a structure
+ * Contains the variable type, name, starting word, and byte within that word of a single variable in a structure.
  */
 
 public class Field extends Structure{

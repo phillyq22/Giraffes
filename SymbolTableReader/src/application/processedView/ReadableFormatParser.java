@@ -50,34 +50,12 @@ public class ReadableFormatParser {
 	 * @param	filePath	The name of the filePath.
 	 * 
 	 */
-	public static boolean parseSelected(ObservableList<TreeItem<Structure>> observableList, String filePath) throws IOException{
-		File file = new File(filePath);
-		boolean notFound = false;
-		if(!file.exists())
-		{
-			notFound = true;
-			BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-			for(TreeItem<Structure> item : observableList)
-			{
-				TreeItem<Structure> parent = item;
-				int indentCount = -1;
-				do{
-					indentCount++;
-					parent = parent.getParent();
-				}while(parent.getParent()!=null);
-				String indentString = "";
-				for(int i =0; i<indentCount; i++){
-					indentString = indentString + INDENT_STRING;
-				}
-				writer.write(indentString + item.getValue().toString() + "\r\n");
-				for (TreeItem<Structure> child: item.getChildren()){
-					writer.write(indentString + INDENT_STRING + child.getValue().toString() + "\r\n");
-				}
-				writer.write("\r\n");
-			}
-			writer.close();
+	public static boolean parseSelected(ObservableList<TreeItem<Structure>> selected, String filePath) throws IOException{
+		ArrayList<Structure> structs = new ArrayList<Structure>();
+		for(TreeItem<Structure> item : selected) {
+			structs.add(item.getValue());
 		}
-		return notFound;
+		return parseStructure(structs,0, filePath);
 	}
 	
 	/*
