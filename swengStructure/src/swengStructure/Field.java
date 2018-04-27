@@ -32,6 +32,19 @@ public class Field extends Structure{
 	}
 	
 	
+	
+	public int getBitSize() {
+		return bitSize;
+	}
+
+	public int getByteSize() {
+		return byteSize;
+	}
+
+	public String getStart() {
+		return start;
+	}
+
 	public void setType(String type)
 	{
 		super.setType(type);
