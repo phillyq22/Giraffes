@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<All_Structures xmlns="XML_Format">
+    <struct name="_IO_FILE">
+        <_flags Bit_Size="32" Byte_Size="4" Starting_Byte="0" type="int"/>
+        <_IO_read_ptr Bit_Size="64" Byte_Size="8" Starting_Byte="8" type="char *"/>
+        <_IO_read_end Bit_Size="64" Byte_Size="8" Starting_Byte="16" type="char *"/>
+        <_IO_read_base Bit_Size="64" Byte_Size="8" Starting_Byte="24" type="char *"/>
+        <_IO_write_base Bit_Size="64" Byte_Size="8" Starting_Byte="32" type="char *"/>
+        <_IO_write_ptr Bit_Size="64" Byte_Size="8" Starting_Byte="40" type="char *"/>
+        <_IO_write_end Bit_Size="64" Byte_Size="8" Starting_Byte="48" type="char *"/>
+        <_IO_buf_base Bit_Size="64" Byte_Size="8" Starting_Byte="56" type="char *"/>
+        <_IO_buf_end Bit_Size="64" Byte_Size="8" Starting_Byte="64" type="char *"/>
+        <_IO_save_base Bit_Size="64" Byte_Size="8" Starting_Byte="72" type="char *"/>
+        <_IO_backup_base Bit_Size="64" Byte_Size="8" Starting_Byte="80" type="char *"/>
+        <_IO_save_end Bit_Size="64" Byte_Size="8" Starting_Byte="88" type="char *"/>
+        <_markers Bit_Size="64" Byte_Size="8" Starting_Byte="96" type="class _IO_marker *"/>
+        <_chain Bit_Size="64" Byte_Size="8" Starting_Byte="104" type="class _IO_FILE *"/>
+        <_fileno Bit_Size="32" Byte_Size="4" Starting_Byte="112" type="int"/>
+        <_flags2 Bit_Size="32" Byte_Size="4" Starting_Byte="116" type="int"/>
+        <_old_offset Bit_Size="64" Byte_Size="8" Starting_Byte="120" type="__off_t"/>
+        <_cur_column Bit_Size="16" Byte_Size="2" Starting_Byte="128" type="short unsigned int"/>
+        <_vtable_offset Bit_Size="8" Byte_Size="1" Starting_Byte="130" type="signed char"/>
+        <_shortbuf-1- Bit_Size="8" Byte_Size="1" Starting_Byte="131" type="char"/>
+        <_lock Bit_Size="64" Byte_Size="8" Starting_Byte="136" type="_IO_lock_t *"/>
+        <_offset Bit_Size="64" Byte_Size="8" Starting_Byte="144" type="__off64_t"/>
+        <__pad1 Bit_Size="64" Byte_Size="8" Starting_Byte="152" type="void *"/>
+        <__pad2 Bit_Size="64" Byte_Size="8" Starting_Byte="160" type="void *"/>
+        <__pad3 Bit_Size="64" Byte_Size="8" Starting_Byte="168" type="void *"/>
+        <__pad4 Bit_Size="64" Byte_Size="8" Starting_Byte="176" type="void *"/>
+        <__pad5 Bit_Size="64" Byte_Size="8" Starting_Byte="184" type="size_t"/>
+        <_mode Bit_Size="32" Byte_Size="4" Starting_Byte="192" type="int"/>
+        <_unused2-20- Bit_Size="160" Byte_Size="20" Starting_Byte="196" type="char"/>
+    </struct>
+    <struct name="typedef">
+        <gp_offset Bit_Size="32" Byte_Size="4" Starting_Byte="0" type="unsigned int"/>
+        <fp_offset Bit_Size="32" Byte_Size="4" Starting_Byte="4" type="unsigned int"/>
+        <overflow_arg_area Bit_Size="64" Byte_Size="8" Starting_Byte="8" type="void *"/>
+        <reg_save_area Bit_Size="64" Byte_Size="8" Starting_Byte="16" type="void *"/>
+    </struct>
+    <struct name="tm">
+        <tm_sec Bit_Size="32" Byte_Size="4" Starting_Byte="0" type="int"/>
+        <tm_min Bit_Size="32" Byte_Size="4" Starting_Byte="4" type="int"/>
+        <tm_hour Bit_Size="32" Byte_Size="4" Starting_Byte="8" type="int"/>
+        <tm_mday Bit_Size="32" Byte_Size="4" Starting_Byte="12" type="int"/>
+        <tm_mon Bit_Size="32" Byte_Size="4" Starting_Byte="16" type="int"/>
+        <tm_year Bit_Size="32" Byte_Size="4" Starting_Byte="20" type="int"/>
+        <tm_wday Bit_Size="32" Byte_Size="4" Starting_Byte="24" type="int"/>
+        <tm_yday Bit_Size="32" Byte_Size="4" Starting_Byte="28" type="int"/>
+        <tm_isdst Bit_Size="32" Byte_Size="4" Starting_Byte="32" type="int"/>
+        <tm_gmtoff Bit_Size="64" Byte_Size="8" Starting_Byte="40" type="long int"/>
+        <tm_zone Bit_Size="64" Byte_Size="8" Starting_Byte="48" type="const char *"/>
+    </struct>
+    <struct name="lconv">
+        <decimal_point Bit_Size="64" Byte_Size="8" Starting_Byte="0" type="char *"/>
+        <thousands_sep Bit_Size="64" Byte_Size="8" Starting_Byte="8" type="char *"/>
+        <grouping Bit_Size="64" Byte_Size="8" Starting_Byte="16" type="char *"/>
+        <int_curr_symbol Bit_Size="64" Byte_Size="8" Starting_Byte="24" type="char *"/>
+        <currency_symbol Bit_Size="64" Byte_Size="8" Starting_Byte="32" type="char *"/>
+        <mon_decimal_point Bit_Size="64" Byte_Size="8" Starting_Byte="40" type="char *"/>
+        <mon_thousands_sep Bit_Size="64" Byte_Size="8" Starting_Byte="48" type="char *"/>
+        <mon_grouping Bit_Size="64" Byte_Size="8" Starting_Byte="56" type="char *"/>
+        <positive_sign Bit_Size="64" Byte_Size="8" Starting_Byte="64" type="char *"/>
+        <negative_sign Bit_Size="64" Byte_Size="8" Starting_Byte="72" type="char *"/>
+        <int_frac_digits Bit_Size="8" Byte_Size="1" Starting_Byte="80" type="char"/>
+        <frac_digits Bit_Size="8" Byte_Size="1" Starting_Byte="81" type="char"/>
+        <p_cs_precedes Bit_Size="8" Byte_Size="1" Starting_Byte="82" type="char"/>
+        <p_sep_by_space Bit_Size="8" Byte_Size="1" Starting_Byte="83" type="char"/>
+        <n_cs_precedes Bit_Size="8" Byte_Size="1" Starting_Byte="84" type="char"/>
+        <n_sep_by_space Bit_Size="8" Byte_Size="1" Starting_Byte="85" type="char"/>
+        <p_sign_posn Bit_Size="8" Byte_Size="1" Starting_Byte="86" type="char"/>
+        <n_sign_posn Bit_Size="8" Byte_Size="1" Starting_Byte="87" type="char"/>
+        <int_p_cs_precedes Bit_Size="8" Byte_Size="1" Starting_Byte="88" type="char"/>
+        <int_p_sep_by_space Bit_Size="8" Byte_Size="1" Starting_Byte="89" type="char"/>
+        <int_n_cs_precedes Bit_Size="8" Byte_Size="1" Starting_Byte="90" type="char"/>
+        <int_n_sep_by_space Bit_Size="8" Byte_Size="1" Starting_Byte="91" type="char"/>
+        <int_p_sign_posn Bit_Size="8" Byte_Size="1" Starting_Byte="92" type="char"/>
+        <int_n_sign_posn Bit_Size="8" Byte_Size="1" Starting_Byte="93" type="char"/>
+    </struct>
+    <struct name="_IO_marker">
+        <_next Bit_Size="64" Byte_Size="8" Starting_Byte="0" type="class _IO_marker *"/>
+        <_sbuf Bit_Size="64" Byte_Size="8" Starting_Byte="8" type="class _IO_FILE *"/>
+        <_pos Bit_Size="32" Byte_Size="4" Starting_Byte="16" type="int"/>
+    </struct>
+    <class name="maxiOsc">
+        <frequency Bit_Size="64" Byte_Size="8" Starting_Byte="0" type="double"/>
+        <phase Bit_Size="64" Byte_Size="8" Starting_Byte="8" type="double"/>
+        <startphase Bit_Size="64" Byte_Size="8" Starting_Byte="16" type="double"/>
+        <endphase Bit_Size="64" Byte_Size="8" Starting_Byte="24" type="double"/>
+        <output Bit_Size="64" Byte_Size="8" Starting_Byte="32" type="double"/>
+        <tri Bit_Size="64" Byte_Size="8" Starting_Byte="40" type="double"/>
+    </class>
+    <struct name="__pthread_internal_list">
+        <__prev Bit_Size="64" Byte_Size="8" Starting_Byte="0" type="class __pthread_internal_list *"/>
+        <__next Bit_Size="64" Byte_Size="8" Starting_Byte="8" type="class __pthread_internal_list *"/>
+    </struct>
+    <class name="maxiSettings">
+        <sampleRate Bit_Size="32" Byte_Size="4" Starting_Byte="0" type="int"/>
+        <channels Bit_Size="32" Byte_Size="4" Starting_Byte="0" type="int"/>
+        <bufferSize Bit_Size="32" Byte_Size="4" Starting_Byte="0" type="int"/>
+    </class>
+    <class name="maxiEnvelope">
+        <period Bit_Size="64" Byte_Size="8" Starting_Byte="0" type="double"/>
+        <output Bit_Size="64" Byte_Size="8" Starting_Byte="8" type="double"/>
+        <phase Bit_Size="64" Byte_Size="8" Starting_Byte="16" type="double"/>
+        <startVal Bit_Size="64" Byte_Size="8" Starting_Byte="24" type="double"/>
+        <endVal Bit_Size="64" Byte_Size="8" Starting_Byte="32" type="double"/>
+        <currentval Bit_Size="64" Byte_Size="8" Starting_Byte="40" type="double"/>
+        <nextval Bit_Size="64" Byte_Size="8" Starting_Byte="48" type="double"/>
+        <noteOn Bit_Size="8" Byte_Size="1" Starting_Byte="56" type="bool"/>
+        <releaseMode Bit_Size="8" Byte_Size="1" Starting_Byte="57" type="bool"/>
+        <decayMode Bit_Size="8" Byte_Size="1" Starting_Byte="58" type="bool"/>
+        <sustainMode Bit_Size="8" Byte_Size="1" Starting_Byte="59" type="bool"/>
+        <attackMode Bit_Size="8" Byte_Size="1" Starting_Byte="60" type="bool"/>
+        <isPlaying Bit_Size="32" Byte_Size="4" Starting_Byte="64" type="int"/>
+        <trig Bit_Size="32" Byte_Size="4" Starting_Byte="68" type="int"/>
+        <valindex Bit_Size="32" Byte_Size="4" Starting_Byte="72" type="int"/>
+        <amplitude Bit_Size="64" Byte_Size="8" Starting_Byte="80" type="double"/>
+    </class>
+    <class name="maxiDelayline">
+        <frequency Bit_Size="64" Byte_Size="8" Starting_Byte="0" type="double"/>
+        <phase Bit_Size="32" Byte_Size="4" Starting_Byte="8" type="int"/>
+        <startphase Bit_Size="64" Byte_Size="8" Starting_Byte="16" type="double"/>
+        <endphase Bit_Size="64" Byte_Size="8" Starting_Byte="24" type="double"/>
+        <output Bit_Size="64" Byte_Size="8" Starting_Byte="32" type="double"/>
+        <memory-88200- Bit_Size="5644800" Byte_Size="705600" Starting_Byte="40" type="double"/>
+    </class>
+    <class name="maxiFractionalDelay">
+        <delaySize Bit_Size="32" Byte_Size="4" Starting_Byte="0" type="intconst"/>
+        <memory-88200- Bit_Size="5644800" Byte_Size="705600" Starting_Byte="0" type="double"/>
+        <writePointer Bit_Size="32" Byte_Size="4" Starting_Byte="0" type="int"/>
+        <readPointer Bit_Size="32" Byte_Size="4" Starting_Byte="0" type="int"/>
+    </class>
+    <class name="maxiFilter">
+        <gain Bit_Size="64" Byte_Size="8" Starting_Byte="0" type="double"/>
+        <input Bit_Size="64" Byte_Size="8" Starting_Byte="8" type="double"/>
+        <output Bit_Size="64" Byte_Size="8" Starting_Byte="16" type="double"/>
+        <inputs-10- Bit_Size="640" Byte_Size="80" Starting_Byte="24" type="double"/>
+        <outputs-10- Bit_Size="640" Byte_Size="80" Starting_Byte="104" type="double"/>
+        <cutoff1 Bit_Size="64" Byte_Size="8" Starting_Byte="184" type="double"/>
+        <x Bit_Size="64" Byte_Size="8" Starting_Byte="192" type="double"/>
+        <y Bit_Size="64" Byte_Size="8" Starting_Byte="200" type="double"/>
+        <z Bit_Size="64" Byte_Size="8" Starting_Byte="208" type="double"/>
+        <c Bit_Size="64" Byte_Size="8" Starting_Byte="216" type="double"/>
+        <cutoff Bit_Size="64" Byte_Size="8" Starting_Byte="224" type="double"/>
+        <resonance Bit_Size="64" Byte_Size="8" Starting_Byte="232" type="double"/>
+    </class>
+    <class name="maxiMix">
+        <input Bit_Size="64" Byte_Size="8" Starting_Byte="0" type="double"/>
+        <two-2- Bit_Size="128" Byte_Size="16" Starting_Byte="8" type="double"/>
+        <four-4- Bit_Size="256" Byte_Size="32" Starting_Byte="24" type="double"/>
+        <eight-8- Bit_Size="512" Byte_Size="64" Starting_Byte="56" type="double"/>
+        <x Bit_Size="64" Byte_Size="8" Starting_Byte="120" type="double"/>
+        <y Bit_Size="64" Byte_Size="8" Starting_Byte="128" type="double"/>
+        <z Bit_Size="64" Byte_Size="8" Starting_Byte="136" type="double"/>
+    </class>
+    <class name="maxiLagExp&lt;double&gt;">
+        <alpha Bit_Size="64" Byte_Size="8" Starting_Byte="0" type="double"/>
+        <alphaReciprocal Bit_Size="64" Byte_Size="8" Starting_Byte="8" type="double"/>
+        <val Bit_Size="64" Byte_Size="8" Starting_Byte="16" type="double"/>
+    </class>
+    <class name="maxiSample">
+        <myPath Bit_Size="64" Byte_Size="8" Starting_Byte="0" type="string"/>
+        <myChunkSize Bit_Size="32" Byte_Size="4" Starting_Byte="8" type="int"/>
+        <mySubChunk1Size Bit_Size="32" Byte_Size="4" Starting_Byte="12" type="int"/>
+        <readChannel Bit_Size="32" Byte_Size="4" Starting_Byte="16" type="int"/>
+        <myFormat Bit_Size="16" Byte_Size="2" Starting_Byte="20" type="short int"/>
+        <myByteRate Bit_Size="32" Byte_Size="4" Starting_Byte="24" type="int"/>
+        <myBlockAlign Bit_Size="16" Byte_Size="2" Starting_Byte="28" type="short int"/>
+        <position Bit_Size="64" Byte_Size="8" Starting_Byte="32" type="double"/>
+        <recordPosition Bit_Size="64" Byte_Size="8" Starting_Byte="40" type="double"/>
+        <speed Bit_Size="64" Byte_Size="8" Starting_Byte="48" type="double"/>
+        <output Bit_Size="64" Byte_Size="8" Starting_Byte="56" type="double"/>
+        <loopRecordLag Bit_Size="192" Byte_Size="24" Starting_Byte="64" type="class maxiLagExp&lt;double&gt;"/>
+        <myDataSize Bit_Size="32" Byte_Size="4" Starting_Byte="88" type="int"/>
+        <myChannels Bit_Size="16" Byte_Size="2" Starting_Byte="92" type="short int"/>
+        <mySampleRate Bit_Size="32" Byte_Size="4" Starting_Byte="96" type="int"/>
+        <length Bit_Size="64" Byte_Size="8" Starting_Byte="104" type="long int"/>
+        <myBitsPerSample Bit_Size="16" Byte_Size="2" Starting_Byte="112" type="short int"/>
+        <temp Bit_Size="64" Byte_Size="8" Starting_Byte="120" type="short int *"/>
+    </class>
+    <class name="maxiMap"/>
+    <class name="maxiDyn">
+        <input Bit_Size="64" Byte_Size="8" Starting_Byte="0" type="double"/>
+        <ratio Bit_Size="64" Byte_Size="8" Starting_Byte="8" type="double"/>
+        <currentRatio Bit_Size="64" Byte_Size="8" Starting_Byte="16" type="double"/>
+        <threshold Bit_Size="64" Byte_Size="8" Starting_Byte="24" type="double"/>
+        <output Bit_Size="64" Byte_Size="8" Starting_Byte="32" type="double"/>
+        <attack Bit_Size="64" Byte_Size="8" Starting_Byte="40" type="double"/>
+        <release Bit_Size="64" Byte_Size="8" Starting_Byte="48" type="double"/>
+        <amplitude Bit_Size="64" Byte_Size="8" Starting_Byte="56" type="double"/>
+        <holdtime Bit_Size="64" Byte_Size="8" Starting_Byte="64" type="long int"/>
+        <holdcount Bit_Size="64" Byte_Size="8" Starting_Byte="72" type="long int"/>
+        <attackphase Bit_Size="32" Byte_Size="4" Starting_Byte="80" type="int"/>
+        <holdphase Bit_Size="32" Byte_Size="4" Starting_Byte="84" type="int"/>
+        <releasephase Bit_Size="32" Byte_Size="4" Starting_Byte="88" type="int"/>
+    </class>
+    <class name="maxiEnv">
+        <input Bit_Size="64" Byte_Size="8" Starting_Byte="0" type="double"/>
+        <output Bit_Size="64" Byte_Size="8" Starting_Byte="8" type="double"/>
+        <attack Bit_Size="64" Byte_Size="8" Starting_Byte="16" type="double"/>
+        <decay Bit_Size="64" Byte_Size="8" Starting_Byte="24" type="double"/>
+        <sustain Bit_Size="64" Byte_Size="8" Starting_Byte="32" type="double"/>
+        <release Bit_Size="64" Byte_Size="8" Starting_Byte="40" type="double"/>
+        <amplitude Bit_Size="64" Byte_Size="8" Starting_Byte="48" type="double"/>
+        <trigger Bit_Size="32" Byte_Size="4" Starting_Byte="56" type="int"/>
+        <holdtime Bit_Size="64" Byte_Size="8" Starting_Byte="64" type="long int"/>
+        <holdcount Bit_Size="64" Byte_Size="8" Starting_Byte="72" type="long int"/>
+        <attackphase Bit_Size="32" Byte_Size="4" Starting_Byte="80" type="int"/>
+        <decayphase Bit_Size="32" Byte_Size="4" Starting_Byte="84" type="int"/>
+        <sustainphase Bit_Size="32" Byte_Size="4" Starting_Byte="88" type="int"/>
+        <holdphase Bit_Size="32" Byte_Size="4" Starting_Byte="92" type="int"/>
+        <releasephase Bit_Size="32" Byte_Size="4" Starting_Byte="96" type="int"/>
+    </class>
+    <class name="convert"/>
+    <class name="maxiDistortion"/>
+    <class name="maxiEnvelopeFollowerType&lt;double&gt;">
+        <attack Bit_Size="64" Byte_Size="8" Starting_Byte="0" type="double"/>
+        <release Bit_Size="64" Byte_Size="8" Starting_Byte="8" type="double"/>
+        <env Bit_Size="64" Byte_Size="8" Starting_Byte="16" type="double"/>
+    </class>
+    <class name="maxiSVF">
+        <v0z Bit_Size="64" Byte_Size="8" Starting_Byte="0" type="double"/>
+        <v1 Bit_Size="64" Byte_Size="8" Starting_Byte="8" type="double"/>
+        <v2 Bit_Size="64" Byte_Size="8" Starting_Byte="16" type="double"/>
+        <g Bit_Size="64" Byte_Size="8" Starting_Byte="24" type="double"/>
+        <damping Bit_Size="64" Byte_Size="8" Starting_Byte="32" type="double"/>
+        <k Bit_Size="64" Byte_Size="8" Starting_Byte="40" type="double"/>
+        <ginv Bit_Size="64" Byte_Size="8" Starting_Byte="48" type="double"/>
+        <g1 Bit_Size="64" Byte_Size="8" Starting_Byte="56" type="double"/>
+        <g2 Bit_Size="64" Byte_Size="8" Starting_Byte="64" type="double"/>
+        <g3 Bit_Size="64" Byte_Size="8" Starting_Byte="72" type="double"/>
+        <g4 Bit_Size="64" Byte_Size="8" Starting_Byte="80" type="double"/>
+        <freq Bit_Size="64" Byte_Size="8" Starting_Byte="88" type="double"/>
+        <res Bit_Size="64" Byte_Size="8" Starting_Byte="96" type="double"/>
+    </class>
+    <class name="maxiKick">
+        <pitch Bit_Size="64" Byte_Size="8" Starting_Byte="0" type="double"/>
+        <output Bit_Size="64" Byte_Size="8" Starting_Byte="8" type="double"/>
+        <outputD Bit_Size="64" Byte_Size="8" Starting_Byte="16" type="double"/>
+        <envOut Bit_Size="64" Byte_Size="8" Starting_Byte="24" type="double"/>
+        <useDistortion Bit_Size="8" Byte_Size="1" Starting_Byte="32" type="bool"/>
+        <useLimiter Bit_Size="8" Byte_Size="1" Starting_Byte="33" type="bool"/>
+        <useFilter Bit_Size="8" Byte_Size="1" Starting_Byte="34" type="bool"/>
+        <distortion Bit_Size="64" Byte_Size="8" Starting_Byte="40" type="double"/>
+        <inverse Bit_Size="8" Byte_Size="1" Starting_Byte="48" type="bool"/>
+        <cutoff Bit_Size="64" Byte_Size="8" Starting_Byte="56" type="double"/>
+        <resonance Bit_Size="64" Byte_Size="8" Starting_Byte="64" type="double"/>
+        <gain Bit_Size="64" Byte_Size="8" Starting_Byte="72" type="double"/>
+        <kick Bit_Size="384" Byte_Size="48" Starting_Byte="80" type="class maxiOsc"/>
+        <envelope Bit_Size="832" Byte_Size="104" Starting_Byte="128" type="class maxiEnv"/>
+        <distort Bit_Size="0" Byte_Size="0" Starting_Byte="232" type="class maxiDistortion"/>
+        <filter Bit_Size="1920" Byte_Size="240" Starting_Byte="240" type="class maxiFilter"/>
+    </class>
+    <class name="maxiSnare">
+        <pitch Bit_Size="64" Byte_Size="8" Starting_Byte="0" type="double"/>
+        <output Bit_Size="64" Byte_Size="8" Starting_Byte="8" type="double"/>
+        <outputD Bit_Size="64" Byte_Size="8" Starting_Byte="16" type="double"/>
+        <envOut Bit_Size="64" Byte_Size="8" Starting_Byte="24" type="double"/>
+        <useDistortion Bit_Size="8" Byte_Size="1" Starting_Byte="32" type="bool"/>
+        <useLimiter Bit_Size="8" Byte_Size="1" Starting_Byte="33" type="bool"/>
+        <useFilter Bit_Size="8" Byte_Size="1" Starting_Byte="34" type="bool"/>
+        <distortion Bit_Size="64" Byte_Size="8" Starting_Byte="40" type="double"/>
+        <inverse Bit_Size="8" Byte_Size="1" Starting_Byte="48" type="bool"/>
+        <cutoff Bit_Size="64" Byte_Size="8" Starting_Byte="56" type="double"/>
+        <resonance Bit_Size="64" Byte_Size="8" Starting_Byte="64" type="double"/>
+        <gain Bit_Size="64" Byte_Size="8" Starting_Byte="72" type="double"/>
+        <tone Bit_Size="384" Byte_Size="48" Starting_Byte="80" type="class maxiOsc"/>
+        <noise Bit_Size="384" Byte_Size="48" Starting_Byte="128" type="class maxiOsc"/>
+        <envelope Bit_Size="832" Byte_Size="104" Starting_Byte="176" type="class maxiEnv"/>
+        <distort Bit_Size="0" Byte_Size="0" Starting_Byte="280" type="class maxiDistortion"/>
+        <filter Bit_Size="1920" Byte_Size="240" Starting_Byte="288" type="class maxiFilter"/>
+    </class>
+    <class name="maxiHats">
+        <pitch Bit_Size="64" Byte_Size="8" Starting_Byte="0" type="double"/>
+        <output Bit_Size="64" Byte_Size="8" Starting_Byte="8" type="double"/>
+        <outputD Bit_Size="64" Byte_Size="8" Starting_Byte="16" type="double"/>
+        <envOut Bit_Size="64" Byte_Size="8" Starting_Byte="24" type="double"/>
+        <useDistortion Bit_Size="8" Byte_Size="1" Starting_Byte="32" type="bool"/>
+        <useLimiter Bit_Size="8" Byte_Size="1" Starting_Byte="33" type="bool"/>
+        <useFilter Bit_Size="8" Byte_Size="1" Starting_Byte="34" type="bool"/>
+        <distortion Bit_Size="64" Byte_Size="8" Starting_Byte="40" type="double"/>
+        <inverse Bit_Size="8" Byte_Size="1" Starting_Byte="48" type="bool"/>
+        <cutoff Bit_Size="64" Byte_Size="8" Starting_Byte="56" type="double"/>
+        <resonance Bit_Size="64" Byte_Size="8" Starting_Byte="64" type="double"/>
+        <gain Bit_Size="64" Byte_Size="8" Starting_Byte="72" type="double"/>
+        <tone Bit_Size="384" Byte_Size="48" Starting_Byte="80" type="class maxiOsc"/>
+        <noise Bit_Size="384" Byte_Size="48" Starting_Byte="128" type="class maxiOsc"/>
+        <envelope Bit_Size="832" Byte_Size="104" Starting_Byte="176" type="class maxiEnv"/>
+        <distort Bit_Size="0" Byte_Size="0" Starting_Byte="280" type="class maxiDistortion"/>
+        <filter Bit_Size="832" Byte_Size="104" Starting_Byte="288" type="class maxiSVF"/>
+    </class>
+    <class name="maxiSampler">
+        <position Bit_Size="64" Byte_Size="8" Starting_Byte="0" type="double"/>
+        <pitch-32- Bit_Size="2048" Byte_Size="256" Starting_Byte="8" type="double"/>
+        <originalPitch Bit_Size="32" Byte_Size="4" Starting_Byte="264" type="int"/>
+        <outputs-32- Bit_Size="2048" Byte_Size="256" Starting_Byte="272" type="double"/>
+        <outputD Bit_Size="64" Byte_Size="8" Starting_Byte="528" type="double"/>
+        <envOut-32- Bit_Size="2048" Byte_Size="256" Starting_Byte="536" type="double"/>
+        <envOutGain-32- Bit_Size="2048" Byte_Size="256" Starting_Byte="792" type="double"/>
+        <output Bit_Size="64" Byte_Size="8" Starting_Byte="1048" type="double"/>
+        <useDistortion Bit_Size="8" Byte_Size="1" Starting_Byte="1056" type="bool"/>
+        <useLimiter Bit_Size="8" Byte_Size="1" Starting_Byte="1057" type="bool"/>
+        <useFilter Bit_Size="8" Byte_Size="1" Starting_Byte="1058" type="bool"/>
+        <distortion Bit_Size="64" Byte_Size="8" Starting_Byte="1064" type="double"/>
+        <inverse Bit_Size="8" Byte_Size="1" Starting_Byte="1072" type="bool"/>
+        <cutoff Bit_Size="64" Byte_Size="8" Starting_Byte="1080" type="double"/>
+        <resonance Bit_Size="64" Byte_Size="8" Starting_Byte="1088" type="double"/>
+        <gain Bit_Size="64" Byte_Size="8" Starting_Byte="1096" type="double"/>
+        <voices Bit_Size="32" Byte_Size="4" Starting_Byte="1104" type="int"/>
+        <currentVoice Bit_Size="32" Byte_Size="4" Starting_Byte="1108" type="int"/>
+        <mtof Bit_Size="0" Byte_Size="0" Starting_Byte="1112" type="class convert"/>
+        <LFO1 Bit_Size="384" Byte_Size="48" Starting_Byte="1120" type="class maxiOsc"/>
+        <LFO2 Bit_Size="384" Byte_Size="48" Starting_Byte="1168" type="class maxiOsc"/>
+        <LFO3 Bit_Size="384" Byte_Size="48" Starting_Byte="1216" type="class maxiOsc"/>
+        <LFO4 Bit_Size="384" Byte_Size="48" Starting_Byte="1264" type="class maxiOsc"/>
+        <samples-32- Bit_Size="32768" Byte_Size="4096" Starting_Byte="1312" type="class maxiSample"/>
+        <envelopes-32- Bit_Size="26624" Byte_Size="3328" Starting_Byte="5408" type="class maxiEnv"/>
+        <distort Bit_Size="0" Byte_Size="0" Starting_Byte="8736" type="class maxiDistortion"/>
+        <filters-32- Bit_Size="26624" Byte_Size="3328" Starting_Byte="8744" type="class maxiSVF"/>
+        <sustain Bit_Size="8" Byte_Size="1" Starting_Byte="12072" type="bool"/>
+    </class>
+    <class name="maxiClock">
+        <timer Bit_Size="384" Byte_Size="48" Starting_Byte="0" type="class maxiOsc"/>
+        <currentCount Bit_Size="32" Byte_Size="4" Starting_Byte="48" type="int"/>
+        <lastCount Bit_Size="32" Byte_Size="4" Starting_Byte="52" type="int"/>
+        <playHead Bit_Size="32" Byte_Size="4" Starting_Byte="56" type="int"/>
+        <bps Bit_Size="64" Byte_Size="8" Starting_Byte="64" type="double"/>
+        <bpm Bit_Size="64" Byte_Size="8" Starting_Byte="72" type="double"/>
+        <ticks Bit_Size="32" Byte_Size="4" Starting_Byte="80" type="int"/>
+        <tick Bit_Size="8" Byte_Size="1" Starting_Byte="84" type="bool"/>
+    </class>
+    <class name="maxiRecorder">
+        <threadRunning Bit_Size="8" Byte_Size="1" Starting_Byte="0" type="bool"/>
+        <bufferQueueSize Bit_Size="32" Byte_Size="4" Starting_Byte="4" type="intconst"/>
+        <bufferSize Bit_Size="32" Byte_Size="4" Starting_Byte="8" type="intconst"/>
+        <bufferIndex Bit_Size="64" Byte_Size="8" Starting_Byte="16" type="long int"/>
+        <recordedAmountFrames Bit_Size="64" Byte_Size="8" Starting_Byte="24" type="long int"/>
+        <bufferQueue Bit_Size="640" Byte_Size="80" Starting_Byte="32" type="class queue&lt;double*, std::deque&lt;double*, std::allocator&lt;double*&gt; &gt; &gt;"/>
+        <savedBuffers Bit_Size="640" Byte_Size="80" Starting_Byte="112" type="class queue&lt;double*, std::deque&lt;double*, std::allocator&lt;double*&gt; &gt; &gt;"/>
+        <doRecord Bit_Size="8" Byte_Size="1" Starting_Byte="192" type="bool"/>
+        <filename Bit_Size="64" Byte_Size="8" Starting_Byte="200" type="string"/>
+        <daemon Bit_Size="64" Byte_Size="8" Starting_Byte="208" type="pthread_t"/>
+    </class>
+    <class name="maxiLagExp&lt;float&gt;">
+        <alpha Bit_Size="32" Byte_Size="4" Starting_Byte="0" type="float"/>
+        <alphaReciprocal Bit_Size="32" Byte_Size="4" Starting_Byte="4" type="float"/>
+        <val Bit_Size="32" Byte_Size="4" Starting_Byte="8" type="float"/>
+    </class>
+    <class name="RtError">
+        <enum name="Type">
+            <WARNING Bit_Size="0" Byte_Size="0" Starting_Byte="" type="int"/>
+            <DEBUG_WARNING Bit_Size="0" Byte_Size="0" Starting_Byte="" type="int"/>
+            <UNSPECIFIED Bit_Size="0" Byte_Size="0" Starting_Byte="" type="int"/>
+            <NO_DEVICES_FOUND Bit_Size="0" Byte_Size="0" Starting_Byte="" type="int"/>
+            <INVALID_DEVICE Bit_Size="0" Byte_Size="0" Starting_Byte="" type="int"/>
+            <MEMORY_ERROR Bit_Size="0" Byte_Size="0" Starting_Byte="" type="int"/>
+            <INVALID_PARAMETER Bit_Size="0" Byte_Size="0" Starting_Byte="" type="int"/>
+            <INVALID_USE Bit_Size="0" Byte_Size="0" Starting_Byte="" type="int"/>
+            <DRIVER_ERROR Bit_Size="0" Byte_Size="0" Starting_Byte="" type="int"/>
+            <SYSTEM_ERROR Bit_Size="0" Byte_Size="0" Starting_Byte="" type="int"/>
+            <THREAD_ERROR Bit_Size="0" Byte_Size="0" Starting_Byte="" type="int"/>
+        </enum>
+        <message_ Bit_Size="64" Byte_Size="8" Starting_Byte="8" type="string"/>
+        <type_ Bit_Size="32" Byte_Size="4" Starting_Byte="16" type="enum Type"/>
+    </class>
+    <class name="RtAudio">
+        <enum name="Api">
+            <UNSPECIFIED Bit_Size="0" Byte_Size="0" Starting_Byte="" type="int"/>
+            <LINUX_ALSA Bit_Size="0" Byte_Size="0" Starting_Byte="" type="int"/>
+            <LINUX_OSS Bit_Size="0" Byte_Size="0" Starting_Byte="" type="int"/>
+            <UNIX_JACK Bit_Size="0" Byte_Size="0" Starting_Byte="" type="int"/>
+            <MACOSX_CORE Bit_Size="0" Byte_Size="0" Starting_Byte="" type="int"/>
+            <WINDOWS_ASIO Bit_Size="0" Byte_Size="0" Starting_Byte="" type="int"/>
+            <WINDOWS_DS Bit_Size="0" Byte_Size="0" Starting_Byte="" type="int"/>
+            <RTAUDIO_DUMMY Bit_Size="0" Byte_Size="0" Starting_Byte="" type="int"/>
+        </enum>
+        <struct name="DeviceInfo">
+            <probed Bit_Size="8" Byte_Size="1" Starting_Byte="0" type="bool"/>
+            <name Bit_Size="64" Byte_Size="8" Starting_Byte="8" type="string"/>
+            <outputChannels Bit_Size="32" Byte_Size="4" Starting_Byte="16" type="unsigned int"/>
+            <inputChannels Bit_Size="32" Byte_Size="4" Starting_Byte="20" type="unsigned int"/>
+            <duplexChannels Bit_Size="32" Byte_Size="4" Starting_Byte="24" type="unsigned int"/>
+            <isDefaultOutput Bit_Size="8" Byte_Size="1" Starting_Byte="28" type="bool"/>
+            <isDefaultInput Bit_Size="8" Byte_Size="1" Starting_Byte="29" type="bool"/>
+            <sampleRates Bit_Size="192" Byte_Size="24" Starting_Byte="32" type="class vector&lt;unsigned int, std::allocator&lt;unsigned int&gt; &gt;"/>
+            <nativeFormats Bit_Size="64" Byte_Size="8" Starting_Byte="56" type="RtAudioFormat"/>
+        </struct>
+        <struct name="StreamParameters">
+            <deviceId Bit_Size="32" Byte_Size="4" Starting_Byte="0" type="unsigned int"/>
+            <nChannels Bit_Size="32" Byte_Size="4" Starting_Byte="4" type="unsigned int"/>
+            <firstChannel Bit_Size="32" Byte_Size="4" Starting_Byte="8" type="unsigned int"/>
+        </struct>
+        <struct name="StreamOptions">
+            <flags Bit_Size="32" Byte_Size="4" Starting_Byte="0" type="RtAudioStreamFlags"/>
+            <numberOfBuffers Bit_Size="32" Byte_Size="4" Starting_Byte="4" type="unsigned int"/>
+            <streamName Bit_Size="64" Byte_Size="8" Starting_Byte="8" type="string"/>
+            <priority Bit_Size="32" Byte_Size="4" Starting_Byte="16" type="int"/>
+        </struct>
+        <rtapi_ Bit_Size="64" Byte_Size="8" Starting_Byte="0" type="class RtApi *"/>
+    </class>
+    <class name="RtApi">
+        <enum name="{">
+            <FAILURE Bit_Size="0" Byte_Size="0" Starting_Byte="" type="int"/>
+            <SUCCESS Bit_Size="0" Byte_Size="0" Starting_Byte="" type="int"/>
+        </enum>
+        <enum name="StreamState">
+            <STREAM_STOPPED Bit_Size="0" Byte_Size="0" Starting_Byte="" type="int"/>
+            <STREAM_RUNNING Bit_Size="0" Byte_Size="0" Starting_Byte="" type="int"/>
+            <STREAM_CLOSED Bit_Size="0" Byte_Size="0" Starting_Byte="" type="int"/>
+        </enum>
+        <enum name="StreamMode">
+            <OUTPUT Bit_Size="0" Byte_Size="0" Starting_Byte="" type="int"/>
+            <INPUT Bit_Size="0" Byte_Size="0" Starting_Byte="" type="int"/>
+            <DUPLEX Bit_Size="0" Byte_Size="0" Starting_Byte="" type="int"/>
+            <UNINITIALIZED Bit_Size="0" Byte_Size="0" Starting_Byte="" type="int"/>
+        </enum>
+        <struct name="ConvertInfo">
+            <channels Bit_Size="32" Byte_Size="4" Starting_Byte="0" type="int"/>
+            <inJump Bit_Size="32" Byte_Size="4" Starting_Byte="4" type="int"/>
+            <outJump Bit_Size="32" Byte_Size="4" Starting_Byte="8" type="int"/>
+            <inFormat Bit_Size="64" Byte_Size="8" Starting_Byte="16" type="RtAudioFormat"/>
+            <outFormat Bit_Size="64" Byte_Size="8" Starting_Byte="24" type="RtAudioFormat"/>
+            <inOffset Bit_Size="192" Byte_Size="24" Starting_Byte="32" type="class vector&lt;int, std::allocator&lt;int&gt; &gt;"/>
+            <outOffset Bit_Size="192" Byte_Size="24" Starting_Byte="56" type="class vector&lt;int, std::allocator&lt;int&gt; &gt;"/>
+        </struct>
+        <struct name="RtApiStream">
+            <device-2- Bit_Size="64" Byte_Size="8" Starting_Byte="0" type="unsigned int"/>
+            <apiHandle Bit_Size="64" Byte_Size="8" Starting_Byte="8" type="void *"/>
+            <mode Bit_Size="32" Byte_Size="4" Starting_Byte="16" type="enum StreamMode"/>
+            <state Bit_Size="32" Byte_Size="4" Starting_Byte="20" type="enum StreamState"/>
+            <userBuffer-2- Bit_Size="128" Byte_Size="16" Starting_Byte="24" type="char *"/>
+            <deviceBuffer Bit_Size="64" Byte_Size="8" Starting_Byte="40" type="char *"/>
+            <doConvertBuffer-2- Bit_Size="16" Byte_Size="2" Starting_Byte="48" type="bool"/>
+            <userInterleaved Bit_Size="8" Byte_Size="1" Starting_Byte="50" type="bool"/>
+            <deviceInterleaved-2- Bit_Size="16" Byte_Size="2" Starting_Byte="51" type="bool"/>
+            <doByteSwap-2- Bit_Size="16" Byte_Size="2" Starting_Byte="53" type="bool"/>
+            <sampleRate Bit_Size="32" Byte_Size="4" Starting_Byte="56" type="unsigned int"/>
+            <bufferSize Bit_Size="32" Byte_Size="4" Starting_Byte="60" type="unsigned int"/>
+            <nBuffers Bit_Size="32" Byte_Size="4" Starting_Byte="64" type="unsigned int"/>
+            <nUserChannels-2- Bit_Size="64" Byte_Size="8" Starting_Byte="68" type="unsigned int"/>
+            <nDeviceChannels-2- Bit_Size="64" Byte_Size="8" Starting_Byte="76" type="unsigned int"/>
+            <channelOffset-2- Bit_Size="64" Byte_Size="8" Starting_Byte="84" type="unsigned int"/>
+            <latency-2- Bit_Size="128" Byte_Size="16" Starting_Byte="96" type="long unsigned int"/>
+            <userFormat Bit_Size="64" Byte_Size="8" Starting_Byte="112" type="RtAudioFormat"/>
+            <deviceFormat-2- Bit_Size="128" Byte_Size="16" Starting_Byte="120" type="long unsigned int"/>
+            <mutex Bit_Size="32" Byte_Size="4" Starting_Byte="136" type="StreamMutex"/>
+            <callbackInfo Bit_Size="384" Byte_Size="48" Starting_Byte="144" type="struct CallbackInfo"/>
+            <convertInfo-2- Bit_Size="1280" Byte_Size="160" Starting_Byte="192" type="struct ConvertInfo"/>
+            <streamTime Bit_Size="64" Byte_Size="8" Starting_Byte="352" type="double"/>
+        </struct>
+        <_vptr.RtApi Bit_Size="64" Byte_Size="8" Starting_Byte="0" type="int ()(void) * *"/>
+        <MAX_SAMPLE_RATES Bit_Size="32" Byte_Size="4" Starting_Byte="0" type="unsigned intconst"/>
+        <SAMPLE_RATES Bit_Size="448" Byte_Size="56" Starting_Byte="0" type="unsigned intconst"/>
+        <errorStream_ Bit_Size="0" Byte_Size="0" Starting_Byte="8" type="ostringstream"/>
+        <errorText_ Bit_Size="64" Byte_Size="8" Starting_Byte="360" type="string"/>
+        <showWarnings_ Bit_Size="8" Byte_Size="1" Starting_Byte="368" type="bool"/>
+        <stream_ Bit_Size="2880" Byte_Size="360" Starting_Byte="376" type="struct RtApiStream"/>
+    </class>
+    <struct name="CallbackInfo">
+        <object Bit_Size="64" Byte_Size="8" Starting_Byte="0" type="void *"/>
+        <thread Bit_Size="32" Byte_Size="4" Starting_Byte="8" type="ThreadHandle"/>
+        <callback Bit_Size="64" Byte_Size="8" Starting_Byte="16" type="void *"/>
+        <userData Bit_Size="64" Byte_Size="8" Starting_Byte="24" type="void *"/>
+        <apiInfo Bit_Size="64" Byte_Size="8" Starting_Byte="32" type="void *"/>
+        <isRunning Bit_Size="8" Byte_Size="1" Starting_Byte="40" type="bool"/>
+    </struct>
+    <class name="RtApiDummy"/>
+</All_Structures>

@@ -195,29 +195,26 @@ public class InitialViewController implements Serializable, Initializable
 			
 	    if (Pattern.matches(".*[.a]", lfName))
 	    {
-	        //call runtime for filename with flags to process .a into .exe
-	        //then process executable
 	        try {
 	            String[] exeCmd = new String[] {"/bin/bash", "-c", exeLinked};
-	            Process p = Runtime.getRuntime().exec(exeCmd);
-	            p.destroy();
+	            Process createExe = Runtime.getRuntime().exec(exeCmd);
+	            createExe.destroy();
 	            String[] paholeCmd = new String[] {"/bin/bash","-c", pahole};
-	            Process pp = Runtime.getRuntime().exec(paholeCmd);
-	            pp.destroy();
+	            Process paholeExe = Runtime.getRuntime().exec(paholeCmd);
+	            paholeExe.destroy();
 	        } catch (IOException e1) {
-	    		processError.setText("File was not in proper format for parsing, please try again.");
+	    		processError.setText("File was not in proper format for parsing.");
 	        }
 	       
 	    }
 	    else if (!Pattern.matches("^([^.]+)$", lfName))
 	    {
-	        //already .exe, process executable
 	        try {
 	            String[] paholeCmd = new String[] {"/bin/bash","-c", pahole};
-	            Process pp = Runtime.getRuntime().exec(paholeCmd);
-	            pp.destroy();
+	            Process paholeExe = Runtime.getRuntime().exec(paholeCmd);
+	            paholeExe.destroy();
 	        } catch (IOException e1) {
-	    		processError.setText("File was not in proper format for parsing, please try again.");
+	    		processError.setText("File was not in proper format for parsing.");
 	        }
 	    }
 
@@ -233,12 +230,12 @@ public class InitialViewController implements Serializable, Initializable
 			 } 
 		     catch (IOException e1) 
 		     {
-		        processError.setText("Sorry, something went wrong with your processing. Please try again.");
+		        processError.setText("Sorry, something went wrong with your processing!");
 			 }
 		} 
         catch (TransformException e1)
 	    {
-        	processError.setText("File was not in proper format for parsing, please try again.");
+        	processError.setText("File was not in proper format for parsing!");
         }
 	}
 	else
@@ -304,11 +301,7 @@ public class InitialViewController implements Serializable, Initializable
 			if(!fileExist(file))
 			{
 				String fileName = file.getName();
-				if(Pattern.matches(".*[.ser]", file.getName()))
-				{
-					readEmIn(file);
-				}
-				else if((Pattern.matches(".*[.a]", fileName) || Pattern.matches("^([^.]+)$", fileName)))
+				if((Pattern.matches(".*[.a]", fileName) || Pattern.matches("^([^.]+)$", fileName)))
 				{
 					fileError.setText("");
 					ObservableList<LoadedFile> list = loadedFilesView.getItems();
@@ -318,6 +311,11 @@ public class InitialViewController implements Serializable, Initializable
 					loadedFiles.setCellValueFactory(new PropertyValueFactory<LoadedFile, CheckBox>("checkBox"));
 					list.add(lf);
 					loadedFilesView.setItems(list);
+					
+				}
+				else if(Pattern.matches(".*[.ser]", file.getName()))
+				{
+					readEmIn(file);
 				}
 				else
 				{
@@ -360,7 +358,13 @@ public class InitialViewController implements Serializable, Initializable
         return found;
     }
    
-    
+	/*
+     * Writes/saves the list of loaded files to the specifed serialized file as a new Array List. 
+     * (Preserves the program's loaded in files state for future use)
+     *
+     * @param   loadedFiles 	An ObservableList of loaded files
+     * @param   file    The file to be written to
+     */
 	public void write(ObservableList<LoadedFile> loadedFiles, File file)
     {
     	try 
@@ -376,6 +380,11 @@ public class InitialViewController implements Serializable, Initializable
     	} 
     }
 
+	/*
+     * Reads/Deserializes the serialized file.
+     *
+     * @param   file    The file to be written to
+     */
 	public ObservableList<LoadedFile> read(File file) 
 	{
 		try 
@@ -391,10 +400,13 @@ public class InitialViewController implements Serializable, Initializable
 		} 
 	}
 
+	/*
+     * Reads the list of files serialized to the specified file into the new Table View of files.
+     * (Loads old preserved file lists in)
+     * @param   file    The file to be written to
+     */
 	public void readEmIn(File file) 
 	{
-		/*TableView<LoadeFile> loadedFilesView = new TableView<LoadedFile>();
-		TableColumn<LoadedFile, CheckBox> loadedView = = new TableColumn<LoadedFile, CheckBox>();*/
 		if (file.exists() && !file.isDirectory()) 
 		{			
 			ObservableList<LoadedFile> list = loadedFilesView.getItems();

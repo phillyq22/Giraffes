@@ -43,7 +43,7 @@
                   </TableView>
                   <Button fx:id="removeFileButton" layoutX="30.0" layoutY="408.0" mnemonicParsing="false" onAction="#removeFile" text="Remove File" />
                   <Button fx:id="processButton" layoutX="514.0" layoutY="408.0" mnemonicParsing="false" onAction="#process" text="Process" />
-                  <Label fx:id="processError" layoutX="186.0" layoutY="412.0" textFill="RED" />
+                  <Label fx:id="processError" layoutX="172.0" layoutY="412.0" textFill="RED" />
                </children>
             </AnchorPane>
         </items>

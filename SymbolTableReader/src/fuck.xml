@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Selected_Structures xmlns="XML_Format">
+    <class name="RtError">
+        <enum name="Type">
+            <WARNING Bit_Size="0" Byte_Size="0" Starting_Byte="" type="int"/>
+            <DEBUG_WARNING Bit_Size="0" Byte_Size="0" Starting_Byte="" type="int"/>
+            <UNSPECIFIED Bit_Size="0" Byte_Size="0" Starting_Byte="" type="int"/>
+            <NO_DEVICES_FOUND Bit_Size="0" Byte_Size="0" Starting_Byte="" type="int"/>
+            <INVALID_DEVICE Bit_Size="0" Byte_Size="0" Starting_Byte="" type="int"/>
+            <MEMORY_ERROR Bit_Size="0" Byte_Size="0" Starting_Byte="" type="int"/>
+            <INVALID_PARAMETER Bit_Size="0" Byte_Size="0" Starting_Byte="" type="int"/>
+            <INVALID_USE Bit_Size="0" Byte_Size="0" Starting_Byte="" type="int"/>
+            <DRIVER_ERROR Bit_Size="0" Byte_Size="0" Starting_Byte="" type="int"/>
+            <SYSTEM_ERROR Bit_Size="0" Byte_Size="0" Starting_Byte="" type="int"/>
+            <THREAD_ERROR Bit_Size="0" Byte_Size="0" Starting_Byte="" type="int"/>
+        </enum>
+        <message_ Bit_Size="64" Byte_Size="8" Starting_Byte="8" type="string"/>
+        <type_ Bit_Size="32" Byte_Size="4" Starting_Byte="16" type="enum Type"/>
+    </class>
+</Selected_Structures>

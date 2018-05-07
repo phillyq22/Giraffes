@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TreeView;
+import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -21,9 +22,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.MultipleSelectionModel;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.TreeItem;
+
 
 /**
  * Controller for the processing windows. Handles any actions within the TreeView
@@ -38,6 +42,7 @@ public class ProcessViewController implements Initializable
 	@FXML TreeView<Structure> treeView = new TreeView<Structure>();
 	@FXML Button back;
 	@FXML private TextField exportFileName = new TextField();
+	@FXML private TextField filterField = new TextField();
 	@FXML private Label saveFileError;
 	@FXML private RadioButton exportText;
 	@FXML private RadioButton exportXML;
@@ -47,6 +52,7 @@ public class ProcessViewController implements Initializable
 	@FXML private Button helpButton;
 	@FXML private Label helpError;
 	@FXML private Label exportError;
+	@FXML private CheckBox deselect;
 	@FXML private ImageView humanReadable = new ImageView();
 	@FXML private ImageView matlab = new ImageView();
 	@FXML private ImageView xml = new ImageView();
@@ -65,10 +71,45 @@ public class ProcessViewController implements Initializable
 	public void initialize(URL location, ResourceBundle resources) 
 	{		
 		TreeItem<Structure> root = new TreeItem<Structure>(null);
-		root.setExpanded(true);
 		parseMany(structs, root);
+		
+		root.setExpanded(true);
 		treeView.setRoot(root);
 		treeView.refresh();
+		deselect.setSelected(false);
+	}
+	
+	public void selectSearch() {
+		if (!deselect.isSelected()) {
+		selectMany(treeView.getRoot().getChildren(), filterField.getText());
+		}
+		else {
+			deselectMany(treeView.getRoot().getChildren(), filterField.getText());
+		}
+	}
+	
+	public void selectMany(ObservableList<TreeItem<Structure>> list, String filter) {
+		MultipleSelectionModel<TreeItem<Structure>> model = treeView.getSelectionModel();
+		for (TreeItem<Structure> item : list) {
+			if (item.getValue().getName().contains(filter)) {
+				model.select(treeView.getRow(item));
+			}
+			else {
+					selectMany(item.getChildren(), filter);
+				}
+			}
+	}
+	
+	public void deselectMany(ObservableList<TreeItem<Structure>> list, String filter) {
+		MultipleSelectionModel<TreeItem<Structure>> model = treeView.getSelectionModel();
+		for (TreeItem<Structure> item : list) {
+			if (item.getValue().getName().contains(filter)) {
+				model.clearSelection(treeView.getRow(item));
+			}
+			else {
+					deselectMany(item.getChildren(), filter);
+				}
+			}
 	}
 
 	/*
@@ -354,7 +395,7 @@ public class ProcessViewController implements Initializable
 	public void showExportOptions()
 	{
 		try 
-		{
+		{/*
 			Path currentRelativePath = Paths.get("");//getting the cwd path as an object
 			String cwd = currentRelativePath.toAbsolutePath().toString();//current working directory as a string
 			System.out.print(cwd);
@@ -363,7 +404,7 @@ public class ProcessViewController implements Initializable
 			Image x = new Image("file:" + File.separator + cwd + File.separator + "xmlexample.PNG");
 			humanReadable.setImage(hr);
 			matlab.setImage(ml);
-			xml.setImage(x);
+			xml.setImage(x);*/
 			Main.buildExportStage();
 			Main.showExportView();
 		} 

@@ -1,4 +1,0 @@
-struct: __pthread_internal_list
-  FIELD: class __pthread_internal_list *, __prev; STARTING WORD: 0 BIT SIZE: 64 BYTE SIZE: 8
-  FIELD: class __pthread_internal_list *, __next; STARTING WORD: 8 BIT SIZE: 64 BYTE SIZE: 8
-
