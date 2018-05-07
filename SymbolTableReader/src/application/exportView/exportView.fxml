@@ -6,7 +6,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
+<<<<<<< HEAD
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="320.0" prefWidth="510.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.processedView.ProcessViewController">
+=======
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="320.0" prefWidth="510.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+>>>>>>> 00a5bd85625c5cef1004ecaa4ada3fc02d6bf650
    <children>
       <ImageView fitHeight="81.0" fitWidth="200.0" layoutX="27.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
          <image>

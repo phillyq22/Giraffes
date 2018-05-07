@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="535.0" prefWidth="753.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.processedView.ProcessViewController">
+   <children>
+      <ImageView fx:id="humanReadable" fitHeight="234.0" fitWidth="350.0" layoutX="10.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="file:textexample.PNG" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="212.0" fitWidth="370.0" layoutX="365.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" fx:id="xml">
+         <image>
+            <Image url="file:xmlexample.PNG" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="matlab" fitHeight="245.0" fitWidth="382.0" layoutX="171.0" layoutY="241.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="file:matlabexample.PNG" />
+         </image>
+      </ImageView>
+      <Label layoutX="89.0" layoutY="223.0" text="Human Readable Format" />
+      <Label layoutX="517.0" layoutY="223.0" text="XML Format" />
+      <Label layoutX="317.0" layoutY="486.0" text="MATLAB Format" />
+   </children>
+</AnchorPane>
